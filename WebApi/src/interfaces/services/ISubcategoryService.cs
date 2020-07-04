@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace webApi.src.interfaces.services
 {
-    interface ISubcategoryService
+    public interface ISubcategoryService
     {
     }
 }

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace webApi.src.interfaces.repositories
+namespace webApi.src.interfaces.services
 {
-    public interface ICategoryRepository
+    public class IPriceService
     {
     }
 }

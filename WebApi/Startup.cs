@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Runtime.InteropServices.ComTypes;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Rewrite;
@@ -27,8 +28,8 @@ namespace WebApi
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = ".NetStore Api",
-                    Description = "Api de acesso ao .NetStore, projeto de estudo do .Net core",
+                    Title = ".web Store Api",
+                    Description = "Api de acesso aos produtos e categorias da loja, projeto de estudo do .Net core",
                     Contact = new OpenApiContact()
                     {
                         Name = "Kaique Beraguas",
@@ -50,12 +51,12 @@ namespace WebApi
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            
             app.UseAuthorization();
             app.UseSwagger();
             app.UseSwaggerUI(s =>
             {
-                s.SwaggerEndpoint("/swagger/v1/swagger.json", ".NetStore V1");
+                s.SwaggerEndpoint("/swagger/v1/swagger.json", "web Store v1");
             });
 
             var options = new RewriteOptions();

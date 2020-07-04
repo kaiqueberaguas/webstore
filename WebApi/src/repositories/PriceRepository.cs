@@ -6,7 +6,7 @@ using webApi.src.interfaces.repositories;
 
 namespace webApi.src.repositories
 {
-    public class CategoryRepository : ICategoryRepository
+    public class PriceRepository : IPriceRepository
     {
     }
 }

@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using webApi.src.interfaces.services;
 
-namespace webApi.src.interfaces.repositories
+namespace webApi.src.services
 {
-    public interface ICategoryRepository
+    public class PriceService : IPriceService
     {
     }
 }

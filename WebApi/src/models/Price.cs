@@ -5,13 +5,16 @@ using System.Threading.Tasks;
 
 namespace webApi.src.models
 {
-    public class Category
+    public class Price
     {
         public long Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public List<Subcategory> Subcategories { get; set; }
+        public Product Product { get; set; }
+        public double Amount { get; set; }
+        public DateTime InitialDate { get; set; }
+        public DateTime FinalDate { get; set; }
+        public bool IsPromotional { get; set; }
         public string LastModification { get; set; }
         public string OriginRegister { get; set; }
+
     }
 }

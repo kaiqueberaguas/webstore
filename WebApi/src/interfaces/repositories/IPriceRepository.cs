@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace webApi.src.interfaces.repositories
 {
-    public interface ICategoryRepository
+    public class IPriceRepository
     {
     }
 }
