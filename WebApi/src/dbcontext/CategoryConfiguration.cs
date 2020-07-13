@@ -12,7 +12,13 @@ namespace webApi.src.dbcontext
     {
         public void Configure(EntityTypeBuilder<Category> builder)
         {
-            throw new NotImplementedException();
+            builder.HasKey(e => e.Id);
+            builder.Property(e => e.Name).HasMaxLength(25);
+            builder.Property(e => e.Description).HasMaxLength(100);
+            builder.HasMany(e => e.Subcategories).WithOne();
+            builder.Property(e => e.LastModification).ValueGeneratedOnAddOrUpdate();
+            builder.Property(e => e.RegisterDate).ValueGeneratedOnAdd();
+            builder.Property(e => e.OriginRegister).HasMaxLength(25);
         }
     }
 }

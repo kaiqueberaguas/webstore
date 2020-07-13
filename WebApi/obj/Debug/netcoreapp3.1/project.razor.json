@@ -1,5 +1,5 @@
 {
-  "FilePath": "c:\\Users\\ksakX\\source\\repos\\WebStore\\WebApi\\WebApi.csproj",
+  "FilePath": "c:\\Users\\ksakX\\source\\repos\\WebStore\\WebApi\\webApi.csproj",
   "Configuration": {
     "ConfigurationName": "MVC-3.0",
     "LanguageVersion": "3.0",
@@ -20518,7 +20518,7 @@
     ],
     "CSharpLanguageVersion": 800
   },
-  "RootNamespace": "WebApi",
+  "RootNamespace": "webApi",
   "Documents": [],
   "SerializationFormat": "0.2"
 }

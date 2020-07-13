@@ -13,7 +13,8 @@ namespace webApi.src.models
         public DateTime InitialDate { get; set; }
         public DateTime FinalDate { get; set; }
         public bool IsPromotional { get; set; }
-        public string LastModification { get; set; }
+        public DateTime LastModification { get; set; }
+        public DateTime RegisterDate { get; set; }
         public string OriginRegister { get; set; }
 
     }

@@ -1,14 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using webApi.src.models;
 
 namespace webApi.src.dbcontext
 {
     public class StoreContext : DbContext
     {
+
         #region DbSets
         public DbSet<Category> Categorias { get; set; }
         public DbSet<Subcategory> SubCategorias { get; set; }
@@ -25,17 +22,12 @@ namespace webApi.src.dbcontext
 
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            
-        }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
             modelBuilder.ApplyConfiguration(new SubcategoryConfiguration());
             modelBuilder.ApplyConfiguration(new CategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new PriceConfiguration());
             base.OnModelCreating(modelBuilder);
         }
 

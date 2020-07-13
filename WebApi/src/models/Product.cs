@@ -15,7 +15,8 @@ namespace webApi.src.models
         public long AvailableQuantity { get; set; }
         public DateTime LimitDate { get; set; }
         public DateTime PurchaseDate { get; set; }
-        public string LastModification { get; set; }
+        public DateTime LastModification { get; set; }
+        public DateTime RegisterDate { get; set; }
         public string OriginRegister { get; set; }
 
     }

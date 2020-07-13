@@ -12,7 +12,8 @@ namespace webApi.src.models
         public string Description { get; set; }
         public Category Category { get; set; }
         public List<Product> Products { get; set; }
-        public string LastModification { get; set; }
+        public DateTime LastModification { get; set; }
+        public DateTime RegisterDate { get; set; }
         public string OriginRegister { get; set; }
     }
 }
