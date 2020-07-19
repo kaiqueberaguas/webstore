@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using webApi.src.interfaces.services;
 using webApi.src.models;
+using WebApi.src.presenters;
 
 namespace webApi.src.controllers
 {
@@ -21,15 +22,20 @@ namespace webApi.src.controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<Subcategory>> Get([FromQuery] int page, [FromQuery] int size)
+        public async Task<IEnumerable<SubcategoryPresenter>> Get([FromQuery] int page, [FromQuery] int size)
         {
-            return await _subcategoryService.GetAll(page,size);
+            var subcategories = new List<SubcategoryPresenter>();
+            var result = await _subcategoryService.GetAll(page,size);
+            result.ForEach(r => new SubcategoryPresenter(r));
+            return subcategories;
+
         }
 
         [HttpGet("{subcategoryId}")]
-        public async Task<Subcategory> Get(long subcategoryId)
+        public async Task<SubcategoryPresenter> Get(long subcategoryId)
         {
-            return await _subcategoryService.Get(subcategoryId);
+            var result = await _subcategoryService.Get(subcategoryId);
+            return new SubcategoryPresenter(result);
         }
 
         [HttpPost]

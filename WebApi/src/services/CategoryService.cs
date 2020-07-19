@@ -32,7 +32,7 @@ namespace webApi.src.services
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Category>> GetAll(int page, int size)
+        public Task<List<Category>> GetAll(int page, int size)
         {
             throw new NotImplementedException();
         }

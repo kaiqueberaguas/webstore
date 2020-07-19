@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using webApi.src.interfaces.services;
 using webApi.src.models;
+using WebApi.src.presenters;
 
 namespace webApi.src.controllers
 {
@@ -21,15 +22,19 @@ namespace webApi.src.controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<Product>> Get([FromQuery] int page, [FromQuery] int size)
+        public async Task<IEnumerable<ProductPresenter>> Get([FromQuery] int page, [FromQuery] int size)
         {
-            return await _productService.GetAll(page,size);
+            var products = new List<ProductPresenter>();
+            var result = await _productService.GetAll(page,size);
+            result.ForEach(r => new ProductPresenter(r));
+            return products;
         }
 
         [HttpGet("{productId}")]
-        public async Task<Product> Get(long productId)
+        public async Task<ProductPresenter> Get(long productId)
         {
-            return await _productService.Get(productId);
+            var result = await _productService.Get(productId);
+            return new ProductPresenter(result);
         }
 
         [HttpPost]
