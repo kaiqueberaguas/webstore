@@ -18,11 +18,13 @@ namespace webApi.src.extensions
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ISubcategoryRepository, SubcategoryRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IPriceRepository, PriceRepository>();
             #endregion
             #region Services
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<ISubcategoryService, SubcategoryService>();
             services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IPriceService, PriceService>();
             #endregion
         }
     }
