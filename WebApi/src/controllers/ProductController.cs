@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using webApi.src.interfaces.services;
-using webApi.src.models;
+using webApi.src.parameters;
 using WebApi.src.presenters;
 
 namespace webApi.src.controllers
@@ -38,15 +36,15 @@ namespace webApi.src.controllers
         }
 
         [HttpPost]
-        public async Task Post([FromBody] Product product)
+        public async Task Post([FromBody] ProductParameter product)
         {
-            await _productService.Create(product);
+            await _productService.Create(product.ToModel());
         }
 
         [HttpPut]
-        public async Task Put([FromBody] Product product)
+        public async Task Put([FromBody] ProductParameter product)
         {
-            await _productService.Update(product);
+            await _productService.Update(product.ToModel());
         }
 
         [HttpDelete("{productId}")]
