@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using webApi.src.controllers.parameters;
 using webApi.src.interfaces.services;
-using webApi.src.parameters;
 using WebApi.src.presenters;
 
 namespace webApi.src.controllers
@@ -20,6 +20,7 @@ namespace webApi.src.controllers
         }
 
         [HttpGet]
+        [Produces("application/json")]
         public async Task<IEnumerable<ProductPresenter>> Get([FromQuery] int page, [FromQuery] int size)
         {
             var products = new List<ProductPresenter>();
@@ -29,6 +30,7 @@ namespace webApi.src.controllers
         }
 
         [HttpGet("{productId}")]
+        [Produces("application/json")]
         public async Task<ProductPresenter> Get(long productId)
         {
             var result = await _productService.Get(productId);
@@ -36,12 +38,14 @@ namespace webApi.src.controllers
         }
 
         [HttpPost]
-        public async Task Post([FromBody] ProductParameter product)
+        [Consumes("application/json")]
+        public async Task Post([FromBody] ProductCreateParameter product)
         {
             await _productService.Create(product.ToModel());
         }
 
         [HttpPut]
+        [Consumes("application/json")]
         public async Task Put([FromBody] ProductParameter product)
         {
             await _productService.Update(product.ToModel());

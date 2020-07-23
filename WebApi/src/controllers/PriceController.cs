@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using webApi.src.controllers.parameters;
 using webApi.src.interfaces.services;
 using webApi.src.parameters;
 using WebApi.src.presenters;
@@ -20,6 +21,7 @@ namespace webApi.src.controllers
         }
 
         [HttpGet]
+        [Produces("application/json")]
         public async Task<IEnumerable<PricePresenter>> Get([FromQuery] int page, [FromQuery] int size)
         {
             var prices = new List<PricePresenter>();
@@ -29,6 +31,7 @@ namespace webApi.src.controllers
         }
 
         [HttpGet("{priceId}")]
+        [Produces("application/json")]
         public async Task<PricePresenter> Get(long priceId)
         {
             var result = await _priceService.Get(priceId);
@@ -36,12 +39,14 @@ namespace webApi.src.controllers
         }
 
         [HttpPost]
-        public async Task Post([FromBody] PriceParameter price)
+        [Consumes("application/json")]
+        public async Task Post([FromBody] PriceCreateParameter price)
         {
             await _priceService.Create(price.ToModel());
         }
 
         [HttpPut]
+        [Consumes("application/json")]
         public async Task Put([FromBody] PriceParameter price)
         {
             await _priceService.Update(price.ToModel());

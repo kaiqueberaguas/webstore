@@ -1,12 +1,8 @@
 ﻿using Castle.Core.Internal;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Threading.Tasks;
 using webApi.src.models;
 
-namespace webApi.src.parameters
+namespace webApi.src.controllers.parameters
 {
     public class SubcategoryParameter
     {
@@ -22,8 +18,8 @@ namespace webApi.src.parameters
             subcategory.Id = Id;
             subcategory.Name = Name;
             subcategory.Description = Description;
-            if(Category != null)subcategory.Category = Category.ToModel();
-            if(!Products.IsNullOrEmpty())
+            subcategory.Category = Category.ToModel();
+            if (!Products.IsNullOrEmpty())
                 Products.ForEach(p => subcategory.Products.Add(p.ToModel()));
             return subcategory;
         }

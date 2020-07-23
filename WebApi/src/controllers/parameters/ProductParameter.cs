@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using webApi.src.models;
 
-namespace webApi.src.parameters
+namespace webApi.src.controllers.parameters
 {
     public class ProductParameter
     {
@@ -27,7 +24,7 @@ namespace webApi.src.parameters
             product.AvailableQuantity = AvailableQuantity;
             product.LimitDate = LimitDate;
             product.PurchaseDate = PurchaseDate;
-            if(Subcategory != null)product.Subcategory = Subcategory.ToModel();
+            product.Subcategory = Subcategory.ToModel();
             return product;
         }
     }

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using webApi.src.controllers.parameters;
 using webApi.src.interfaces.services;
-using webApi.src.parameters;
 using WebApi.src.presenters;
 
 namespace webApi.src.controllers
@@ -20,6 +20,7 @@ namespace webApi.src.controllers
         }
 
         [HttpGet]
+        [Produces("application/json")]
         public async Task<List<CategoryPresenter>> Get([FromQuery]int page, [FromQuery] int size)
         {
             var categories = new List<CategoryPresenter>();
@@ -29,6 +30,7 @@ namespace webApi.src.controllers
         }
 
         [HttpGet("{categoryId}")]
+        [Produces("application/json")]
         public async Task<CategoryPresenter> Get(long categoryId)
         {
             var result = await _categoryService.Get(categoryId);
@@ -36,12 +38,14 @@ namespace webApi.src.controllers
         }
 
         [HttpPost]
-        public async Task Post([FromBody] CategoryParameter category)
+        [Consumes("application/json")]
+        public async Task Post([FromBody] CategoryCreateParameter category)
         {
             await _categoryService.Create(category.ToModel());
         }
 
         [HttpPut]
+        [Consumes("application/json")]
         public async Task Put([FromBody] CategoryParameter category)
         {
             await _categoryService.Update(category.ToModel());
