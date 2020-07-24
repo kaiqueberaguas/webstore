@@ -9,7 +9,7 @@ namespace WebApi.src.presenters
         public long Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public Category Category { get; set; }
+        public CategoryPresenter Category { get; set; }
 
         public SubcategoryPresenter()
         {
@@ -24,7 +24,7 @@ namespace WebApi.src.presenters
             if (subcategory.Category != null)
             {
                 subcategory.Category.Subcategories = null;
-                Category = new Category(subcategory.Category);
+                Category = new CategoryPresenter(subcategory.Category);
             }
         }
     }

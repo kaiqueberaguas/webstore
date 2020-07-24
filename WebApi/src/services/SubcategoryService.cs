@@ -16,30 +16,29 @@ namespace webApi.src.services
         {
             _subcategoryRepository = subcategoryRepository;
         }
-
-        public Task Create(Subcategory obj)
+        public async Task<Subcategory> Get(long id)
         {
-            throw new NotImplementedException();
+            return await _subcategoryRepository.GetById(id);
         }
-
-        public Task Delete(long id)
+        public async Task<List<Subcategory>> GetAll(int page, int size)
         {
-            throw new NotImplementedException();
+            return await _subcategoryRepository.GetAll(page, size);
         }
-
-        public Task<Subcategory> Get(long id)
+        public async Task<Subcategory> Create(Subcategory obj)
         {
-            throw new NotImplementedException();
+            return await _subcategoryRepository.Insert(obj);
         }
-
-        public Task<List<Subcategory>> GetAll(int page, int size)
+        public async Task Update(Subcategory obj)
         {
-            throw new NotImplementedException();
+            await _subcategoryRepository.Update(obj);
         }
-
-        public Task Update(Subcategory obj)
+        public async Task<Subcategory> Delete(long id)
         {
-            throw new NotImplementedException();
+            return await _subcategoryRepository.Delete(id);
+        }
+        public async Task Delete(Subcategory obj)
+        {
+            await _subcategoryRepository.Delete(obj);
         }
     }
 }

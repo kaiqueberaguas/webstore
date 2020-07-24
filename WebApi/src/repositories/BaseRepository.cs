@@ -22,26 +22,31 @@ namespace webApi.src.repositories
             _storeContext.Dispose();
         }
 
+        public virtual async Task<T> GetById(long Id)
+        {
+            return await _storeContext.Set<T>().FindAsync(Id);
+        }
         public virtual async Task<List<T>> GetAll(int page, int pageSize)
         {
             return await _storeContext.Set<T>().Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
         }
-
-        public virtual async Task<T> GetById(long? Id)
-        {
-            return await _storeContext.Set<T>().FindAsync(Id);
-        }
-
-        public virtual async Task Insert(T obj)
+        public virtual async Task<T> Insert(T obj)
         {
             _storeContext.Set<T>().Add(obj);
             await _storeContext.SaveChangesAsync();
+            return await _storeContext.Set<T>().FindAsync(obj);
         }
-
         public virtual async Task Update(T obj)
         {
             _storeContext.Entry(obj).State = EntityState.Modified;
             await _storeContext.SaveChangesAsync();
+        }
+        public virtual async Task<T> Delete(long id)
+        {
+            var obj = _storeContext.Set<T>().Find(id);
+            _storeContext.Set<T>().Remove(obj);
+            await _storeContext.SaveChangesAsync();
+            return obj;
         }
         public virtual async Task Delete(T obj)
         {

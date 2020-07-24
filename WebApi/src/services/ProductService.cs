@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using webApi.src.interfaces.repositories;
 using webApi.src.interfaces.services;
@@ -17,29 +15,29 @@ namespace webApi.src.services
             _productRepository = productRepository;
         }
 
-        public Task Create(Product obj)
+        public async Task<Product> Get(long id)
         {
-            throw new NotImplementedException();
+            return await _productRepository.GetById(id);
         }
-
-        public Task Delete(long id)
+        public async Task<List<Product>> GetAll(int page, int size)
         {
-            throw new NotImplementedException();
+            return await _productRepository.GetAll(page, size);
         }
-
-        public Task<Product> Get(long id)
+        public async Task<Product> Create(Product obj)
         {
-            throw new NotImplementedException();
+            return await _productRepository.Insert(obj);
         }
-
-        public Task<List<Product>> GetAll(int page, int size)
+        public async Task Update(Product obj)
         {
-            throw new NotImplementedException();
+            await _productRepository.Update(obj);
         }
-
-        public Task Update(Product obj)
+        public async Task<Product> Delete(long id)
         {
-            throw new NotImplementedException();
+            return await _productRepository.Delete(id);
+        }
+        public async Task Delete(Product obj)
+        {
+            await _productRepository.Delete(obj);
         }
     }
 }

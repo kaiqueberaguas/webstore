@@ -10,8 +10,9 @@ namespace webApi.src.interfaces.services
         Task<List<T>> GetAll(int page, int size);
         Task<T> Get(long id);
         Task Update(T obj);
-        Task Create(T obj);
-        Task Delete(long id);
+        Task<T> Create(T obj);
+        Task<T> Delete(long id);
+        Task Delete(T obj);
 
     }
 }

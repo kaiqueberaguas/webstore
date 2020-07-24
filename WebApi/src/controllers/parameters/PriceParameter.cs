@@ -8,7 +8,7 @@ namespace webApi.src.parameters
     {
         public long Id { get; set; }
         public ProductParameter Product { get; set; }
-        public double Amount { get; set; }
+        public decimal Amount { get; set; }
         public DateTime InitialDate { get; set; }
         public DateTime FinalDate { get; set; }
         public bool IsPromotional { get; set; }

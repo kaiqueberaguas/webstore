@@ -17,29 +17,29 @@ namespace webApi.src.services
             _priceRepository = priceRepository;
         }
 
-        public Task Create(Price obj)
+        public async Task<Price> Get(long id)
         {
-            throw new NotImplementedException();
+            return await _priceRepository.GetById(id);
         }
-
-        public Task Delete(long id)
+        public async Task<List<Price>> GetAll(int page, int size)
         {
-            throw new NotImplementedException();
+            return await _priceRepository.GetAll(page,size);
         }
-
-        public Task<Price> Get(long id)
+        public async Task Update(Price obj)
         {
-            throw new NotImplementedException();
+            await _priceRepository.Update(obj);
         }
-
-        public Task<List<Price>> GetAll(int page, int size)
+        public async Task<Price> Create(Price obj)
         {
-            throw new NotImplementedException();
+            return await _priceRepository.Insert(obj);
         }
-
-        public Task Update(Price obj)
+        public async Task<Price> Delete(long id)
         {
-            throw new NotImplementedException();
+            return await _priceRepository.Delete(id);
+        }
+        public async Task Delete(Price obj)
+        {
+            await _priceRepository.Delete(obj);
         }
     }
 }
