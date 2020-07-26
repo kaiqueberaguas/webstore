@@ -8,7 +8,8 @@ namespace webApi.src.models
     public class Price
     {
         public long Id { get; set; }
-        public Product Product { get; set; }
+        public virtual Product Product { get; set; }
+        public long ProductId { get; set; }
         public decimal Amount { get; set; }
         public DateTime InitialDate { get; set; }
         public DateTime FinalDate { get; set; }

@@ -19,7 +19,8 @@ namespace webApi.src.dbcontext
             builder.Property(e => e.AvailableQuantity).HasDefaultValue(0);
             builder.Property(e => e.LimitDate);
             builder.Property(e => e.PurchaseDate).IsRequired();
-            builder.HasOne(e => e.Subcategory).WithMany();
+            builder.HasOne(e => e.Subcategory).WithMany(e => e.Products).HasForeignKey(p => p.SubcategoryId);
+            builder.HasMany(e => e.Prices).WithOne(p => p.Product);
             builder.Property(e => e.LastModification).ValueGeneratedOnAddOrUpdate();
             builder.Property(e => e.RegisterDate).ValueGeneratedOnAdd();
             builder.Property(e => e.OriginRegister).HasMaxLength(25);

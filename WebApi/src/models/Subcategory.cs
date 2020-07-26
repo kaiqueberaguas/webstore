@@ -10,7 +10,8 @@ namespace webApi.src.models
         public long Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public Category Category { get; set; }
+        public virtual Category Category { get; set; }
+        public long CategoryId { get; set; }
         public List<Product> Products { get; set; }
         public DateTime LastModification { get; set; }
         public DateTime RegisterDate { get; set; }

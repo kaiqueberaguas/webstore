@@ -9,6 +9,7 @@ namespace webApi.src.dbcontext
         #region DbSets
         public DbSet<Category> Categorias { get; set; }
         public DbSet<Subcategory> SubCategorias { get; set; }
+        public DbSet<Price> Prices { get; set; }
         public DbSet<Product> Produtos { get; set; }
         #endregion
 

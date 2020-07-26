@@ -10,8 +10,8 @@ namespace webApi.src.dbcontext
         public void Configure(EntityTypeBuilder<Price> builder)
         {
             builder.HasKey(e => e.Id);
-            builder.Property(e => e.Product).IsRequired();            
-            builder.Property(e => e.Amount).IsRequired();
+            builder.HasOne(e => e.Product).WithMany(p => p.Prices).IsRequired();            
+            builder.Property(e => e.Amount).HasColumnType("money").IsRequired();
             builder.Property(e => e.IsPromotional).HasDefaultValue(false);
             builder.Property(e => e.InitialDate).HasDefaultValue(DateTime.Now);
             builder.Property(e => e.FinalDate).HasDefaultValue(null);

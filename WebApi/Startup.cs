@@ -2,6 +2,7 @@ using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Rewrite;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,8 +24,11 @@ namespace WebApi
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddEntityFrameworkSqlServer().AddDbContext<StoreContext>(options => options.UseSqlServer(
-                       Configuration.GetConnectionString("DbStore")));
+            var builder = new SqlConnectionStringBuilder(Configuration.GetConnectionString("SqlServerConnectionString"));
+            builder.Password = Configuration["SECRETY_DATABASE"];
+            builder.UserID = Configuration["USER_DATABASE"];
+
+            services.AddDbContext<StoreContext>(options => options.UseSqlServer(builder.ConnectionString));
             services.AddControllers();
             #region swagger
             services.AddSwaggerGen(c =>
@@ -49,6 +53,7 @@ namespace WebApi
         {
             if (env.IsDevelopment())
             {
+
                 app.UseDeveloperExceptionPage();
             }
 

@@ -11,12 +11,14 @@ namespace webApi.src.models
         public string Name { get; set; }
         public string Description { get; set; }
         public string Information { get; set; }
-        public Subcategory Subcategory { get; set; }
+        public virtual Subcategory Subcategory { get; set; }
+        public long SubcategoryId { get; set; }
         public long AvailableQuantity { get; set; }
         public DateTime LimitDate { get; set; }
         public DateTime PurchaseDate { get; set; }
         public DateTime LastModification { get; set; }
         public DateTime RegisterDate { get; set; }
+        public List<Price> Prices { get; set; }
         public string OriginRegister { get; set; }
 
     }
