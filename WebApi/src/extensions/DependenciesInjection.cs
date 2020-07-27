@@ -10,9 +10,9 @@ using webApi.src.services;
 
 namespace webApi.src.extensions
 {
-    public class DependenciesInjection
+    public static class DependenciesInjection
     {
-        public static void RegistryRepository(IServiceCollection services)
+        public static void AddDependencyInjection(this IServiceCollection services)
         {
             #region repositories
             services.AddScoped<ICategoryRepository, CategoryRepository>();

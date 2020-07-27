@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using webApi.src.dbcontext;
+using webApi.src.extensions;
 
 namespace WebApi
 {
@@ -24,12 +25,14 @@ namespace WebApi
 
         public void ConfigureServices(IServiceCollection services)
         {
+            #region database_configuration
             var builder = new SqlConnectionStringBuilder(Configuration.GetConnectionString("SqlServerConnectionString"));
             builder.Password = Configuration["SECRETY_DATABASE"];
             builder.UserID = Configuration["USER_DATABASE"];
-
-            services.AddDbContext<StoreContext>(options => options.UseSqlServer(builder.ConnectionString));
+            #endregion
+            services.AddEntityFrameworkSqlServer().AddDbContext<StoreContext>(options => options.UseSqlServer(builder.ConnectionString));
             services.AddControllers();
+            services.AddDependencyInjection();
             #region swagger
             services.AddSwaggerGen(c =>
             {
