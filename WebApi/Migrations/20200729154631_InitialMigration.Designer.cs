@@ -10,7 +10,7 @@ using webApi.src.dbcontext;
 namespace webApi.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20200725043227_InitialMigration")]
+    [Migration("20200729154631_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,7 +50,7 @@ namespace webApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categorias");
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("webApi.src.models.Price", b =>
@@ -61,7 +61,7 @@ namespace webApi.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("money");
 
                     b.Property<DateTime>("FinalDate")
                         .ValueGeneratedOnAdd()
@@ -71,7 +71,7 @@ namespace webApi.Migrations
                     b.Property<DateTime>("InitialDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2020, 7, 25, 1, 32, 27, 597, DateTimeKind.Local).AddTicks(4759));
+                        .HasDefaultValue(new DateTime(2020, 7, 29, 12, 46, 31, 536, DateTimeKind.Local).AddTicks(7557));
 
                     b.Property<bool>("IsPromotional")
                         .ValueGeneratedOnAdd()
@@ -147,16 +147,11 @@ namespace webApi.Migrations
                     b.Property<long>("SubcategoryId")
                         .HasColumnType("bigint");
 
-                    b.Property<long?>("SubcategoryId1")
-                        .HasColumnType("bigint");
-
                     b.HasKey("Id");
 
                     b.HasIndex("SubcategoryId");
 
-                    b.HasIndex("SubcategoryId1");
-
-                    b.ToTable("Produtos");
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("webApi.src.models.Subcategory", b =>
@@ -194,7 +189,7 @@ namespace webApi.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("SubCategorias");
+                    b.ToTable("SubCategories");
                 });
 
             modelBuilder.Entity("webApi.src.models.Price", b =>
@@ -209,14 +204,10 @@ namespace webApi.Migrations
             modelBuilder.Entity("webApi.src.models.Product", b =>
                 {
                     b.HasOne("webApi.src.models.Subcategory", "Subcategory")
-                        .WithMany()
+                        .WithMany("Products")
                         .HasForeignKey("SubcategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("webApi.src.models.Subcategory", null)
-                        .WithMany("Products")
-                        .HasForeignKey("SubcategoryId1");
                 });
 
             modelBuilder.Entity("webApi.src.models.Subcategory", b =>

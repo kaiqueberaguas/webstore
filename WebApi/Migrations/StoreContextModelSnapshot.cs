@@ -48,7 +48,7 @@ namespace webApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categorias");
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("webApi.src.models.Price", b =>
@@ -69,7 +69,7 @@ namespace webApi.Migrations
                     b.Property<DateTime>("InitialDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2020, 7, 25, 3, 46, 34, 752, DateTimeKind.Local).AddTicks(73));
+                        .HasDefaultValue(new DateTime(2020, 7, 29, 12, 46, 31, 536, DateTimeKind.Local).AddTicks(7557));
 
                     b.Property<bool>("IsPromotional")
                         .ValueGeneratedOnAdd()
@@ -145,16 +145,11 @@ namespace webApi.Migrations
                     b.Property<long>("SubcategoryId")
                         .HasColumnType("bigint");
 
-                    b.Property<long?>("SubcategoryId1")
-                        .HasColumnType("bigint");
-
                     b.HasKey("Id");
 
                     b.HasIndex("SubcategoryId");
 
-                    b.HasIndex("SubcategoryId1");
-
-                    b.ToTable("Produtos");
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("webApi.src.models.Subcategory", b =>
@@ -192,7 +187,7 @@ namespace webApi.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("SubCategorias");
+                    b.ToTable("SubCategories");
                 });
 
             modelBuilder.Entity("webApi.src.models.Price", b =>
@@ -206,15 +201,11 @@ namespace webApi.Migrations
 
             modelBuilder.Entity("webApi.src.models.Product", b =>
                 {
-                    b.HasOne("webApi.src.models.Subcategory", null)
+                    b.HasOne("webApi.src.models.Subcategory", "Subcategory")
                         .WithMany("Products")
                         .HasForeignKey("SubcategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("webApi.src.models.Subcategory", "Subcategory")
-                        .WithMany()
-                        .HasForeignKey("SubcategoryId1");
                 });
 
             modelBuilder.Entity("webApi.src.models.Subcategory", b =>

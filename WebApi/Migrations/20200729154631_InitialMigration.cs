@@ -8,7 +8,7 @@ namespace webApi.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Categorias",
+                name: "Categories",
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
@@ -21,11 +21,11 @@ namespace webApi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Categorias", x => x.Id);
+                    table.PrimaryKey("PK_Categories", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "SubCategorias",
+                name: "SubCategories",
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
@@ -39,17 +39,17 @@ namespace webApi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SubCategorias", x => x.Id);
+                    table.PrimaryKey("PK_SubCategories", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SubCategorias_Categorias_CategoryId",
+                        name: "FK_SubCategories_Categories_CategoryId",
                         column: x => x.CategoryId,
-                        principalTable: "Categorias",
+                        principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Produtos",
+                name: "Products",
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
@@ -63,24 +63,17 @@ namespace webApi.Migrations
                     PurchaseDate = table.Column<DateTime>(nullable: false),
                     LastModification = table.Column<DateTime>(nullable: false),
                     RegisterDate = table.Column<DateTime>(nullable: false),
-                    OriginRegister = table.Column<string>(maxLength: 25, nullable: true),
-                    SubcategoryId1 = table.Column<long>(nullable: true)
+                    OriginRegister = table.Column<string>(maxLength: 25, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Produtos", x => x.Id);
+                    table.PrimaryKey("PK_Products", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Produtos_SubCategorias_SubcategoryId",
+                        name: "FK_Products_SubCategories_SubcategoryId",
                         column: x => x.SubcategoryId,
-                        principalTable: "SubCategorias",
+                        principalTable: "SubCategories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Produtos_SubCategorias_SubcategoryId1",
-                        column: x => x.SubcategoryId1,
-                        principalTable: "SubCategorias",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -90,8 +83,8 @@ namespace webApi.Migrations
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProductId = table.Column<long>(nullable: false),
-                    Amount = table.Column<decimal>(nullable: false),
-                    InitialDate = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2020, 7, 25, 1, 32, 27, 597, DateTimeKind.Local).AddTicks(4759)),
+                    Amount = table.Column<decimal>(type: "money", nullable: false),
+                    InitialDate = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2020, 7, 29, 12, 46, 31, 536, DateTimeKind.Local).AddTicks(7557)),
                     FinalDate = table.Column<DateTime>(nullable: false),
                     IsPromotional = table.Column<bool>(nullable: false, defaultValue: false),
                     LastModification = table.Column<DateTime>(nullable: false),
@@ -102,9 +95,9 @@ namespace webApi.Migrations
                 {
                     table.PrimaryKey("PK_Prices", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Prices_Produtos_ProductId",
+                        name: "FK_Prices_Products_ProductId",
                         column: x => x.ProductId,
-                        principalTable: "Produtos",
+                        principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -115,18 +108,13 @@ namespace webApi.Migrations
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Produtos_SubcategoryId",
-                table: "Produtos",
+                name: "IX_Products_SubcategoryId",
+                table: "Products",
                 column: "SubcategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Produtos_SubcategoryId1",
-                table: "Produtos",
-                column: "SubcategoryId1");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SubCategorias_CategoryId",
-                table: "SubCategorias",
+                name: "IX_SubCategories_CategoryId",
+                table: "SubCategories",
                 column: "CategoryId");
         }
 
@@ -136,13 +124,13 @@ namespace webApi.Migrations
                 name: "Prices");
 
             migrationBuilder.DropTable(
-                name: "Produtos");
+                name: "Products");
 
             migrationBuilder.DropTable(
-                name: "SubCategorias");
+                name: "SubCategories");
 
             migrationBuilder.DropTable(
-                name: "Categorias");
+                name: "Categories");
         }
     }
 }

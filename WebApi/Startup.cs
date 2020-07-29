@@ -27,8 +27,7 @@ namespace WebApi
         {
             #region database_configuration
             var builder = new SqlConnectionStringBuilder(Configuration.GetConnectionString("SqlServerConnectionString"));
-            builder.Password = Configuration["SECRETY_DATABASE"];
-            builder.UserID = Configuration["USER_DATABASE"];
+            builder.Password = Configuration["SECRETY_DATABASE"];   
             #endregion
             services.AddEntityFrameworkSqlServer().AddDbContext<StoreContext>(options => options.UseSqlServer(builder.ConnectionString));
             services.AddControllers();

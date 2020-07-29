@@ -12,7 +12,6 @@ namespace webApi.src.dbcontext
             builder.HasKey(e => e.Id);
             builder.Property(e => e.Name).HasMaxLength(25).IsRequired();
             builder.Property(e => e.Description).HasMaxLength(100);
-            builder.HasMany(e => e.Products).WithOne();
             builder.HasOne(e => e.Category).WithMany().IsRequired();
             builder.Property(e => e.LastModification).ValueGeneratedOnAddOrUpdate();
             builder.Property(e => e.RegisterDate).ValueGeneratedOnAdd();
