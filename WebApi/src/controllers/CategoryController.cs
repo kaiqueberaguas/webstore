@@ -21,11 +21,11 @@ namespace webApi.src.controllers
 
         [HttpGet]
         [Produces("application/json")]
-        public async Task<List<CategoryPresenter>> Get([FromQuery]int page, [FromQuery] int size)
+        public async Task<List<CategoryPresenter>> Get([FromQuery]int page = 0, [FromQuery] int size = 15)
         {
             var categories = new List<CategoryPresenter>();
             var result = await _categoryService.GetAll(page,size);
-            result.ForEach(r => new CategoryPresenter(r));
+            result.ForEach(r => categories.Add(new CategoryPresenter(r)));
             return categories;
         }
 

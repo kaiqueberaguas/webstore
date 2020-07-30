@@ -1,9 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using webApi.src.dbcontext;
+using webApi.src.interfaces;
 using webApi.src.interfaces.repositories;
 
 namespace webApi.src.repositories
@@ -28,6 +30,8 @@ namespace webApi.src.repositories
         }
         public virtual async Task<List<T>> GetAll(int page, int pageSize)
         {
+            if (page <= 0) page = 1;
+            if (pageSize <= 0) pageSize = 1;
             return await _storeContext.Set<T>().Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
         }
         public virtual async Task<T> Insert(T obj)

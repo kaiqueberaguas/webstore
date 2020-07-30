@@ -21,11 +21,11 @@ namespace webApi.src.controllers
 
         [HttpGet]
         [Produces("application/json")]
-        public async Task<IEnumerable<ProductPresenter>> Get([FromQuery] int page, [FromQuery] int size)
+        public async Task<IEnumerable<ProductPresenter>> Get([FromQuery] int page = 0, [FromQuery] int size = 15)
         {
             var products = new List<ProductPresenter>();
             var result = await _productService.GetAll(page,size);
-            result.ForEach(r => new ProductPresenter(r));
+            result.ForEach(r => products.Add(new ProductPresenter(r)));
             return products;
         }
 

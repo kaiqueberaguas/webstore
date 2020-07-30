@@ -22,11 +22,11 @@ namespace webApi.src.controllers
 
         [HttpGet]
         [Produces("application/json")]
-        public async Task<IEnumerable<PricePresenter>> Get([FromQuery] int page, [FromQuery] int size)
+        public async Task<IEnumerable<PricePresenter>> Get([FromQuery] int page = 0, [FromQuery] int size = 15)
         {
             var prices = new List<PricePresenter>();
             var result = await _priceService.GetAll(page, size);
-            result.ForEach(r => new PricePresenter(r));
+            result.ForEach(r => prices.Add(new PricePresenter(r)));
             return prices;
         }
 
