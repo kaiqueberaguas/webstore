@@ -21,9 +21,8 @@ namespace webApi.src.dbcontext
             builder.Property(e => e.PurchaseDate).IsRequired();
             builder.HasOne(e => e.Subcategory).WithMany(e => e.Products).HasForeignKey(e => e.SubcategoryId).IsRequired();
             builder.HasMany(e => e.Prices).WithOne(p => p.Product);
-            builder.Property(e => e.LastModification).ValueGeneratedOnAddOrUpdate();
-            builder.Property(e => e.RegisterDate).ValueGeneratedOnAdd();
-            builder.Property(e => e.OriginRegister).HasMaxLength(25);
+            builder.Property(e => e.LastModification);
+            builder.Property(e => e.RegisterDate);
         }
     }
 }

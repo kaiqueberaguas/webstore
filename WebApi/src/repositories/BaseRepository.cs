@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 using webApi.src.dbcontext;
 using webApi.src.interfaces;
 using webApi.src.interfaces.repositories;
+using webApi.src.models;
 
 namespace webApi.src.repositories
 {
-    public class BaseRepository<T> : IBaseRepository<T> where T : class
+    public class BaseRepository<T> : IBaseRepository<T> where T : Entity
     {
 
         private readonly StoreContext _storeContext;
@@ -36,12 +37,14 @@ namespace webApi.src.repositories
         }
         public virtual async Task<T> Insert(T obj)
         {
+            obj.PrepareCreateRecord();
             _storeContext.Set<T>().Add(obj);
             await _storeContext.SaveChangesAsync();
             return await _storeContext.Set<T>().FindAsync(obj);
         }
         public virtual async Task Update(T obj)
         {
+            obj.UpdateRecorde();
             _storeContext.Entry(obj).State = EntityState.Modified;
             await _storeContext.SaveChangesAsync();
         }

@@ -7,7 +7,7 @@ namespace WebApi.src.presenters
 {
     public class CategoryPresenter
     {
-        public long Id { get; set; }
+        public long? Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public List<SubcategoryPresenter> Subcategories { get; set; }

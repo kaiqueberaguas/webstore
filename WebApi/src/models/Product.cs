@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace webApi.src.models
 {
-    public class Product
+    public class Product : Entity
     {
-        public long Id { get; set; }
+        public override long? Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string Information { get; set; }
@@ -16,10 +16,8 @@ namespace webApi.src.models
         public long AvailableQuantity { get; set; }
         public DateTime LimitDate { get; set; }
         public DateTime PurchaseDate { get; set; }
-        public DateTime LastModification { get; set; }
-        public DateTime RegisterDate { get; set; }
         public List<Price> Prices { get; set; }
-        public string OriginRegister { get; set; }
-
+        public override DateTime? LastModification { get; set; }
+        public override DateTime? RegisterDate { get; set; }
     }
 }

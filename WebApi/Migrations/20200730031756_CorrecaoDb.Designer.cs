@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using webApi.src.dbcontext;
 
 namespace webApi.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    partial class StoreContextModelSnapshot : ModelSnapshot
+    [Migration("20200730031756_CorrecaoDb")]
+    partial class CorrecaoDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,14 +32,14 @@ namespace webApi.Migrations
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
 
-                    b.Property<DateTime?>("LastModification")
+                    b.Property<DateTime>("LastModification")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(25)")
                         .HasMaxLength(25);
 
-                    b.Property<DateTime?>("RegisterDate")
+                    b.Property<DateTime>("RegisterDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -63,20 +65,20 @@ namespace webApi.Migrations
                     b.Property<DateTime>("InitialDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2020, 7, 30, 0, 26, 27, 940, DateTimeKind.Local).AddTicks(1545));
+                        .HasDefaultValue(new DateTime(2020, 7, 30, 0, 17, 56, 323, DateTimeKind.Local).AddTicks(1306));
 
                     b.Property<bool>("IsPromotional")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasDefaultValue(false);
 
-                    b.Property<DateTime?>("LastModification")
+                    b.Property<DateTime>("LastModification")
                         .HasColumnType("datetime2");
 
                     b.Property<long>("ProductId")
                         .HasColumnType("bigint");
 
-                    b.Property<DateTime?>("RegisterDate")
+                    b.Property<DateTime>("RegisterDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -107,7 +109,7 @@ namespace webApi.Migrations
                         .HasColumnType("nvarchar(400)")
                         .HasMaxLength(400);
 
-                    b.Property<DateTime?>("LastModification")
+                    b.Property<DateTime>("LastModification")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("LimitDate")
@@ -121,7 +123,7 @@ namespace webApi.Migrations
                     b.Property<DateTime>("PurchaseDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("RegisterDate")
+                    b.Property<DateTime>("RegisterDate")
                         .HasColumnType("datetime2");
 
                     b.Property<long>("SubcategoryId")
@@ -148,7 +150,7 @@ namespace webApi.Migrations
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
 
-                    b.Property<DateTime?>("LastModification")
+                    b.Property<DateTime>("LastModification")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
@@ -156,7 +158,7 @@ namespace webApi.Migrations
                         .HasColumnType("nvarchar(25)")
                         .HasMaxLength(25);
 
-                    b.Property<DateTime?>("RegisterDate")
+                    b.Property<DateTime>("RegisterDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");

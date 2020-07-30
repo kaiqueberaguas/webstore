@@ -15,9 +15,8 @@ namespace webApi.src.dbcontext
             builder.Property(e => e.IsPromotional).HasDefaultValue(false);
             builder.Property(e => e.InitialDate).HasDefaultValue(DateTime.Now);
             builder.Property(e => e.FinalDate).HasDefaultValue(null);
-            builder.Property(e => e.LastModification).ValueGeneratedOnAddOrUpdate();
-            builder.Property(e => e.RegisterDate).ValueGeneratedOnAdd();
-            builder.Property(e => e.OriginRegister).HasMaxLength(25);            
+            builder.Property(e => e.LastModification);
+            builder.Property(e => e.RegisterDate);
         }
     }
 }

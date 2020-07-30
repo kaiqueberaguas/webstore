@@ -6,7 +6,7 @@ namespace WebApi.src.presenters
 {
     public class PricePresenter
     {
-        public long Id { get; set; }
+        public long? Id { get; set; }
         public ProductPresenter Product { get; set; }
         public decimal Amount { get; set; }
         public DateTime InitialDate { get; set; }
