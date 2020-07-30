@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using webApi.src.controllers.parameters;
 using webApi.src.models;
 
@@ -6,6 +7,7 @@ namespace webApi.src.parameters
 {
     public class PriceParameter
     {
+        [Required]
         public long Id { get; set; }
         public ProductParameter Product { get; set; }
         public decimal Amount { get; set; }

@@ -1,6 +1,4 @@
-﻿using Castle.Core.Internal;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using webApi.src.models;
 
 namespace webApi.src.controllers.parameters

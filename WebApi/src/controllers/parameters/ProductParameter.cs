@@ -1,10 +1,12 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using webApi.src.models;
 
 namespace webApi.src.controllers.parameters
 {
     public class ProductParameter
     {
+        [Required]
         public long Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

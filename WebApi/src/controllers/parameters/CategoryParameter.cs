@@ -9,9 +9,12 @@ namespace webApi.src.controllers.parameters
     {
         [Required]
         public long Id { get; set; }
+        
+        [MaxLength(25)]
         public string Name { get; set; }
+        
+        [MaxLength(100)]
         public string Description { get; set; }
-        public List<SubcategoryParameter> Subcategories { get; set; }
 
 
         public Category ToModel()
@@ -20,8 +23,6 @@ namespace webApi.src.controllers.parameters
             category.Id = Id;
             category.Name = Name;
             category.Description = Description;
-            if (!Subcategories.IsNullOrEmpty())
-                Subcategories.ForEach(c => category.Subcategories.Add(c.ToModel()));
             return category;
         }
     }
