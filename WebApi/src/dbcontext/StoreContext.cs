@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using webApi.src.models;
 
 namespace webApi.src.dbcontext
 {
-    public class StoreContext : DbContext
+    public class StoreContext : IdentityDbContext
     {
 
         #region DbSets
