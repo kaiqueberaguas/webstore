@@ -31,8 +31,8 @@ namespace WebApi
             builder.Password = Configuration["SECRETY_DATABASE"];   
             #endregion
             services.AddEntityFrameworkSqlServer().AddDbContext<StoreContext>(options => options.UseSqlServer(builder.ConnectionString));
-            #region 
-            // services.AddDefaultIdentity<IdentityUser>().AddRoles<IdentityRole>().AddEntityFrameworkStores<StoreContext>().AddDefaultTokenProviders();//todo
+            #region identity
+            services.AddDefaultIdentity<IdentityUser>().AddRoles<IdentityRole>().AddEntityFrameworkStores<StoreContext>().AddDefaultTokenProviders();//todo
             #endregion
             services.AddControllers();
             services.AddDependencyInjection();

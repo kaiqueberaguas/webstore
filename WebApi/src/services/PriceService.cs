@@ -25,9 +25,9 @@ namespace webApi.src.services
         {
             return await _priceRepository.GetAll(page,size);
         }
-        public async Task Update(Price obj)
+        public async Task<Price> Update(Price obj)
         {
-            await _priceRepository.Update(obj);
+            return await _priceRepository.Update(obj);
         }
         public async Task<Price> Create(Price obj)
         {
@@ -37,9 +37,9 @@ namespace webApi.src.services
         {
             return await _priceRepository.Delete(id);
         }
-        public async Task Delete(Price obj)
+        public async Task<Price> Delete(Price obj)
         {
-            await _priceRepository.Delete(obj);
+            return await _priceRepository.Delete(obj);
         }
     }
 }

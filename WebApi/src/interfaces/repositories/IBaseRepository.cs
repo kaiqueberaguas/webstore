@@ -10,9 +10,9 @@ namespace webApi.src.interfaces.repositories
     {
         public Task<T> GetById(long Id);
         public Task<List<T>> GetAll(int page, int pageSize);
-        public Task Update(T obj);
+        public Task<T> Update(T obj);
         public Task<T> Insert(T obj);
         public Task<T> Delete(long id);
-        public Task Delete(T obj);
+        public Task<T> Delete(T obj);
     }
 }

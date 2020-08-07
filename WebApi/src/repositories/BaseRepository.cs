@@ -40,25 +40,36 @@ namespace webApi.src.repositories
             obj.PrepareCreateRecord();
             _storeContext.Set<T>().Add(obj);
             await _storeContext.SaveChangesAsync();
-            return await _storeContext.Set<T>().FindAsync(obj);
+            return obj;
         }
-        public virtual async Task Update(T obj)
+        public virtual async Task<T> Update(T obj)
         {
+            var result = await _storeContext.Set<T>().FindAsync(obj.Id.Value);
+            if (result is null) return null;
             obj.UpdateRecorde();
             _storeContext.Entry(obj).State = EntityState.Modified;
             await _storeContext.SaveChangesAsync();
+            return obj;
         }
         public virtual async Task<T> Delete(long id)
         {
             var obj = _storeContext.Set<T>().Find(id);
-            _storeContext.Set<T>().Remove(obj);
-            await _storeContext.SaveChangesAsync();
+            if (obj != null)
+            {
+                _storeContext.Set<T>().Remove(obj);
+                await _storeContext.SaveChangesAsync();
+            }
             return obj;
         }
-        public virtual async Task Delete(T obj)
+        public virtual async Task<T> Delete(T obj)
         {
-            _storeContext.Set<T>().Remove(obj);
-            await _storeContext.SaveChangesAsync();
+            var result = _storeContext.Set<T>().Find(obj.Id);
+            if (result != null)
+            {
+                _storeContext.Set<T>().Remove(obj);
+                await _storeContext.SaveChangesAsync();
+            }
+            return result;
         }
     }
 }

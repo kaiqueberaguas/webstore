@@ -28,17 +28,17 @@ namespace webApi.src.services
         {
             return await _subcategoryRepository.Insert(obj);
         }
-        public async Task Update(Subcategory obj)
+        public async Task<Subcategory> Update(Subcategory obj)
         {
-            await _subcategoryRepository.Update(obj);
+            return await _subcategoryRepository.Update(obj);
         }
         public async Task<Subcategory> Delete(long id)
         {
             return await _subcategoryRepository.Delete(id);
         }
-        public async Task Delete(Subcategory obj)
+        public async Task<Subcategory> Delete(Subcategory obj)
         {
-            await _subcategoryRepository.Delete(obj);
+            return await _subcategoryRepository.Delete(obj);
         }
     }
 }

@@ -7,7 +7,7 @@ using WebApi.src.models.authorizationModels;
 namespace WebApi.src.controllers
 {
     
-    [Route("api/controller")]
+    [Route("api/[Controller]")]
     [ApiController]
     public class AuthController : ControllerBase
     {
@@ -21,7 +21,7 @@ namespace WebApi.src.controllers
             _userManager = userManager;
         }
 
-        [HttpPost("RegisterUser")]
+        [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterUser register)
         {
             if(!ModelState.IsValid) 
@@ -29,8 +29,15 @@ namespace WebApi.src.controllers
             
             var result = await _userManager.CreateAsync(register.ToIdentityUser(),register.Password);
             if(!result.Succeeded) return BadRequest(result.Errors);
-            
+            await _signInManager.SignInAsync(register.ToIdentityUser(),false);
             return Created("/login",null);
         }        
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginUser login)
+        {
+            
+
+            return null;           
+        }
     }
 }
