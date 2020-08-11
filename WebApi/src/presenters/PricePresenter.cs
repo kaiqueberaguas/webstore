@@ -27,10 +27,10 @@ namespace WebApi.src.presenters
                     price.Product.Subcategory.Category.Subcategories = null;
                 Product = new ProductPresenter(price.Product);
             }
-            Amount = price.Amount;
+            Amount = price.Amount.Value;
             InitialDate = price.InitialDate;
             FinalDate = price.FinalDate;
-            IsPromotional = price.IsPromotional;
+            IsPromotional = price.IsPromotional.Value;
         }
     }
 }

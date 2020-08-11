@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -39,24 +37,7 @@ namespace WebApi
             #endregion
             services.AddControllers();
             services.AddDependencyInjection();
-            #region swagger
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo
-                {
-                    Title = ".web Store Api",
-                    Description = "Api de acesso aos produtos e categorias da loja, projeto de estudo do .Net core",
-                    Contact = new OpenApiContact()
-                    {
-                        Name = "Kaique Beraguas",
-                        Email = "kaiqueberaguas@gmail.com",
-                        Url = new Uri(@"https://www.linkedin.com/in/kaique-beraguas/")
-                    },
-                    Version = "v1"
-                });
-                c.AddSecurityDefinition("Bearrer", new OpenApiSecurityScheme());
-            });
-            #endregion
+            services.AddSwaggerConfigure();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

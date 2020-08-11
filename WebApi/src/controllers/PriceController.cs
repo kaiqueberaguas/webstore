@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Castle.Core.Internal;
 using Microsoft.AspNetCore.Mvc;
 using webApi.src.controllers.parameters;
 using webApi.src.interfaces.services;
@@ -9,6 +10,8 @@ using WebApi.src.presenters;
 namespace webApi.src.controllers
 {
     [Route("api/v1/[controller]")]
+    [Consumes("application/json")]
+    [Produces("application/json")]
     [ApiController]
     public class PriceController : ControllerBase
     {
@@ -21,41 +24,48 @@ namespace webApi.src.controllers
         }
 
         [HttpGet]
-        [Produces("application/json")]
-        public async Task<IEnumerable<PricePresenter>> Get([FromQuery] int page = 0, [FromQuery] int size = 15)
+        public async Task<ActionResult<IList<PricePresenter>>> Get(
+            [FromQuery] int page = 0, [FromQuery] int size = 15)
         {
             var prices = new List<PricePresenter>();
             var result = await _priceService.GetAll(page, size);
+            if (result.IsNullOrEmpty())
+            {
+                return NoContent();
+            }
             result.ForEach(r => prices.Add(new PricePresenter(r)));
             return prices;
         }
 
         [HttpGet("{priceId}")]
-        [Produces("application/json")]
-        public async Task<PricePresenter> Get(long priceId)
+        public async Task<ActionResult<PricePresenter>> Get(long priceId)
         {
             var result = await _priceService.Get(priceId);
+            if (result is null) return NotFound();
             return new PricePresenter(result);
         }
 
         [HttpPost]
-        [Consumes("application/json")]
-        public async Task Post([FromBody] PriceCreateParameter price)
+        public async Task<ActionResult<PricePresenter>> Post([FromBody] PriceCreateParameter price)
         {
-            await _priceService.Create(price.ToModel());
+            var result = await _priceService.Create(price.ToModel());
+            return CreatedAtAction(nameof(Get), new { categoryId = result.Id }, new PricePresenter(result));
         }
 
         [HttpPut]
-        [Consumes("application/json")]
-        public async Task Put([FromBody] PriceParameter price)
+        public async Task<ActionResult<PricePresenter>> Put([FromBody] PriceParameter price)
         {
-            await _priceService.Update(price.ToModel());
+            var result = await _priceService.Update(price.ToModel());
+            if (result is null) return NoContent();
+            return new PricePresenter(result);
         }
 
         [HttpDelete("{priceId}")]
-        public async Task Delete(long priceId)
+        public async Task<ActionResult<PricePresenter>> Delete(long priceId)
         {
-            await _priceService.Delete(priceId);
+            var result = await _priceService.Delete(priceId);
+            if (result is null) return NotFound();
+            return new PricePresenter(result);
         }
     }
 }

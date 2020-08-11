@@ -30,7 +30,7 @@ namespace WebApi.src.presenters
                     product.Subcategory.Category.Subcategories = null;
                 Subcategory = new SubcategoryPresenter(product.Subcategory);
             }
-            AvailableQuantity = product.AvailableQuantity;
+            AvailableQuantity = product.AvailableQuantity.Value;
             LimitDate = product.LimitDate;
         }
     }

@@ -16,7 +16,7 @@ namespace webApi.src.dbcontext
             builder.Property(e => e.Name).HasMaxLength(25).IsRequired();
             builder.Property(e => e.Description).HasMaxLength(100).IsRequired();
             builder.Property(e => e.Information).HasMaxLength(400);
-            builder.Property(e => e.AvailableQuantity).HasDefaultValue(0);
+            builder.Property(e => e.AvailableQuantity);
             builder.Property(e => e.LimitDate);
             builder.Property(e => e.PurchaseDate).IsRequired();
             builder.HasOne(e => e.Subcategory).WithMany(e => e.Products).HasForeignKey(e => e.SubcategoryId).IsRequired();
