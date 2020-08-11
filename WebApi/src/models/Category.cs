@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Castle.Core.Internal;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,5 +14,11 @@ namespace webApi.src.models
         public List<Subcategory> Subcategories { get; set; }
         public override DateTime? LastModification { get; set; }
         public override DateTime? RegisterDate { get; set; }
+
+        public void Update(Category category)
+        {
+            if (!category.Name.IsNullOrEmpty()) Name = category.Name;
+            if (!category.Description.IsNullOrEmpty()) Description = category.Description;
+        }
     }
 }

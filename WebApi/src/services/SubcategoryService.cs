@@ -30,7 +30,13 @@ namespace webApi.src.services
         }
         public async Task<Subcategory> Update(Subcategory obj)
         {
-            return await _subcategoryRepository.Update(obj);
+            var result = await _subcategoryRepository.GetById(obj.Id.Value);
+            if (result is null)
+            {
+                return null;
+            }
+            result.Update(obj);
+            return await _subcategoryRepository.Update(result);
         }
         public async Task<Subcategory> Delete(long id)
         {

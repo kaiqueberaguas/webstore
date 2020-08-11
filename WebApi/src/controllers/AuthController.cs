@@ -23,21 +23,21 @@ namespace WebApi.src.controllers
 
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterUser register)
-        {
-            if(!ModelState.IsValid) 
-                return BadRequest(ModelState.Values.SelectMany(e => e.Errors));
-            
+        {            
             var result = await _userManager.CreateAsync(register.ToIdentityUser(),register.Password);
             if(!result.Succeeded) return BadRequest(result.Errors);
             await _signInManager.SignInAsync(register.ToIdentityUser(),false);
-            return Created("/login",null);
+            return CreatedAtAction(nameof(Login),null);
         }        
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginUser login)
         {
-            
-
-            return null;           
+            var result = await _signInManager.PasswordSignInAsync(login.Email, login.Password, false, true);
+            if (!result.Succeeded)
+            {
+                return BadRequest("Usuario ou senha invalidos");
+            }
+            return Ok();           
         }
     }
 }

@@ -27,7 +27,13 @@ namespace webApi.src.services
         }
         public async Task<Price> Update(Price obj)
         {
-            return await _priceRepository.Update(obj);
+            var result = await _priceRepository.GetById(obj.Id.Value);
+            if (result is null)
+            {
+                return null;
+            }
+            result.Update(obj);
+            return await _priceRepository.Update(result);
         }
         public async Task<Price> Create(Price obj)
         {

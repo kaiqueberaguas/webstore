@@ -44,8 +44,6 @@ namespace webApi.src.repositories
         }
         public virtual async Task<T> Update(T obj)
         {
-            var result = await _storeContext.Set<T>().FindAsync(obj.Id.Value);
-            if (result is null) return null;
             obj.UpdateRecorde();
             _storeContext.Entry(obj).State = EntityState.Modified;
             await _storeContext.SaveChangesAsync();

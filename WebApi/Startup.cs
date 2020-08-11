@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -32,7 +34,8 @@ namespace WebApi
             #endregion
             services.AddEntityFrameworkSqlServer().AddDbContext<StoreContext>(options => options.UseSqlServer(builder.ConnectionString));
             #region identity
-            services.AddDefaultIdentity<IdentityUser>().AddRoles<IdentityRole>().AddEntityFrameworkStores<StoreContext>().AddDefaultTokenProviders();//todo
+            services.AddDefaultIdentity<IdentityUser>().AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<StoreContext>().AddDefaultTokenProviders();//todo
             #endregion
             services.AddControllers();
             services.AddDependencyInjection();
@@ -51,6 +54,7 @@ namespace WebApi
                     },
                     Version = "v1"
                 });
+                c.AddSecurityDefinition("Bearrer", new OpenApiSecurityScheme());
             });
             #endregion
         }
@@ -62,7 +66,6 @@ namespace WebApi
 
                 app.UseDeveloperExceptionPage();
             }
-
             app.UseHttpsRedirection();
 
             app.UseRouting();

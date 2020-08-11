@@ -8,7 +8,6 @@ namespace webApi.src.controllers.parameters
     {
         [Required]
         public ProductParameter Product { get; set; }
-        
         [Required]
         public decimal Amount { get; set; }
         public DateTime InitialDate { get; set; }
@@ -22,7 +21,7 @@ namespace webApi.src.controllers.parameters
             price.Amount = Amount;
             price.InitialDate = InitialDate == null || InitialDate < DateTime.Today ? DateTime.Today:InitialDate;
             price.FinalDate = FinalDate;
-            price.IsPromotional = IsPromotional != null && IsPromotional;
+            price.IsPromotional = IsPromotional;
             return price;
         }
 

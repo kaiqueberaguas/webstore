@@ -29,7 +29,13 @@ namespace webApi.src.services
         }
         public async Task<Product> Update(Product obj)
         {
-            return await _productRepository.Update(obj);
+            var result = await _productRepository.GetById(obj.Id.Value);
+            if (result is null)
+            {
+                return null;
+            }
+            result.Update(obj);
+            return await _productRepository.Update(result);
         }
         public async Task<Product> Delete(long id)
         {
