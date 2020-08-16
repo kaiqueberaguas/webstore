@@ -1,15 +1,9 @@
-using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Rewrite;
-using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
-using webApi.src.dbcontext;
 using webApi.src.extensions;
 
 namespace WebApi
@@ -26,31 +20,27 @@ namespace WebApi
 
         public void ConfigureServices(IServiceCollection services)
         {
-            #region database_configuration
-            var builder = new SqlConnectionStringBuilder(Configuration.GetConnectionString("SqlServerConnectionString"));
-            builder.Password = Configuration["SECRETY_DATABASE"];   
-            #endregion
-            services.AddEntityFrameworkSqlServer().AddDbContext<StoreContext>(options => options.UseSqlServer(builder.ConnectionString));
-            #region identity
-            services.AddDefaultIdentity<IdentityUser>().AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<StoreContext>().AddDefaultTokenProviders();//todo
-            #endregion
-            services.AddControllers();
-            services.AddDependencyInjection();
+            services.AddDataBaseConfigure(Configuration);           
+            
+            services.AddRouting(options => options.LowercaseUrls = true);
+            
+            services.AddJwtSecurity(Configuration);
             services.AddSwaggerConfigure();
+            services.AddDependencyInjection();
+            //services.AddCors();
+            services.AddControllers();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
-
                 app.UseDeveloperExceptionPage();
             }
+            
             app.UseHttpsRedirection();
 
             app.UseRouting();
-            
             app.UseAuthorization();
             #region swagger
             app.UseSwagger();

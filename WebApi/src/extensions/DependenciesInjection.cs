@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using webApi.src.interfaces.repositories;
 using webApi.src.interfaces.services;
 using webApi.src.repositories;
+using webApi.src.Sercutity;
 using webApi.src.services;
 
 namespace webApi.src.extensions
@@ -25,6 +26,10 @@ namespace webApi.src.extensions
             services.AddScoped<ISubcategoryService, SubcategoryService>();
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IPriceService, PriceService>();
+            #endregion
+            #region default
+            services.AddScoped<AccessManager>();
+            services.AddScoped<RegisterUserManager>();
             #endregion
         }
     }

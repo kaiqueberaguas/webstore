@@ -2,42 +2,45 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using WebApi.src.models.authorizationModels;
+using webApi.src.Sercutity;
+using webApi.src.Sercutity.AuthorizationModels;
 
 namespace WebApi.src.controllers
 {
-    
+
     [Route("api/[Controller]")]
     [ApiController]
     public class AuthController : ControllerBase
     {
 
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly RegisterUserManager _registerUserManager;
 
-        public AuthController(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager)
+        public AuthController(RegisterUserManager registerUserManager)
         {
-            _signInManager = signInManager;
-            _userManager = userManager;
+            _registerUserManager = registerUserManager;
         }
 
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterUser register)
-        {            
-            var result = await _userManager.CreateAsync(register.ToIdentityUser(),register.Password);
+        {
+            var result = await _registerUserManager.Register(register);
             if(!result.Succeeded) return BadRequest(result.Errors);
-            await _signInManager.SignInAsync(register.ToIdentityUser(),false);
             return CreatedAtAction(nameof(Login),null);
         }        
+
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginUser login)
+        public async Task<ActionResult<Token>> Login(
+            [FromBody] AccessCredentials login,
+            [FromServices] AccessManager accessManager)
         {
-            var result = await _signInManager.PasswordSignInAsync(login.Email, login.Password, false, true);
-            if (!result.Succeeded)
+            if (accessManager.ValidateCredentials(login))
             {
-                return BadRequest("Usuario ou senha invalidos");
+                return accessManager.GenerateToken(login);
             }
-            return Ok();           
+            else
+            {
+                return BadRequest("Erro ao fazer login");
+            }
         }
     }
 }

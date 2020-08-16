@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Castle.Core.Internal;
+using Castle.Core.Logging;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using webApi.src.controllers.parameters;
@@ -12,11 +13,13 @@ namespace webApi.src.controllers
     [Route("api/v1/[controller]")]
     [Consumes("application/json")]
     [Produces("application/json")]
+    [Authorize("Bearrer")]
     [ApiController]
     public class CategoryController : ControllerBase
     {
 
         private readonly ICategoryService _categoryService;
+        //private readonly ILogger _logger;
 
         public CategoryController(ICategoryService categoryService)
         {
@@ -36,7 +39,7 @@ namespace webApi.src.controllers
             result.ForEach(r => categories.Add(new CategoryPresenter(r)));
             return categories;
         }
-
+        
         [HttpGet("{categoryId}")]
         public async Task<ActionResult<CategoryPresenter>> Get([FromRoute] long categoryId)
         {
