@@ -1,6 +1,7 @@
 <h3>Projeto de estudo com .net core 3.0</h3>
 
 Requisitos:
+
     dotnet core 3.1
     dotnet-tool dotnet ef ou visual studio
     docker
