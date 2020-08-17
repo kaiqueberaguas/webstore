@@ -34,5 +34,7 @@ Para rodar:
 
 Controle de roles:
 
-    Por default todo usuario criado em /api/auth/register tem a role "USER", para incluir, excluir e modificar a aplicação é preciso a role "ADMIN" que pode ser criada em POST "api/v1/administration/role?role=ADMIN" e inserida no usuario no 
+    Por default todo usuario criado em /api/auth/register tem a role "USER", para incluir, 
+    excluir e modificar a aplicação é preciso a role "ADMIN" que pode ser criada 
+    em POST "api/v1/administration/role?role=ADMIN" e inserida no usuario no 
     PUT "api/v1/administration/role"
