@@ -8,7 +8,9 @@ using webApi.src.Sercutity.AuthorizationModels;
 namespace WebApi.src.controllers
 {
 
-    [Route("api/[Controller]")]
+    [Route("api/v1/[Controller]")]
+    [Consumes("application/json")]
+    [Produces("application/json")]
     [ApiController]
     public class AuthController : ControllerBase
     {

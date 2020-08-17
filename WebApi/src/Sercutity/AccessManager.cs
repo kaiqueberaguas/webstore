@@ -1,12 +1,13 @@
-﻿using Microsoft.Extensions.Caching.Distributed;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Security.Claims;
-using System.IdentityModel.Tokens.Jwt;
 using System.Security.Principal;
+using System.IdentityModel.Tokens.Jwt;
+
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Identity;
+
+using Newtonsoft.Json;
 using webApi.src.Sercutity.AuthorizationModels;
 
 namespace webApi.src.Sercutity
@@ -56,7 +57,6 @@ namespace webApi.src.Sercutity
                             // a role Acesso-APIProdutos
                             credenciaisValidas = _userManager.IsInRoleAsync(
                                 userIdentity, Roles.ROLE_CLIENTE).Result;
-                            //credenciaisValidas = true;
                         }
                     }
                 }
@@ -68,7 +68,7 @@ namespace webApi.src.Sercutity
 
                         string strTokenArmazenado =
                             _cache.GetString(credenciais.RefreshToken);
-                        if (!String.IsNullOrWhiteSpace(strTokenArmazenado))
+                        if (!string.IsNullOrWhiteSpace(strTokenArmazenado))
                         {
                             refreshTokenBase = JsonConvert
                                 .DeserializeObject<RefreshTokenData>(strTokenArmazenado);

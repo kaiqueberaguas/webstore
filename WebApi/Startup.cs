@@ -24,9 +24,9 @@ namespace WebApi
             
             services.AddRouting(options => options.LowercaseUrls = true);
             
-            services.AddJwtSecurity(Configuration);
             services.AddSwaggerConfigure();
             services.AddDependencyInjection();
+            services.AddJwtSecurity(Configuration);
             //services.AddCors();
             services.AddControllers();
         }

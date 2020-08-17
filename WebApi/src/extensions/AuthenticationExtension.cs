@@ -1,14 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using webApi.src.dbcontext;
 using webApi.src.Sercutity;
 using webApi.src.Sercutity.AuthorizationModels;
 
@@ -39,17 +34,23 @@ namespace webApi.src.extensions
                 paramsValidation.IssuerSigningKey = signingConfigurations.Key;
                 paramsValidation.ValidAudience = tokenConfigurations.Audience;
                 paramsValidation.ValidIssuer = tokenConfigurations.Issuer;
-
-                // Valida a assinatura de um token recebido
                 paramsValidation.ValidateIssuerSigningKey = true;
-
-                // Verifica se um token recebido ainda é válido
                 paramsValidation.ValidateLifetime = true;
-
-                // Tempo de tolerância para a expiração de um token (utilizado
-                // caso haja problemas de sincronismo de horário entre diferentes
-                // computadores envolvidos no processo de comunicação)
                 paramsValidation.ClockSkew = TimeSpan.Zero;
+                
+                //bearerOptions.Events = new JwtBearerEvents()
+                //{
+                //    OnAuthenticationFailed = c => 
+                //    {
+                //        c.NoResult();
+                //        c.Response.StatusCode = 500;
+                //        c.Response.ContentType = "text/plain";
+                //        c.Response.WriteAsync(c.Exception.ToString());
+                //        return Task.CompletedTask;
+                //    },
+                //    OnMessageReceived = context => Task.CompletedTask
+                //};
+
             });
 
             services.AddAuthorization(auth =>

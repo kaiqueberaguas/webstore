@@ -1,13 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using webApi.src.interfaces.repositories;
 using webApi.src.interfaces.services;
 using webApi.src.repositories;
 using webApi.src.Sercutity;
 using webApi.src.services;
+using WebApi.src.Sercutity;
 
 namespace webApi.src.extensions
 {
@@ -28,6 +25,7 @@ namespace webApi.src.extensions
             services.AddScoped<IPriceService, PriceService>();
             #endregion
             #region default
+            services.AddScoped<IAdmintrationService, AdmintrationService>();
             services.AddScoped<AccessManager>();
             services.AddScoped<RegisterUserManager>();
             #endregion

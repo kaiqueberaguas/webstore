@@ -6,4 +6,7 @@ Para rodar:
     cd webApi
     dotne user-secrets init
     dotnet user-secrets set "SECRETY_DATABASE" "{senha configurada no container do sqlserver}"
-    dotnet run
+    dotnet user-secrets set "REDIS_SECRETY_DATABASE" "{senha do redis}"
+    dotnet user-secrets set "JWT_KEY" "{chave de criptografia do token jwt}"
+    
+	dotnet run

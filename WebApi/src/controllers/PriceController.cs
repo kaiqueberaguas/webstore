@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Castle.Core.Internal;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using webApi.src.controllers.parameters;
 using webApi.src.interfaces.services;
@@ -12,6 +13,8 @@ namespace webApi.src.controllers
     [Route("api/v1/[controller]")]
     [Consumes("application/json")]
     [Produces("application/json")]
+    [Authorize("Bearer")]
+    [Authorize(Roles = "ADMIN")]
     [ApiController]
     public class PriceController : ControllerBase
     {
@@ -23,6 +26,7 @@ namespace webApi.src.controllers
             _priceService = priceService;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<IList<PricePresenter>>> Get(
             [FromQuery] int page = 0, [FromQuery] int size = 15)
@@ -37,6 +41,7 @@ namespace webApi.src.controllers
             return prices;
         }
 
+        [AllowAnonymous]
         [HttpGet("{priceId}")]
         public async Task<ActionResult<PricePresenter>> Get(long priceId)
         {

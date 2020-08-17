@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Castle.Core.Internal;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using webApi.src.controllers.parameters;
@@ -12,6 +13,8 @@ namespace webApi.src.controllers
     [Route("api/v1/[controller]")]
     [Consumes("application/json")]
     [Produces("application/json")]
+    [Authorize("Bearer")]
+    [Authorize(Roles = "ADMIN")]
     [ApiController]
     public class SubcategoryController : ControllerBase
     {
@@ -23,6 +26,7 @@ namespace webApi.src.controllers
             _subcategoryService = subcategoryService;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<IList<SubcategoryPresenter>>> Get(
             [FromQuery] int page = 0, [FromQuery] int size = 15)
@@ -37,6 +41,7 @@ namespace webApi.src.controllers
             return subcategories;
         }
 
+        [AllowAnonymous]
         [HttpGet("{subcategoryId}")]
         public async Task<ActionResult<SubcategoryPresenter>> Get(long subcategoryId)
         {

@@ -12,6 +12,8 @@ namespace webApi.src.controllers
     [Route("api/v1/[controller]")]
     [Consumes("application/json")]
     [Produces("application/json")]
+    [Authorize("Bearer")]
+    [Authorize(Roles = "ADMIN")]
     [ApiController]
     public class ProductController : ControllerBase
     {
@@ -23,6 +25,7 @@ namespace webApi.src.controllers
             _productService = productService;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<IList<ProductPresenter>>> Get(
             [FromQuery] int page = 0, [FromQuery] int size = 15)
@@ -37,6 +40,7 @@ namespace webApi.src.controllers
             return products;
         }
 
+        [AllowAnonymous]
         [HttpGet("{productId}")]
         public async Task<ActionResult<ProductPresenter>> Get(long productId)
         {

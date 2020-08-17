@@ -20,9 +20,8 @@ namespace webApi.src.Sercutity
 
         public async Task<IdentityResult> Register(RegisterUser register)
         {
-            RoleManager<Roles> roles = roles.CreateAsync(Roles.ROLE_CLIENTE);
             var result = await _userManager.CreateAsync(register.ToIdentityUser(), register.Password);
-            await _userManager.AddToRoleAsync(register.ToIdentityUser(), );
+            await _userManager.AddToRoleAsync(register.ToIdentityUser(), Roles.ROLE_CLIENTE );
             return result;
         }
     }
