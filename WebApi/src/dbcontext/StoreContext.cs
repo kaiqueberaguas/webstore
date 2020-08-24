@@ -6,7 +6,6 @@ namespace webApi.src.dbcontext
 {
     public class StoreContext : IdentityDbContext
     {
-
         #region DbSets
         public DbSet<Category> Categories { get; set; }
         public DbSet<Subcategory> SubCategories { get; set; }
@@ -16,12 +15,10 @@ namespace webApi.src.dbcontext
 
         public StoreContext()
         {
-           
         }
 
         public StoreContext(DbContextOptions<StoreContext> options) : base(options)
         {
-
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

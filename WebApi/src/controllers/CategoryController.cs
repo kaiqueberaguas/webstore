@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Castle.Core.Internal;
 using Microsoft.AspNetCore.Authorization;
@@ -13,26 +14,24 @@ namespace webApi.src.controllers
     [Route("api/v1/[controller]")]
     [Consumes("application/json")]
     [Produces("application/json")]
-    [Authorize("Bearer")]
-    [Authorize(Roles = "ADMIN")]
+    //[Authorize("Bearer")]
+    //[Authorize(Roles = "ADMIN")]
     [ApiController]
     public class CategoryController : ControllerBase
     {
 
         private readonly ICategoryService _categoryService;
-        //private readonly ILogger _logger;
 
         public CategoryController(ICategoryService categoryService)
         {
             _categoryService = categoryService;
-
         }
+
         [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<IList<CategoryPresenter>>> Get(
             [FromQuery] int page = 0, [FromQuery] int size = 15)
         {
-            //_logger.LogDebug("Inicio da requisição:");
             var categories = new List<CategoryPresenter>();
             var result = await _categoryService.GetAll(page, size);
             if (result.IsNullOrEmpty())

@@ -9,10 +9,10 @@
     <OutputPath></OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="src\configurations\**" />
-    <Content Remove="src\configurations\**" />
-    <EmbeddedResource Remove="src\configurations\**" />
-    <None Remove="src\configurations\**" />
+    <Compile Remove="Src\configurations\**" />
+    <Content Remove="Src\configurations\**" />
+    <EmbeddedResource Remove="Src\configurations\**" />
+    <None Remove="Src\configurations\**" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.7" />

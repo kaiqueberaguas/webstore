@@ -6,7 +6,7 @@ using webApi.src.interfaces.repositories;
 using webApi.src.interfaces.services;
 using webApi.src.models;
 
-namespace webApi.src.services
+namespace WebApi.Src.Services
 {
     public class SubcategoryService : ISubcategoryService
     {

@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using webApi.src.interfaces.repositories;
 using webApi.src.interfaces.services;
-using webApi.src.repositories;
 using webApi.src.Sercutity;
-using webApi.src.services;
 using WebApi.src.Sercutity;
+using WebApi.Src.Repositories;
+using WebApi.Src.Services;
 
 namespace webApi.src.extensions
 {

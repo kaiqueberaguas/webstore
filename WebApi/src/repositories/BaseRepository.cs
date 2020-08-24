@@ -1,15 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using webApi.src.dbcontext;
-using webApi.src.interfaces;
 using webApi.src.interfaces.repositories;
 using webApi.src.models;
 
-namespace webApi.src.repositories
+namespace WebApi.Src.Repositories
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : Entity
     {

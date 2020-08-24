@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.src.Sercutity;
 
-namespace WebApi.src.controllers
+namespace WebApi.Src.Controllers
 {
 
 
@@ -11,7 +11,7 @@ namespace WebApi.src.controllers
     [Consumes("application/json")]
     [Produces("application/json")]
     [Authorize("Bearer")]
-    [Authorize(Roles = "ADMIN")]
+    //[Authorize(Roles = "ADMIN")]
     [ApiController]
     public class AdministrationController : ControllerBase
     {
@@ -30,14 +30,14 @@ namespace WebApi.src.controllers
         }
 
         [HttpDelete("role/{role}")]
-        public async Task<IActionResult> UpdateRole([FromRoute ]string role)
+        public async Task<IActionResult> UpdateRole([FromRoute] string role)
         {
             await _admintrationService.DeleteRole(role);
             return Ok();
         }
 
         [HttpPut("route")]
-        public async Task<IActionResult> UpdatePermission([FromBody]UserAcess userAcess)
+        public async Task<IActionResult> UpdatePermission([FromBody] UserAcess userAcess)
         {
             await _admintrationService.UpdatePermission(userAcess);
             return Ok();

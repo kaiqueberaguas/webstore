@@ -6,7 +6,7 @@ using webApi.src.interfaces.repositories;
 using webApi.src.interfaces.services;
 using webApi.src.models;
 
-namespace webApi.src.services
+namespace WebApi.Src.Services
 {
     public class PriceService : IPriceService
     {
@@ -23,7 +23,7 @@ namespace webApi.src.services
         }
         public async Task<List<Price>> GetAll(int page, int size)
         {
-            return await _priceRepository.GetAll(page,size);
+            return await _priceRepository.GetAll(page, size);
         }
         public async Task<Price> Update(Price obj)
         {

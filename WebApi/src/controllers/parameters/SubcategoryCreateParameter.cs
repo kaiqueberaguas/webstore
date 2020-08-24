@@ -16,7 +16,7 @@ namespace webApi.src.controllers.parameters
         public string Description { get; set; }
         [Required]
         public CategoryParameter Category { get; set; }
-        public List<ProductParameter> Products { get; set; }
+        public List<ProductCreateParameter> Products { get; set; }
 
         public Subcategory ToModel()
         {

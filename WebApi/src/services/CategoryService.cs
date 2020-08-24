@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using webApi.src.interfaces.repositories;
 using webApi.src.interfaces.services;
 using webApi.src.models;
 
-namespace webApi.src.services
+namespace WebApi.Src.Services
 {
     public class CategoryService : ICategoryService
     {
@@ -31,7 +29,7 @@ namespace webApi.src.services
         public async Task<Category> Update(Category obj)
         {
             var result = await _categoryRepository.GetById(obj.Id.Value);
-            if (result is null) 
+            if (result is null)
             {
                 return null;
             }

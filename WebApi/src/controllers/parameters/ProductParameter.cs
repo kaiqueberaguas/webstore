@@ -7,7 +7,7 @@ namespace webApi.src.controllers.parameters
     public class ProductParameter
     {
         [Required]
-        public long Id { get; set; }
+        public long ProductId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string Information { get; set; }
@@ -19,7 +19,7 @@ namespace webApi.src.controllers.parameters
         public Product ToModel()
         {
             var product = new Product();
-            product.Id = Id;
+            product.Id = ProductId;
             product.Name = Name;
             product.Description = Description;
             product.Information = Information;

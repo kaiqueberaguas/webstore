@@ -4,7 +4,9 @@ using Microsoft.AspNetCore.Rewrite;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using webApi.src.extensions;
+using WebApi.Src.Extensions;
 
 namespace WebApi
 {
@@ -20,10 +22,9 @@ namespace WebApi
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDataBaseConfigure(Configuration);           
-            
+            services.AddDataBaseConfigure(Configuration);
             services.AddRouting(options => options.LowercaseUrls = true);
-            
+
             services.AddSwaggerConfigure();
             services.AddDependencyInjection();
             services.AddJwtSecurity(Configuration);
@@ -33,11 +34,9 @@ namespace WebApi
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            
+  
+            //app.UseGlobalExceptionHandler();
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
