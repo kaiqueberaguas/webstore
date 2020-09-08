@@ -12,8 +12,8 @@ namespace webApi.src.controllers
     [Route("api/v1/[controller]")]
     [Consumes("application/json")]
     [Produces("application/json")]
-    [Authorize("Bearer")]
-    [Authorize(Roles = "ADMIN")]
+    // [Authorize("Bearer")]
+    // [Authorize(Roles = "ADMIN")]
     [ApiController]
     public class ProductController : ControllerBase
     {

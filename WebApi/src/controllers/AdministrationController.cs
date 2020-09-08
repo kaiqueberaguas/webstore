@@ -10,7 +10,7 @@ namespace WebApi.Src.Controllers
     [Route("api/v1/[Controller]")]
     [Consumes("application/json")]
     [Produces("application/json")]
-    [Authorize("Bearer")]
+    // [Authorize("Bearer")]
     //[Authorize(Roles = "ADMIN")]
     [ApiController]
     public class AdministrationController : ControllerBase

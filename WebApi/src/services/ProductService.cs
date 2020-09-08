@@ -15,9 +15,9 @@ namespace WebApi.Src.Services
             _productRepository = productRepository;
         }
 
-        public async Task<Product> Get(long id)
+        public async Task<Product> Get(long code)
         {
-            return await _productRepository.GetById(id);
+            return await _productRepository.GetByCode(code);
         }
         public async Task<List<Product>> GetAll(int page, int size)
         {

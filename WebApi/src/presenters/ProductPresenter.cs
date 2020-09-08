@@ -1,37 +1,42 @@
-﻿
-using System;
+﻿using System;
 using webApi.src.models;
 
 namespace WebApi.src.presenters
 {
     public class ProductPresenter
     {
-        public long? Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public string Information { get; set; }
-        public SubcategoryPresenter Subcategory { get; set; }
-        public long AvailableQuantity { get; set; }
-        public DateTime LimitDate { get; set; }
+        public long? Id { get; }
+        public string Name { get; }
+        public long ProductCode { get; }
+        public string Description { get; }
+        public string Information { get; }
+        public SubcategoryPresenter Subcategory { get; }
+        public long AvailableQuantity { get; }
+        public DateTime LimitDate { get; }
 
-        public ProductPresenter()
-        {
-
-        }
         public ProductPresenter(Product product)
         {
             Id = product.Id;
             Name = product.Name;
+            ProductCode = product.Code.GetValueOrDefault();
             Description = product.Description;
             Information = product.Information;
             if (product.Subcategory != null)
             {
-                if (product.Subcategory.Category != null)
-                    product.Subcategory.Category.Subcategories = null;
-                Subcategory = new SubcategoryPresenter(product.Subcategory);
+                Subcategory = prepareSimpleSearch(product.Subcategory);
             }
             AvailableQuantity = product.AvailableQuantity.Value;
             LimitDate = product.LimitDate;
+        }
+
+        private SubcategoryPresenter prepareSimpleSearch(Subcategory subcategory)
+        {
+            var model = new Subcategory()
+            {
+                Name = subcategory.Name,
+                Code = subcategory.Code.GetValueOrDefault()
+            };
+            return new SubcategoryPresenter(model);
         }
     }
 }

@@ -66,5 +66,10 @@ namespace WebApi.Src.Repositories
             }
             return result;
         }
+
+        public async Task<T> GetByCode(long code)
+        {
+            return await _storeContext.Set<T>().Where(e => e.Code == code).FirstOrDefaultAsync();
+        }
     }
 }

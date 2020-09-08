@@ -14,9 +14,9 @@ namespace WebApi.Src.Services
         {
             _categoryRepository = categoryRepository;
         }
-        public async Task<Category> Get(long id)
+        public async Task<Category> Get(long code)
         {
-            return await _categoryRepository.GetById(id);
+            return await _categoryRepository.GetByCode(code);
         }
         public async Task<List<Category>> GetAll(int page, int size)
         {

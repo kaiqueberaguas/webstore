@@ -12,13 +12,17 @@ namespace WebApi.Src.Services
     {
 
         private readonly ISubcategoryRepository _subcategoryRepository;
-        public SubcategoryService(ISubcategoryRepository subcategoryRepository)
+        private readonly ICategoryRepository _categoryRepository;
+
+        public SubcategoryService(ISubcategoryRepository subcategoryRepository, ICategoryRepository categoryRepository)
         {
             _subcategoryRepository = subcategoryRepository;
+            _categoryRepository = categoryRepository;
         }
-        public async Task<Subcategory> Get(long id)
+
+        public async Task<Subcategory> Get(long code)
         {
-            return await _subcategoryRepository.GetById(id);
+            return await _subcategoryRepository.GetByCode(code);
         }
         public async Task<List<Subcategory>> GetAll(int page, int size)
         {
@@ -26,6 +30,12 @@ namespace WebApi.Src.Services
         }
         public async Task<Subcategory> Create(Subcategory obj)
         {
+            var category = await _categoryRepository.GetByCode(obj.Category.Code.Value);
+            if (category is null)
+            {
+                return null;
+            }
+            obj.Category = category;
             return await _subcategoryRepository.Insert(obj);
         }
         public async Task<Subcategory> Update(Subcategory obj)

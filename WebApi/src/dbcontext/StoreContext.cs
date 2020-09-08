@@ -9,7 +9,6 @@ namespace webApi.src.dbcontext
         #region DbSets
         public DbSet<Category> Categories { get; set; }
         public DbSet<Subcategory> SubCategories { get; set; }
-        public DbSet<Price> Prices { get; set; }
         public DbSet<Product> Products { get; set; }
         #endregion
 
@@ -26,7 +25,6 @@ namespace webApi.src.dbcontext
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
             modelBuilder.ApplyConfiguration(new SubcategoryConfiguration());
             modelBuilder.ApplyConfiguration(new CategoryConfiguration());
-            modelBuilder.ApplyConfiguration(new PriceConfiguration());
             base.OnModelCreating(modelBuilder);
         }
 

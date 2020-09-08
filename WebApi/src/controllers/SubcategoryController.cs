@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Castle.Core.Internal;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using webApi.src.controllers.parameters;
 using webApi.src.interfaces.services;
@@ -13,8 +12,8 @@ namespace webApi.src.controllers
     [Route("api/v1/[controller]")]
     [Consumes("application/json")]
     [Produces("application/json")]
-    [Authorize("Bearer")]
-    [Authorize(Roles = "ADMIN")]
+    // [Authorize("Bearer")]
+    // [Authorize(Roles = "ADMIN")]
     [ApiController]
     public class SubcategoryController : ControllerBase
     {
@@ -54,23 +53,24 @@ namespace webApi.src.controllers
         public async Task<ActionResult<SubcategoryPresenter>> Post([FromBody] SubcategoryCreateParameter subcategory)
         {
             var result = await _subcategoryService.Create(subcategory.ToModel());
-            return CreatedAtAction(nameof(Get), new { subcategoryId = result.Id }, new SubcategoryPresenter(result));
+            return CreatedAtAction(nameof(Get), new { subcategoryId = result.Code }, new SubcategoryPresenter(result));
         }
 
-        [HttpPut]
-        public async Task<ActionResult<SubcategoryPresenter>> Put([FromBody] SubcategoryParameter subcategory)
+        [HttpPut("{subcategory-code}")]
+        public async Task<ActionResult<SubcategoryPresenter>> Put(
+            [FromBody] SubcategoryParameter subcategory)
         {
             var result = await _subcategoryService.Update(subcategory.ToModel());
             if (result is null) return NoContent();
             return new SubcategoryPresenter(result);
         }
 
-        [HttpDelete("{subcategoryId}")]
-        public async Task<ActionResult<SubcategoryPresenter>> Delete(long subcategoryId)
-        {
-            var result = await _subcategoryService.Delete(subcategoryId);
-            if (result is null) return NotFound();
-            return new SubcategoryPresenter(result);
-        }
+        // [HttpDelete("{subcategoryId}")]
+        // public async Task<ActionResult<SubcategoryPresenter>> Delete(long subcategoryId)
+        // {
+        //     var result = await _subcategoryService.Delete(subcategoryId);
+        //     if (result is null) return NotFound();
+        //     return new SubcategoryPresenter(result);
+        // }
     }
 }

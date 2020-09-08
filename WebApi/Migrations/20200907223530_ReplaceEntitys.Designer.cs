@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using webApi.src.dbcontext;
 
 namespace webApi.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    partial class StoreContextModelSnapshot : ModelSnapshot
+    [Migration("20200907223530_ReplaceEntitys")]
+    partial class ReplaceEntitys
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -222,7 +224,7 @@ namespace webApi.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long?>("Code")
+                    b.Property<long>("CategoryCode")
                         .HasColumnType("bigint");
 
                     b.Property<string>("Description")
@@ -241,9 +243,8 @@ namespace webApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Code")
-                        .IsUnique()
-                        .HasFilter("[Code] IS NOT NULL");
+                    b.HasIndex("CategoryCode")
+                        .IsUnique();
 
                     b.ToTable("Categories");
                 });
@@ -259,9 +260,6 @@ namespace webApi.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<long?>("AvailableQuantity")
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("Code")
                         .HasColumnType("bigint");
 
                     b.Property<string>("Description")
@@ -284,6 +282,9 @@ namespace webApi.Migrations
                         .HasColumnType("nvarchar(25)")
                         .HasMaxLength(25);
 
+                    b.Property<long>("ProductCode")
+                        .HasColumnType("bigint");
+
                     b.Property<DateTime>("PurchaseDate")
                         .HasColumnType("datetime2");
 
@@ -296,9 +297,8 @@ namespace webApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Code")
-                        .IsUnique()
-                        .HasFilter("[Code] IS NOT NULL");
+                    b.HasIndex("ProductCode")
+                        .IsUnique();
 
                     b.HasIndex("SubcategoryId");
 
@@ -316,9 +316,6 @@ namespace webApi.Migrations
                         .IsRequired()
                         .HasColumnType("bigint");
 
-                    b.Property<long?>("Code")
-                        .HasColumnType("bigint");
-
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
@@ -334,13 +331,15 @@ namespace webApi.Migrations
                     b.Property<DateTime?>("RegisterDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<long>("SubcategoryCode")
+                        .HasColumnType("bigint");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("Code")
-                        .IsUnique()
-                        .HasFilter("[Code] IS NOT NULL");
+                    b.HasIndex("SubcategoryCode")
+                        .IsUnique();
 
                     b.ToTable("SubCategories");
                 });

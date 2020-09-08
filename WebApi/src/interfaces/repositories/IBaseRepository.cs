@@ -8,11 +8,12 @@ namespace webApi.src.interfaces.repositories
 {
     public interface IBaseRepository<T> : IDisposable where T : Entity
     {
-        public Task<T> GetById(long Id);
-        public Task<List<T>> GetAll(int page, int pageSize);
-        public Task<T> Update(T obj);
-        public Task<T> Insert(T obj);
-        public Task<T> Delete(long id);
-        public Task<T> Delete(T obj);
+        Task<T> GetById(long Id);
+        Task<T> GetByCode(long Code);
+        Task<List<T>> GetAll(int page, int pageSize);
+        Task<T> Update(T obj);
+        Task<T> Insert(T obj);
+        Task<T> Delete(long id);
+        Task<T> Delete(T obj);
     }
 }

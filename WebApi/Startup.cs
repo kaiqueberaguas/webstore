@@ -28,7 +28,14 @@ namespace WebApi
             services.AddSwaggerConfigure();
             services.AddDependencyInjection();
             services.AddJwtSecurity(Configuration);
-            //services.AddCors();
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: "localhost",
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin();
+                    });
+            });
             services.AddControllers();
         }
 
@@ -40,6 +47,7 @@ namespace WebApi
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseCors("localhost");
             app.UseAuthorization();
             #region swagger
             app.UseSwagger();
