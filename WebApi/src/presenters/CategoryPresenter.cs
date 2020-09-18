@@ -6,25 +6,27 @@ namespace WebApi.src.presenters
 {
     public class CategoryPresenter
     {
-        public long? Id { get; }
-        public string Name { get;}
-        public long CategoryCode { get;}
-        public string Description { get;}
-        public List<SubcategoryPresenter> Subcategories { get;}
+        public string Name { get; }
+        public long? CategoryCode { get; }
+        public string Description { get; }
+        public bool IsActive { get; set; }
+        public List<SubcategoryPresenter> Subcategories { get; }
 
         public CategoryPresenter(Category category)
         {
-            Id = category.Id;
             Name = category.Name;
             CategoryCode = category.Code.GetValueOrDefault();
+            IsActive = category.IsActive.GetValueOrDefault();
             Description = category.Description;
-            Subcategories = new List<SubcategoryPresenter>();
-            if(!category.Subcategories.IsNullOrEmpty())
+            if (!category.Subcategories.IsNullOrEmpty())
+            {
+                Subcategories = new List<SubcategoryPresenter>();
                 category.Subcategories.ForEach(s =>
                 {
                     s.Category = null;
                     this.Subcategories.Add(new SubcategoryPresenter(s));
                 });
+            }
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using webApi.src.interfaces.repositories;
 using webApi.src.interfaces.services;
 using webApi.src.models;
+using WebApi.Src.Models;
 
 namespace WebApi.Src.Services
 {
@@ -18,7 +19,7 @@ namespace WebApi.Src.Services
         {
             return await _categoryRepository.GetByCode(code);
         }
-        public async Task<List<Category>> GetAll(int page, int size)
+        public async Task<Pageable<Category>> GetAll(int page, int size)
         {
             return await _categoryRepository.GetAll(page, size);
         }
@@ -28,7 +29,7 @@ namespace WebApi.Src.Services
         }
         public async Task<Category> Update(Category obj)
         {
-            var result = await _categoryRepository.GetById(obj.Id.Value);
+            var result = await _categoryRepository.GetByCode(obj.Code.GetValueOrDefault());
             if (result is null)
             {
                 return null;
@@ -36,13 +37,12 @@ namespace WebApi.Src.Services
             result.Update(obj);
             return await _categoryRepository.Update(result);
         }
-        public async Task<Category> Delete(long id)
+        public async Task<Category> Delete(long code)
         {
-            return await _categoryRepository.Delete(id);
-        }
-        public async Task<Category> Delete(Category obj)
-        {
-            return await _categoryRepository.Delete(obj);
+            var obj = await _categoryRepository.GetByCode(code);
+            if (obj != null)
+                return await _categoryRepository.Delete(obj.Id.GetValueOrDefault());
+            return null;
         }
     }
 }

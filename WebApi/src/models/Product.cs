@@ -12,13 +12,14 @@ namespace webApi.src.models
         public string Description { get; set; }
         public string Information { get; set; }
         public virtual Subcategory Subcategory { get; set; }
-        public long? SubcategoryId { get; set; }
+        public virtual long? SubcategoryId { get; set; }
         public long? AvailableQuantity { get; set; }
         public DateTime LimitDate { get; set; }
         public DateTime PurchaseDate { get; set; }
         public decimal Amount { get; set; }
         public override DateTime? LastModification { get; set; }
         public override DateTime? RegisterDate { get; set; }
+        public override bool? IsActive { get => base.IsActive; set => base.IsActive = value; }
 
         public override bool Equals(object obj)
         {

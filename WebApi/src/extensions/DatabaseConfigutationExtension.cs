@@ -11,19 +11,22 @@ namespace webApi.src.extensions
 {
     public static class DatabaseConfigutationExtension
     {
-        public static readonly ILoggerFactory logger = LoggerFactory.Create(builder => builder.AddDebug());
+        public static readonly ILoggerFactory logger = LoggerFactory.Create(builder => builder.AddDebug().AddConsole());
         public static IServiceCollection AddDataBaseConfigure(this IServiceCollection services, IConfiguration configuration)
         {
             #region database_configuration
             var builder = new SqlConnectionStringBuilder(configuration.GetConnectionString("SqlServerConnectionString"));
             builder.Password = configuration["SECRETY_DATABASE"];
             #endregion
+
             services.AddDbContext<StoreContext>(options => options
-                .UseLoggerFactory(logger)
+                //.UseLoggerFactory(logger)
+                .UseLazyLoadingProxies()
                 .UseSqlServer(builder.ConnectionString));
+
             #region redis
             var builderRedis = configuration.GetConnectionString("ConexaoRedis")
-                .Replace("REDIS_SECRETY_DATABASE",configuration["REDIS_SECRETY_DATABASE"]);
+                .Replace("REDIS_SECRETY_DATABASE", configuration["REDIS_SECRETY_DATABASE"]);
 
             services.AddDistributedRedisCache(options =>
             {
@@ -31,6 +34,7 @@ namespace webApi.src.extensions
                 options.InstanceName = "OAuth";
             });
             #endregion
+
             #region identity
             services.AddIdentity<IdentityUser, IdentityRole>().AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<StoreContext>().AddDefaultTokenProviders();//todo

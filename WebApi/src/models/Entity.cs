@@ -8,6 +8,7 @@ namespace webApi.src.models
         public virtual long? Code { get; set; }
         public virtual DateTime? LastModification { get; set; }
         public virtual DateTime? RegisterDate { get; set; }
+        public virtual bool? IsActive { get; set; }
 
         public virtual void PrepareCreateRecord()
         {

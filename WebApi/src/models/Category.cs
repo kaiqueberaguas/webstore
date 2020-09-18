@@ -10,10 +10,11 @@ namespace webApi.src.models
         public string Name { get; set; }
         public override long? Code { get; set; }
         public string Description { get; set; }
-        public List<Subcategory> Subcategories { get; set; }
+        public virtual List<Subcategory> Subcategories { get; set; }
         public override DateTime? LastModification { get; set; }
         public override DateTime? RegisterDate { get; set; }
-
+        public override bool? IsActive { get => base.IsActive; set => base.IsActive = value; }
+        
         public override bool Equals(object obj)
         {
             return obj is Category category &&

@@ -8,6 +8,8 @@ using Microsoft.Extensions.Logging;
 using webApi.src.controllers.parameters;
 using webApi.src.interfaces.services;
 using WebApi.src.presenters;
+using WebApi.Src.Models;
+using WebApi.Src.Presenters;
 
 namespace webApi.src.controllers
 {
@@ -29,18 +31,18 @@ namespace webApi.src.controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public async Task<ActionResult<IList<CategoryPresenter>>> Get(
-            [FromQuery] int page = 0, [FromQuery] int size = 15)
+        public async Task<ActionResult<PageablePresenter<CategoryPresenter>>> Get([FromQuery] int page = 1, [FromQuery] int size = 15)
         {
-            var categories = new List<CategoryPresenter>();
             var result = await _categoryService.GetAll(page, size);
             if (result.IsNullOrEmpty())
             {
                 return NoContent();
             }
-            result.ForEach(r => categories.Add(new CategoryPresenter(r)));
+            var categories = new PageablePresenter<CategoryPresenter>(page, result.TotalPages);
+            result.ForEach(r => categories.Content.Add(new CategoryPresenter(r)));
             return categories;
         }
+
         [AllowAnonymous]
         [HttpGet("{categoryId}")]
         public async Task<ActionResult<CategoryPresenter>> Get([FromRoute] long categoryId)

@@ -11,10 +11,11 @@ namespace webApi.src.models
         public override long? Code { get; set; }
         public string Description { get; set; }
         public virtual Category Category { get; set; }
-        public long? CategoryId { get; set; }
-        public List<Product> Products { get; set; }
+        public virtual long? CategoryId { get; set; }
+        public virtual List<Product> Products { get; set; }
         public override DateTime? LastModification { get; set; }
         public override DateTime? RegisterDate { get; set; }
+        public override bool? IsActive { get => base.IsActive; set => base.IsActive = value; }
 
         public override bool Equals(object obj)
         {
@@ -51,7 +52,7 @@ namespace webApi.src.models
         {
             if (!subcategory.Name.IsNullOrEmpty()) Name = subcategory.Name;
             if (!subcategory.Description.IsNullOrEmpty()) Description = subcategory.Description;
-            if (subcategory.Category != null && subcategory.Category.Id != null)
+            if (subcategory.Category != null && subcategory.Category.Code != null)
             {
                 Category = subcategory.Category;
                 CategoryId = subcategory.Category.Id;
