@@ -31,7 +31,7 @@ namespace WebApi.src.controllers
         }        
 
         [HttpPost("login")]
-        public async Task<ActionResult<Token>> Login(
+        public ActionResult<Token> Login(
             [FromBody] AccessCredentials login,
             [FromServices] AccessManager accessManager)
         {
