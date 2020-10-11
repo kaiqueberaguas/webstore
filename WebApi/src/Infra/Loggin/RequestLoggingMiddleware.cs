@@ -22,8 +22,10 @@ namespace WebApi.Src.Infra.Log
 
         public async Task Invoke(HttpContext context)
         {
+            var startRequest = DateTime.Now;
             try
             {
+                
                 await _next(context);
             }
             catch (Exception e)
@@ -33,11 +35,11 @@ namespace WebApi.Src.Infra.Log
             finally
             {
                 _logger.LogInformation(
-                    "Request {method} {basePath}{url} => {statusCode}",
+                    "Request {method} {url} => {statusCode}",
                     context.Request?.Method,
                     context.Request?.Path.Value,
                     context.Response?.StatusCode);
-                
+                _logger.LogInformation("Tempo total da requisicao: "+ DateTime.Now.Subtract(startRequest));
             }
         }
     }
