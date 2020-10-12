@@ -41,6 +41,7 @@ namespace webApi.src.controllers
             }
             var subcategories = new PageablePresenter<SubcategoryPresenter>(page, result.TotalPages);
             result.ForEach(r => subcategories.Content.Add(new SubcategoryPresenter(r)));
+             _logger.LogInformation($"Total de registros retornados:{subcategories.Content.Count}");
             return subcategories;
         }
 

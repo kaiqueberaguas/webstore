@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Castle.Core.Internal;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using webApi.src.controllers.parameters;
 using webApi.src.interfaces.services;
@@ -23,10 +24,12 @@ namespace webApi.src.controllers
     {
 
         private readonly IProductService _productService;
+        private ILogger<ProductController> _logger;
 
-        public ProductController(IProductService productService)
+        public ProductController(IProductService productService, ILogger<ProductController> logger)
         {
             _productService = productService;
+            _logger = logger;
         }
 
         [AllowAnonymous]
@@ -40,6 +43,7 @@ namespace webApi.src.controllers
             }
             var products = new PageablePresenter<ProductPresenter>(result.PageIndex,result.TotalPages);
             result.ForEach(r => products.Content.Add(new ProductPresenter(r)));
+             _logger.LogInformation($"Total de registros retornados:{products.Content.Count}");
             return products;
         }
 
