@@ -21,7 +21,7 @@ namespace webApi.src.extensions
 
             services.AddDbContext<StoreContext>(options => options
                 // .UseLoggerFactory(logger).EnableSensitiveDataLogging(true)
-                .UseLazyLoadingProxies()
+                // .UseLazyLoadingProxies()
                 .UseSqlServer(builder.ConnectionString));
 
             #region redis
