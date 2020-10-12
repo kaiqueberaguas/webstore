@@ -6,6 +6,6 @@ namespace webApi.src.interfaces.repositories
 {
     public interface IProductRepository : IBaseRepository<Product>
     {
-        Task<Pageable<Product>> GetAll(int page, int pageSize,long subcategoryCode);
+        Task<Pageable<Product>> GetAll(int page, int size,long subcategoryCode);
     }
 }

@@ -31,10 +31,10 @@ namespace webApi.src.controllers
         }
 
         [AllowAnonymous]
-        [HttpGet]
-        public async Task<ActionResult<PageablePresenter<SubcategoryPresenter>>> Get([FromQuery] int page = 1, [FromQuery] int size = 15)
+        [HttpGet("category/{categoryCode}")]
+        public async Task<ActionResult<PageablePresenter<SubcategoryPresenter>>> Get(long categoryCode, [FromQuery] int page = 1, [FromQuery] int size = 15)
         {
-            var result = await _subcategoryService.GetAll(page, size);
+            var result = await _subcategoryService.GetAllByCategory(categoryCode, page, size);
             if (result.IsNullOrEmpty())
             {
                 return NoContent();

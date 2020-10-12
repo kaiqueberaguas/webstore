@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using webApi.src.dbcontext;
 using webApi.src.interfaces.repositories;
@@ -32,13 +30,13 @@ namespace WebApi.Src.Repositories
         {
             return await _storeContext.Set<T>().FindAsync(Id);
         }
-        public virtual async Task<Pageable<T>> GetAll(int page, int pageSize)
+        public virtual async Task<Pageable<T>> GetAll(int page, int size)
         {
             if (page <= 0) page = 1;
-            if (pageSize <= 0) pageSize = 1;
-            var list = await _storeContext.Set<T>().Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
+            if (size <= 0) size = 1;
+            var list = await _storeContext.Set<T>().Skip((page - 1) * size).Take(size).ToListAsync();
             var count = await _storeContext.Set<T>().CountAsync();
-            return new Pageable<T>(list, count, page,pageSize);
+            return new Pageable<T>(list, count, page,size);
         }
         public virtual async Task<T> Insert(T obj)
         {

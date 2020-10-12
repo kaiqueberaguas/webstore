@@ -20,7 +20,7 @@ namespace webApi.src.extensions
             #endregion
 
             services.AddDbContext<StoreContext>(options => options
-                //.UseLoggerFactory(logger)
+                // .UseLoggerFactory(logger).EnableSensitiveDataLogging(true)
                 .UseLazyLoadingProxies()
                 .UseSqlServer(builder.ConnectionString));
 

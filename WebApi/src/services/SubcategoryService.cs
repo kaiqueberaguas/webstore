@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using webApi.src.interfaces.repositories;
 using webApi.src.interfaces.services;
 using webApi.src.models;
@@ -29,6 +26,12 @@ namespace WebApi.Src.Services
         {
             return await _subcategoryRepository.GetAll(page, size);
         }
+
+        public async Task<Pageable<Subcategory>> GetAllByCategory(long categoryCode, int page, int size)
+        {
+            return await _subcategoryRepository.GetAllByCategory(categoryCode, page, size);
+        }
+
         public async Task<Subcategory> Create(Subcategory obj)
         {
             var category = await _categoryRepository.GetByCode(obj.Category.Code.Value);
@@ -58,5 +61,6 @@ namespace WebApi.Src.Services
                 return await _subcategoryRepository.Delete(obj.Id.GetValueOrDefault());
             return null;
         }
+
     }
 }

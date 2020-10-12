@@ -14,20 +14,20 @@ namespace WebApi.Src.Repositories
         {
         }
 
-        public async Task<Pageable<Product>> GetAll(int page, int pageSize, long subcategoryCode)
+        public async Task<Pageable<Product>> GetAll(int page, int size, long subcategoryCode)
         {
             if (page <= 0) page = 1;
-            if (pageSize <= 0) pageSize = 1;
+            if (size <= 0) size = 1;
             var list = await _storeContext.Products
                 .Where(p => p.Subcategory.Code == subcategoryCode)
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize)
+                .Skip((page - 1) * size)
+                .Take(size)
                 .ToListAsync();
             var count = await _storeContext.Products
                 .Where(p => p.Subcategory.Code == subcategoryCode)
                 .CountAsync();
 
-            return new Pageable<Product>(list, count, page, pageSize);
+            return new Pageable<Product>(list, count, page, size);
 
         }
     }
