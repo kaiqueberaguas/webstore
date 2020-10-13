@@ -49,6 +49,7 @@ namespace webApi.src.models
         {
             if (!category.Name.IsNullOrEmpty()) Name = category.Name;
             if (!category.Description.IsNullOrEmpty()) Description = category.Description;
+            if (category.IsActive != null) IsActive = category.IsActive;
         }
         
         

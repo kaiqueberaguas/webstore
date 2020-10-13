@@ -3,12 +3,12 @@ services:
     db:
         image: "mcr.microsoft.com/mssql/server"
         environment:
-            SA_PASSWORD: "${SQL_PASSWORD}"
+            SA_PASSWORD: "SqlServer2020@%"
             ACCEPT_EULA: "Y"
         ports:
             - "1433:1433"
     redis:
         image: redis
-        command: redis-server --requirepass ${REDIS_PASSWORD}
+        command: redis-server --requirepass Redis2020%
         ports:
            - "6379:6379"
