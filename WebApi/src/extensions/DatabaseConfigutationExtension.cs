@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Configuration;
 using webApi.src.dbcontext;
 
 namespace webApi.src.extensions
@@ -20,7 +19,7 @@ namespace webApi.src.extensions
             #endregion
 
             services.AddDbContext<StoreContext>(options => options
-                // .UseLoggerFactory(logger).EnableSensitiveDataLogging(true)
+                .UseLoggerFactory(logger).EnableSensitiveDataLogging(true)
                 // .UseLazyLoadingProxies()
                 .UseSqlServer(builder.ConnectionString));
 
