@@ -52,7 +52,11 @@ namespace webApi.src.controllers
         public async Task<ActionResult<ProductPresenter>> Get(long productCode)
         {
             var result = await _productService.Get(productCode);
-            if (result is null) return NotFound();
+            if (result is null)
+            {
+                _logger.LogInformation($"Produto não encontrado, codigo:{productCode}");
+                return NotFound();
+            }
             return new ProductPresenter(result);
         }
 

@@ -46,18 +46,21 @@ namespace webApi.src.controllers
         }
 
         [AllowAnonymous]
-        [HttpGet("{subcategory-code}")]
+        [HttpGet("{subcategoryCode}")]
         public async Task<ActionResult<SubcategoryPresenter>> Get(long subcategoryCode)
         {
             var result = await _subcategoryService.Get(subcategoryCode);
-            if (result is null) return NotFound();
+            if (result is null)
+            {
+                _logger.LogInformation($"Subcategoria não encontrada, codigo:{subcategoryCode}");
+                return NotFound();             
+            }  
             return new SubcategoryPresenter(result);
         }
 
         [HttpPost]
         public async Task<ActionResult<SubcategoryPresenter>> Post([FromBody] SubcategoryCreateParameter subcategory)
         {
-            
             var result = await _subcategoryService.Create(subcategory.ToModel());
             return CreatedAtAction(nameof(Get), new { subcategoryId = result.Code }, new SubcategoryPresenter(result));
         }
@@ -70,12 +73,12 @@ namespace webApi.src.controllers
             return new SubcategoryPresenter(result);
         }
 
-        // [HttpDelete("{subcategoryId}")]
-        // public async Task<ActionResult<SubcategoryPresenter>> Delete(long subcategoryId)
-        // {
-        //     var result = await _subcategoryService.Delete(subcategoryId);
-        //     if (result is null) return NotFound();
-        //     return new SubcategoryPresenter(result);
-        // }
+        [HttpDelete("{subcategoryId}")]
+        public async Task<ActionResult<SubcategoryPresenter>> Delete(long subcategoryId)
+        {
+            var result = await _subcategoryService.Delete(subcategoryId);
+            if (result is null) return NotFound();
+            return new SubcategoryPresenter(result);
+        }
     }
 }

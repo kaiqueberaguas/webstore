@@ -19,7 +19,7 @@ namespace webApi.src.extensions
             #endregion
 
             services.AddDbContext<StoreContext>(options => options
-                .UseLoggerFactory(logger).EnableSensitiveDataLogging(true)
+                //.UseLoggerFactory(logger).EnableSensitiveDataLogging(true)    // Loga sql executado no terminal
                 // .UseLazyLoadingProxies()
                 .UseSqlServer(builder.ConnectionString));
 

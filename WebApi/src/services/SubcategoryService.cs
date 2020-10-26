@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
 using webApi.src.interfaces.repositories;
 using webApi.src.interfaces.services;
 using webApi.src.models;
@@ -11,11 +12,13 @@ namespace WebApi.Src.Services
 
         private readonly ISubcategoryRepository _subcategoryRepository;
         private readonly ICategoryRepository _categoryRepository;
+        private readonly ILogger<SubcategoryService> _logger;
 
-        public SubcategoryService(ISubcategoryRepository subcategoryRepository, ICategoryRepository categoryRepository)
+        public SubcategoryService(ISubcategoryRepository subcategoryRepository, ICategoryRepository categoryRepository, ILogger<SubcategoryService> logger)
         {
             _subcategoryRepository = subcategoryRepository;
             _categoryRepository = categoryRepository;
+            _logger = logger;
         }
 
         public async Task<Subcategory> Get(long code)
@@ -34,9 +37,10 @@ namespace WebApi.Src.Services
 
         public async Task<Subcategory> Create(Subcategory obj)
         {
-            var category = await _categoryRepository.GetByCode(obj.Category.Code.Value);
+            var category = await _categoryRepository.GetByCode(obj.Category.Code.GetValueOrDefault());
             if (category is null)
             {
+                _logger.LogError($"Categoria codigo:{obj.Category.Code.GetValueOrDefault()} não encontrada");
                 return null;
             }
             obj.Category = category;

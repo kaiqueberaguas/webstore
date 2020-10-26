@@ -25,7 +25,6 @@ namespace WebApi.Src.Infra.Log
             var startRequest = DateTime.Now;
             try
             {
-                
                 await _next(context);
             }
             catch (Exception e)

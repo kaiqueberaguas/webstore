@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using webApi.src.interfaces.repositories;
 using webApi.src.interfaces.services;
@@ -11,10 +12,14 @@ namespace WebApi.Src.Services
     {
 
         private readonly ICategoryRepository _categoryRepository;
-        public CategoryService(ICategoryRepository categoryRepository)
+        private readonly ILogger<CategoryService> _logger;
+
+        public CategoryService(ICategoryRepository categoryRepository, ILogger<CategoryService> logger)
         {
             _categoryRepository = categoryRepository;
+            _logger = logger;
         }
+
         public async Task<Category> Get(long code)
         {
             return await _categoryRepository.GetByCode(code);

@@ -41,6 +41,7 @@ namespace WebApi.Src.Services
             var subcategory = await _subcategoryrepository.GetByCode(obj.Subcategory.Code.GetValueOrDefault());
             if(subcategory is null)
             {
+                _logger.LogError($"Subcategoria codigo:{obj.Subcategory.Code.GetValueOrDefault()} não encontrada");
                 return null;
             }
             obj.Subcategory = null;

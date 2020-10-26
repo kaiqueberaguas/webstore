@@ -44,11 +44,15 @@ namespace webApi.src.controllers
         }
 
         [AllowAnonymous]
-        [HttpGet("{categoryId}")]
-        public async Task<ActionResult<CategoryPresenter>> Get([FromRoute] long categoryId)
+        [HttpGet("{categoryCode}")]
+        public async Task<ActionResult<CategoryPresenter>> Get([FromRoute] long categoryCode)
         {
-            var result = await _categoryService.Get(categoryId);
-            if (result is null) return NotFound();
+            var result = await _categoryService.Get(categoryCode);
+            if (result is null)
+            {
+                _logger.LogInformation($"Categoria não encontrada, codigo:{categoryCode}");
+                return NotFound();
+            }
             return new CategoryPresenter(result);
         }
 
