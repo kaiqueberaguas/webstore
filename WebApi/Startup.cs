@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Rewrite;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using webApi.src.extensions;
+using WebApi.Src.Extensions;
 using WebApi.Src.Infra.Log;
 
 namespace WebApi
@@ -26,6 +27,7 @@ namespace WebApi
             services.AddSwaggerConfigure();
             services.AddDependencyInjection();
             services.AddJwtSecurity(Configuration);
+           
             services.AddCors(options =>
             {
                 options.AddPolicy(name: "https://localhost*",
@@ -40,7 +42,7 @@ namespace WebApi
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 
-            //app.UseGlobalExceptionHandler();
+            app.UseGlobalExceptionHandler();
             app.UseMiddleware<RequestLoggingMiddleware>();
             app.UseHttpsRedirection();
 

@@ -14,7 +14,7 @@ namespace WebApi.Src.Extensions
     public static class ExceptionHandlerExtension
     {//analisar
 
-        public static readonly ILoggerFactory loggerFactoryk = LoggerFactory.Create(builder => builder.AddDebug());
+        public static readonly ILoggerFactory loggerFactoryk = LoggerFactory.Create(builder => builder.AddConsole());
 
         public static void UseGlobalExceptionHandler(this IApplicationBuilder app)
         {
@@ -35,8 +35,8 @@ namespace WebApi.Src.Extensions
                         var json = new
                         {
                             context.Response.StatusCode,
-                            Message = "An error occurred whilst processing your request",
-                            Detailed = exceptionHandlerFeature.Error
+                            Message = "Ops, ocorreu algum erro, tente novamente mais tarde!",
+                            Detailed = exceptionHandlerFeature.Error.Message
                         };
 
                         await context.Response.WriteAsync(JsonConvert.SerializeObject(json));

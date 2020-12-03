@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Castle.Core.Internal;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -6,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using webApi.src.controllers.parameters;
 using webApi.src.interfaces.services;
 using WebApi.src.presenters;
+using WebApi.Src.Infra.Log;
 using WebApi.Src.Presenters;
 
 namespace webApi.src.controllers
@@ -32,6 +34,7 @@ namespace webApi.src.controllers
         [HttpGet]
         public async Task<ActionResult<PageablePresenter<CategoryPresenter>>> Get([FromQuery] int page = 1, [FromQuery] int size = 15)
         {
+            throw new Exception("Erro de teste");
             var result = await _categoryService.GetAll(page, size);
             if (result.IsNullOrEmpty())
             {
