@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Rewrite;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using webApi.src.extensions;
-using WebApi.Src.Extensions;
 using WebApi.Src.Infra.Log;
 
 namespace WebApi
@@ -26,29 +25,29 @@ namespace WebApi
 
             services.AddSwaggerConfigure();
             services.AddDependencyInjection();
-            services.AddJwtSecurity(Configuration);
+            //services.AddJwtSecurity(Configuration);
            
-            services.AddCors(options =>
-            {
-                options.AddPolicy(name: "https://localhost*",
-                    builder =>
-                    {
-                        builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();//ajustar restrição de cors e restrição de metodos
-                    });
-            });
+            //services.AddCors(options =>
+            //{
+            //    options.AddPolicy(name: "https://localhost*",
+            //        builder =>
+            //        {
+            //            builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();//ajustar restrição de cors e restrição de metodos
+            //        });
+            //});
             services.AddControllers();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 
-            app.UseGlobalExceptionHandler();
+            //app.UseGlobalExceptionHandler();
             app.UseMiddleware<RequestLoggingMiddleware>();
             app.UseHttpsRedirection();
 
             app.UseRouting();
-            app.UseCors("https://localhost*");
-            app.UseAuthorization();
+            //app.UseCors("https://localhost*");
+            //app.UseAuthorization();
             #region swagger
             app.UseSwagger();
             app.UseSwaggerUI(s =>

@@ -1,8 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using webApi.src.interfaces.repositories;
 using webApi.src.interfaces.services;
-using webApi.src.Sercutity;
-using WebApi.src.Sercutity;
 using WebApi.Src.Repositories;
 using WebApi.Src.Services;
 
@@ -22,11 +20,11 @@ namespace webApi.src.extensions
             services.AddScoped<ISubcategoryService, SubcategoryService>();
             services.AddScoped<IProductService, ProductService>();
             #endregion
-            #region default
-            services.AddScoped<IAdmintrationService, AdmintrationService>();
-            services.AddScoped<AccessManager>();
-            services.AddScoped<RegisterUserManager>();
-            #endregion
+            //#region default
+            //services.AddScoped<IAdmintrationService, AdmintrationService>();
+            //services.AddScoped<AccessManager>();
+            //services.AddScoped<RegisterUserManager>();
+            //#endregion
         }
     }
 }

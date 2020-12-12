@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using webApi.src.models;
 
 namespace webApi.src.dbcontext
 {
-    public class StoreContext : IdentityDbContext
+    public class StoreContext : DbContext
     {
         #region DbSets
         public DbSet<Category> Categories { get; set; }

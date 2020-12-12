@@ -30,14 +30,14 @@ namespace webApi.src.extensions
             services.AddDistributedRedisCache(options =>
             {
                 options.Configuration = builderRedis;
-                options.InstanceName = "OAuth";
+                options.InstanceName = "WebStore";
             });
             #endregion
 
-            #region identity
-            services.AddIdentity<IdentityUser, IdentityRole>().AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<StoreContext>().AddDefaultTokenProviders();//todo
-            #endregion
+            //#region identity
+            //services.AddIdentity<IdentityUser, IdentityRole>().AddRoles<IdentityRole>()
+            //    .AddEntityFrameworkStores<StoreContext>().AddDefaultTokenProviders();//todo
+            //#endregion
 
             return services;
         }
