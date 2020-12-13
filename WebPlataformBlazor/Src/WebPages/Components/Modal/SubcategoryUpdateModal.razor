@@ -1,0 +1,45 @@
+﻿<form>
+    <div class="form-group row">
+
+        <label for="inputEmail4" class="col-sm-2 col-form-label">Nome</label>
+        <div class="col-sm-10">
+            <input @bind="Subcategory.Name" type="text" placeholder=@Subcategory.Name style="margin-bottom: 3%; padding: 3%" maxlength="25" class="form-control" id="name">
+        </div>
+
+        <label for="inputEmail4" class="col-sm-2 col-form-label">Descrição</label>
+        <div class="col-sm-10">
+            <input @bind="Subcategory.Description" type="text" placeholder=@Subcategory.Description style="margin-bottom:3%;padding:3%" maxlength="100" class="form-control" id="description">
+        </div>
+        <div class="btn-group">
+            <button type="submit" class="btn btn-primary" style="padding:2%; margin:2%" @onclick="RegisterNewCategory">Salvar</button>
+            <button type="submit" class="btn btn-primary" style="padding:2%; margin:2%">Cancelar</button>
+        </div>
+    </div>
+</form>
+
+
+@inject SubcategoryPageService _subcategoryPageService;
+@code {
+
+    [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; }
+
+    [Parameter] public Subcategory Subcategory { get; set; } 
+    bool ShowForm { get; set; } = true;
+
+    void SubmitForm()
+    {
+
+        BlazoredModal.Close();
+    }
+
+    private async Task RegisterNewCategory()
+    {
+        await _subcategoryPageService.Update(Subcategory);
+    }
+
+    void Cancel()
+    {
+        BlazoredModal.Cancel();
+    }
+
+}

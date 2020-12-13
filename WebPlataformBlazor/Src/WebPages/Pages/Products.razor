@@ -1,0 +1,10 @@
+﻿@page "/{category}/{subcategory}"
+
+<h3>Products</h3>
+
+@code {
+    [Parameter]
+    public string Category { get; set; }
+    [Parameter]
+    public string Subcategory { get; set; }
+}

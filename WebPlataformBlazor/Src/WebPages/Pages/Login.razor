@@ -1,0 +1,39 @@
+﻿@page "/Login"
+
+
+<div class="row">
+    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="card card-signin my-5 table-borderless">
+            <div class="card-body">
+                <h5 class="card-title text-center">Entrar</h5>
+                <form class="form-signin">
+                    <div class="form-label-group">
+                        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+                        <label for="inputEmail">Email</label>
+                    </div>
+
+                    <div class="form-label-group">
+                        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                        <label for="inputPassword">Senha</label>
+                    </div>
+
+                    <div class="custom-control custom-checkbox mb-3">
+                        <input type="checkbox" class="custom-control-input" id="customCheck1">
+                        <label class="custom-control-label" for="customCheck1">Lembrar senha</label>
+                    </div>
+                    <button class="btn btn-sm align-content-lg-start" type="submit">Esqueci minha senha</button>
+                    <div class="row">
+                        <button class="col btn btn-outline-primary"  type="submit" style="padding:1%;margin:1%">Login</button>
+                        <NavLink class="col btn btn-outline-success" href="Registrar" type="submit" style="padding:1%;margin:1%">Registrar</NavLink>
+                    </div>
+                    @*<hr class="my-4">
+        <button class="btn btn-lg btn-google text-uppercase" type="submit"><i class="fab fa-google"></i> Sign in with Google</button>
+        <button class="btn btn-lg btn-facebook text-uppercase" type="submit"><i class="fab fa-facebook-f"></i> Sign in with Facebook</button>*@
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@code {
+
+}

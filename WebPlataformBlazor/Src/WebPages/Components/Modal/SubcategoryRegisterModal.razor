@@ -1,0 +1,48 @@
+﻿<form>
+
+    <div class="form-group row">
+        <label for="inputEmail4" class="col-sm-2 col-form-label">Nome</label>
+        <div class="col-sm-10">
+            <input @bind="Subcategory.Name" type="text" placeholder="Nome da categoria" style="margin-bottom: 3%; padding: 3%" maxlength="25" class="form-control" id="name">
+        </div>
+
+        <label for="inputEmail4" class="col-sm-2 col-form-label">Descrição</label>
+        <div class="col-sm-10">
+            <input @bind="Subcategory.Description" type="text" placeholder="Descrição da categoria" style="margin-bottom:3%;padding:3%" maxlength="100" class="form-control" id="description">
+        </div>
+        <div class="btn-group">
+            <button type="submit" class="btn btn-primary" style="padding:2%; margin:2%" @onclick="RegisterNewCategory">Salvar</button>
+            <button type="submit" class="btn btn-primary" style="padding:2%; margin:2%">Cancelar</button>
+        </div>
+    </div>
+</form>
+
+@inject SubcategoryPageService _subcategoryPageService;
+@code {
+
+    [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; }
+
+    [Parameter] public string CategoryCode { get; set; }
+
+    public Subcategory Subcategory { get; set; } = new Subcategory();
+    bool ShowForm { get; set; } = true;
+    int FormId { get; set; }
+
+    void SubmitForm()
+    {
+
+        BlazoredModal.Close();
+    }
+
+    private async Task RegisterNewCategory()
+    {
+        Subcategory.CategoryCode = long.Parse(CategoryCode);
+        await _subcategoryPageService.Create(Subcategory);
+    }
+
+    void Cancel()
+    {
+        BlazoredModal.Cancel();
+    }
+
+}

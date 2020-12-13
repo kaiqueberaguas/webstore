@@ -1,0 +1,50 @@
+﻿@page "/subcategory/{subcategoryName}/{subcategoryCode}/products"
+
+<h3>@SubcategoryName</h3>
+
+<table class="table table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <td scope="col">Nome</td>
+            <td scope="col">Descrição</td>
+            <td scope="col">Preço</td>
+            <td scope="col">Produto Ativo</td>
+            <td scope="col">Ação</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in products.Content)
+        {
+            <tr>
+                <td scope="col">@product.Name</td>
+                <td scope="col">@product.Description</td>
+                <td scope="col">@product.Price</td>
+                <td scope="col">@SetTextCase(product, "Ativa", "Desativa")</td>
+                <td scope="col">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-success">Editar</button>
+                        <button type="button" class="btn btn-secondary">@SetTextCase(product, "Desativar", "Ativar")</button>
+                        <button type="button" class="btn btn-danger">Excluir</button>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@inject ProductsPageService _productsPageService;
+@code {
+
+    [Parameter]
+    public string SubcategoryCode { get; set; }
+
+    [Parameter]
+    public string SubcategoryName { get; set; }
+
+    Pageable<Product> products = new Pageable<Product>();
+
+    protected override async Task OnInitializedAsync() => products = await _productsPageService.GetProductsBySubategoryCode(SubcategoryCode, 0, 15);
+
+    private string SetTextCase(Product product, string caseTrue, string caseFalse) => (product.IsActive.GetValueOrDefault()) ? caseTrue : caseFalse;
+
+}

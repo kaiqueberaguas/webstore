@@ -1,0 +1,113 @@
+﻿@*@page "/category/{categoryName}/{categoryCode}/subcategory"
+<h3>@CategoryName</h3>
+
+<div class="row">
+    <button class="btn btn-primary" @onclick="NewSubcategory">Nova Subcategoria</button>
+    <button class="btn btn-outline-info" @onclick="ToBack">Voltar</button>
+</div>
+
+<table class="table table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <td scope="col" style="padding:2%">Nome</td>
+            <td scope="col" style="padding:2%">Descrição</td>
+            <td scope="col" style="padding:2%">Ativa</td>
+            <td scope="col" style="padding:2%">Produtos</td>
+            <td scope="col" style="padding:2%">Ação</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var sub in subcategories.Content)
+        {
+            <tr>
+                <td scope="col">
+                    <a href="/subcategory/@sub.Name/@sub.SubcategoryCode/products">
+                        @sub.Name
+                    </a>
+                </td>
+                <td scope="col" style="padding:2%">@sub.Description</td>
+                <td scope="col" style="padding:2%">@SetTextCase(sub, "Ativa", "Desativa")</td>
+                <td scope="col" style="padding:2%">@sub.TotalProducts</td>
+                <td scope="col" style="padding:2%">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-success" @onclick="() => UpdateSubcategory(sub)">Editar</button>
+                        <button type="button" class="btn btn-secondary" @onclick="() => Disable(sub)">@SetTextCase(sub, "Desativar", "Ativar")</button>
+                        <button type="button" class="btn btn-danger" @onclick="@(() => DeleteSubcategory(sub.SubcategoryCode.ToString()))">Excluir</button>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@inject SubcategoryPageService _subcategoryPageService;
+@inject NavigationManager NavigationManager;
+@code {
+
+    [Parameter]
+    public string CategoryCode { get; set; }
+
+    [Parameter]
+    public string CategoryName { get; set; }
+
+    [CascadingParameter] public IModalService Modal { get; set; }
+
+    Pageable<Subcategory> subcategories = new Pageable<Subcategory>();
+
+    private int page { get; set; } = 1;
+    private int size { get; set; } = 15;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var response = await _subcategoryPageService.GetSubcategorysByCategoryCode(CategoryCode, page, size);
+        if (response != null)
+        {
+            subcategories = response;
+        }
+
+    }
+
+    private void ToBack()
+    {
+        NavigationManager.NavigateTo("/categories", true);
+    }
+
+    private void NewSubcategory()
+    {
+        var parameters = new ModalParameters();
+        parameters.Add("CategoryCode", CategoryCode);
+        var modal = Modal.Show<SubcategoryRegisterModal>("Nova categoria",parameters);
+        if (modal.Result.IsCompleted)
+        {
+            NavigationManager.NavigateTo("/subcategory", true);
+        }
+    }
+
+    private async Task UpdateSubcategory(Subcategory subcategory)
+    {
+        var parameters = new ModalParameters();
+        parameters.Add("Subcategory", subcategory);
+
+        var modal = Modal.Show<SubcategoryUpdateModal>("Atualizar subcategoria", parameters);
+        await modal.Result;
+        NavigationManager.NavigateTo("/subcategory", true);
+    }
+
+    private async Task Disable(Subcategory subcategory)
+    {
+        subcategory.IsActive = !subcategory.IsActive;
+        subcategory = await _subcategoryPageService.Update(subcategory);
+    }
+
+    private string SetTextCase(Subcategory subcategory, string caseTrue, string caseFalse) => (subcategory.IsActive.GetValueOrDefault()) ? caseTrue : caseFalse;
+
+    private async Task DeleteSubcategory(string subcategoryCode)
+    {
+        var response = await _subcategoryPageService.Delete(subcategoryCode);
+
+        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+        {
+            NavigationManager.NavigateTo($"/category/{CategoryName}/{CategoryCode}/subcategory", true);
+        }
+    }
+}*@

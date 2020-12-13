@@ -1,0 +1,93 @@
+﻿@page "/categories"
+
+<div class="row">
+    <h3 class="col">Categorias</h3>
+    <button class="btn btn-primary" @onclick="NewCategory">Nova Categoria</button>
+</div>
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <td scope="col" style="padding:2%">Nome</td>
+            <td scope="col" style="padding:2%">Descrição</td>
+            <td scope="col" style="padding:2%">Subcategorias</td>
+            <td scope="col" style="padding:2%">Ativa</td>
+            <td scope="col" style="padding:2%">Ação</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var cat in categories.Content)
+        {
+            <tr>
+                <td scope="col" style="padding:2%">
+                    <a href="/category/@cat.Name/@cat.CategoryCode/subcategory">
+                        @cat.Name
+                    </a>
+                </td>
+                <td scope="col" style="padding:2%">@cat.Description</td>
+                <td scope="col" style="padding:2%">@cat.TotalSubcategorys</td>
+                <td scope="col" style="padding:2%">@SetTextCase(cat, "  Ativa  ", "Desativa")</td>
+                <td scope="col" style="padding:2%">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-success" @onclick="@(() => UpdateCategory(cat))">Editar</button>
+                        <button type="button" class="btn btn-secondary" @onclick="() => Disable(cat)">@SetTextCase(cat, "Desativar", "  Ativar  ")</button>
+                        <button type="button" class="btn btn-danger" @onclick="@(() => DeleteCategory(cat.CategoryCode.ToString()))">Excluir</button>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@inject NavigationManager NavigationManager;
+@inject CategoryPageService _categoryPageService;
+@code {
+
+    [CascadingParameter] public IModalService Modal { get; set; }
+
+    Pageable<Category> categories = new Pageable<Category>();
+    private int page { get; set; } = 1;
+    private int size { get; set; } = 15;
+
+
+    private void NewCategory()
+    {
+        var modal = Modal.Show<CategoryRegisterModal>("Nova categoria");
+        if (modal.Result.IsCompleted)
+        {
+            NavigationManager.NavigateTo("/categories", true);
+        }
+    }
+
+    private async Task UpdateCategory(Category category)
+    {
+        var parameters = new ModalParameters();
+        parameters.Add("Category", category);
+
+        var modal = Modal.Show<CategoryUpdateModal>("Atualizar categoria", parameters);
+        await modal.Result;
+        NavigationManager.NavigateTo("/categories", true);
+    }
+
+    private async Task Disable(Category category)
+    {
+        category.IsActive = !category.IsActive;
+        await _categoryPageService.Update(category);
+    }
+
+
+    protected override async Task OnInitializedAsync() => categories = await _categoryPageService.GetCategories(page, size);
+
+    private string SetTextCase(Category category, string caseTrue, string caseFalse) => (category.IsActive.GetValueOrDefault()) ? caseTrue : caseFalse;
+
+    private async Task DeleteCategory(string categoryCode)
+    {
+        var response = await _categoryPageService.Delete(categoryCode);
+
+        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+        {
+            NavigationManager.NavigateTo("/categories", true);
+        }
+    }
+}
+
+
