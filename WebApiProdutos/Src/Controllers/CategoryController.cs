@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using webApi.src.controllers.parameters;
 using webApi.src.interfaces.services;
 using WebApi.src.presenters;
+using WebApi.Src.Controllers.Parameters;
 using WebApi.Src.Infra.Log;
 using WebApi.Src.Presenters;
 

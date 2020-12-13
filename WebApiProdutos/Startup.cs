@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Rewrite;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using webApi.src.extensions;
+using WebApi.Src.Extensions;
 using WebApi.Src.Infra.Log;
 
 namespace WebApi

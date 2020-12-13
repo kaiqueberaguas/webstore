@@ -4,7 +4,7 @@ using webApi.src.interfaces.services;
 using WebApi.Src.Repositories;
 using WebApi.Src.Services;
 
-namespace webApi.src.extensions
+namespace WebApi.Src.Extensions
 {
     public static class DependenciesInjection
     {
