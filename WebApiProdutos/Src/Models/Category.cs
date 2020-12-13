@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace webApi.src.models
+namespace WebApiProdutos.Src.Models
 {
     public class Category : Entity
     {
@@ -14,7 +14,7 @@ namespace webApi.src.models
         public override DateTime? LastModification { get; set; }
         public override DateTime? RegisterDate { get; set; }
         public override bool? IsActive { get => base.IsActive; set => base.IsActive = value; }
-        
+
         public override bool Equals(object obj)
         {
             return obj is Category category &&
@@ -42,7 +42,7 @@ namespace webApi.src.models
         {
             base.PrepareCreateRecord();
             Code = GetHashCode();
-            if(Code < 0) Code *= -1;
+            if (Code < 0) Code *= -1;
         }
 
         public void Update(Category category)
@@ -51,7 +51,7 @@ namespace webApi.src.models
             if (!category.Description.IsNullOrEmpty()) Description = category.Description;
             if (category.IsActive != null) IsActive = category.IsActive;
         }
-        
-        
+
+
     }
 }

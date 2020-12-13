@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Castle.Core.Internal;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using webApi.src.controllers.parameters;
-using webApi.src.interfaces.services;
-using WebApi.src.presenters;
-using WebApi.Src.Models;
-using WebApi.Src.Presenters;
+using WebApiProdutos.Src.Controllers.Parameters;
+using WebApiProdutos.Src.Interfaces.Services;
+using WebApiProdutos.Src.Presenters;
 
-namespace webApi.src.controllers
+namespace WebApiProdutos.Src.Controllers
 {
     [Route("api/v1/[controller]")]
     [Consumes("application/json")]
@@ -41,9 +36,9 @@ namespace webApi.src.controllers
             {
                 return NoContent();
             }
-            var products = new PageablePresenter<ProductPresenter>(result.PageIndex,result.TotalPages);
+            var products = new PageablePresenter<ProductPresenter>(result.PageIndex, result.TotalPages);
             result.ForEach(r => products.Content.Add(new ProductPresenter(r)));
-             _logger.LogInformation($"Total de registros retornados:{products.Content.Count}");
+            _logger.LogInformation($"Total de registros retornados:{products.Content.Count}");
             return products;
         }
 

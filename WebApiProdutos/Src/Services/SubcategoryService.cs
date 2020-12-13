@@ -1,11 +1,10 @@
 ﻿using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
-using webApi.src.interfaces.repositories;
-using webApi.src.interfaces.services;
-using webApi.src.models;
-using WebApi.Src.Models;
+using WebApiProdutos.Src.Interfaces.Repositories;
+using WebApiProdutos.Src.Interfaces.Services;
+using WebApiProdutos.Src.Models;
 
-namespace WebApi.Src.Services
+namespace WebApiProdutos.Src.Services
 {
     public class SubcategoryService : ISubcategoryService
     {
@@ -61,7 +60,7 @@ namespace WebApi.Src.Services
         public async Task<Subcategory> Delete(long code)
         {
             var obj = await _subcategoryRepository.GetByCode(code);
-            if(obj != null)
+            if (obj != null)
                 return await _subcategoryRepository.Delete(obj.Id.GetValueOrDefault());
             return null;
         }

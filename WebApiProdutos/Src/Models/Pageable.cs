@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using webApi.src.models;
 
-namespace WebApi.Src.Models
+namespace WebApiProdutos.Src.Models
 {
     public class Pageable<T> : List<T> where T : Entity
     {
@@ -14,7 +13,7 @@ namespace WebApi.Src.Models
         {
             PageIndex = pageIndex;
             TotalPages = (int)Math.Ceiling(totalItens / (double)pageSize);
-            this.AddRange(items);
+            AddRange(items);
         }
     }
 }

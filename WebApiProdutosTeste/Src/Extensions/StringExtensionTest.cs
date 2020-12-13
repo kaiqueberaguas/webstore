@@ -1,10 +1,7 @@
 ﻿using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using webApi.src.extensions;
+using WebApiProdutos.Src.Extensions;
 
-namespace WebApiTeste.Src.Extensions
+namespace WebApiProdutosTeste.Src.Extensions
 {
     public class StringExtensionTest
     {

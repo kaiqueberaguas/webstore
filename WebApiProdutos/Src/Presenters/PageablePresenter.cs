@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
-using webApi.src.models;
-using WebApi.Src.Models;
 
-namespace WebApi.Src.Presenters
+namespace WebApiProdutos.Src.Presenters
 {
     public class PageablePresenter<T>
     {

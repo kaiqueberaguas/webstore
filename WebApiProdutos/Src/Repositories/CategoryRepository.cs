@@ -1,8 +1,8 @@
-﻿using webApi.src.dbcontext;
-using webApi.src.interfaces.repositories;
-using webApi.src.models;
+﻿using WebApiProdutos.Src.Dbcontext;
+using WebApiProdutos.Src.Interfaces.Repositories;
+using WebApiProdutos.Src.Models;
 
-namespace WebApi.Src.Repositories
+namespace WebApiProdutos.Src.Repositories
 {
     public class CategoryRepository : BaseRepository<Category>, ICategoryRepository
     {

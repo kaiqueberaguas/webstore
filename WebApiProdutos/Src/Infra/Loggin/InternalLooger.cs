@@ -1,10 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace WebApi.Src.Infra.Loggin
+namespace WebApiProdutos.Src.Infra.Loggin
 {
     public class InternalLooger : ILoggerFactory
     {

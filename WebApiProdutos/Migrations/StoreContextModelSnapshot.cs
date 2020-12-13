@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using webApi.src.dbcontext;
+using WebApiProdutos.Src.Dbcontext;
 
 namespace webApi.Migrations
 {

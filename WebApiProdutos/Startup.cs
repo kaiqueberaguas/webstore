@@ -3,9 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Rewrite;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using webApi.src.extensions;
-using WebApi.Src.Extensions;
-using WebApi.Src.Infra.Log;
+using WebApiProdutos.Src.Extensions;
+using WebApiProdutos.Src.Infra.Loggin;
 
 namespace WebApi
 {

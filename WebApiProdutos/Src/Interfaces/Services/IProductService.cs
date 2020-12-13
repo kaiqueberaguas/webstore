@@ -1,8 +1,7 @@
 ﻿using System.Threading.Tasks;
-using webApi.src.models;
-using WebApi.Src.Models;
+using WebApiProdutos.Src.Models;
 
-namespace webApi.src.interfaces.services
+namespace WebApiProdutos.Src.Interfaces.Services
 {
     public interface IProductService : IBasicCrudService<Product>
     {

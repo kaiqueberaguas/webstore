@@ -1,8 +1,8 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using webApi.src.models;
+using WebApiProdutos.Src.Models;
 
-namespace webApi.src.controllers.parameters
+namespace WebApiProdutos.Src.Controllers.Parameters
 {
     public class ProductCreateParameter
     {

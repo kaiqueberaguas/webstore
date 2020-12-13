@@ -1,11 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace webApi.src.extensions
+namespace WebApiProdutos.Src.Extensions
 {
     public static class SwaggerConfig
     {
@@ -30,7 +27,7 @@ namespace webApi.src.extensions
                 //    Type = SecuritySchemeType.Http,
                 //    Flows = new OpenApiSecurityScheme
                 //    {
-                        
+
                 //            //AuthorizationUrl = new Uri("/api/Auth/login", UriKind.Relative),
                 //    }
                 //});

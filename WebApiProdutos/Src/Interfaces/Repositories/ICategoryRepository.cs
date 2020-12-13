@@ -1,6 +1,6 @@
-﻿using webApi.src.models;
+﻿using WebApiProdutos.Src.Models;
 
-namespace webApi.src.interfaces.repositories
+namespace WebApiProdutos.Src.Interfaces.Repositories
 {
     public interface ICategoryRepository : IBaseRepository<Category>
     {

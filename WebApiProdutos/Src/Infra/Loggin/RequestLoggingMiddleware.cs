@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 
-namespace WebApi.Src.Infra.Log
+namespace WebApiProdutos.Src.Infra.Loggin
 {
     public class RequestLoggingMiddleware
     {
@@ -34,7 +34,7 @@ namespace WebApi.Src.Infra.Log
                     context.Request?.Method,
                     context.Request?.Path.Value,
                     context.Response?.StatusCode);
-                _logger.LogInformation("Tempo total da requisicao: "+ DateTime.Now.Subtract(startRequest));
+                _logger.LogInformation("Tempo total da requisicao: " + DateTime.Now.Subtract(startRequest));
             }
         }
     }

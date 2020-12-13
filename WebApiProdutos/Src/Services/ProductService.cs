@@ -1,13 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
-using Microsoft.Extensions.Logging;
-using System.Collections.Generic;
+﻿using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
-using webApi.src.interfaces.repositories;
-using webApi.src.interfaces.services;
-using webApi.src.models;
-using WebApi.Src.Models;
+using WebApiProdutos.Src.Interfaces.Repositories;
+using WebApiProdutos.Src.Interfaces.Services;
+using WebApiProdutos.Src.Models;
 
-namespace WebApi.Src.Services
+namespace WebApiProdutos.Src.Services
 {
     public class ProductService : IProductService
     {
@@ -31,7 +28,7 @@ namespace WebApi.Src.Services
         {
             return await _productRepository.GetAll(page, size);
         }
-        public async Task<Pageable<Product>> GetAll(int page, int size,long subcategoryCode)
+        public async Task<Pageable<Product>> GetAll(int page, int size, long subcategoryCode)
         {
             return await _productRepository.GetAll(page, size, subcategoryCode);
         }
@@ -39,7 +36,7 @@ namespace WebApi.Src.Services
         public async Task<Product> Create(Product obj)
         {
             var subcategory = await _subcategoryrepository.GetByCode(obj.Subcategory.Code.GetValueOrDefault());
-            if(subcategory is null)
+            if (subcategory is null)
             {
                 _logger.LogError($"Subcategoria codigo:{obj.Subcategory.Code.GetValueOrDefault()} não encontrada");
                 return null;
@@ -48,7 +45,7 @@ namespace WebApi.Src.Services
             obj.SubcategoryId = subcategory.Id;
             return await _productRepository.Insert(obj);
         }
-        
+
         public async Task<Product> Update(Product obj)
         {
             var result = await _productRepository.GetByCode(obj.Code.GetValueOrDefault());
@@ -59,7 +56,7 @@ namespace WebApi.Src.Services
             result.Update(obj);
             return await _productRepository.Update(result);
         }
-        
+
         public async Task<Product> Delete(long code)
         {
             var obj = await _productRepository.GetByCode(code);

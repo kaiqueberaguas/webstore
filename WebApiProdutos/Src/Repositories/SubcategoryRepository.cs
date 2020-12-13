@@ -1,12 +1,11 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using webApi.src.dbcontext;
-using webApi.src.interfaces.repositories;
-using webApi.src.models;
-using WebApi.Src.Models;
+using WebApiProdutos.Src.Dbcontext;
+using WebApiProdutos.Src.Interfaces.Repositories;
+using WebApiProdutos.Src.Models;
 
-namespace WebApi.Src.Repositories
+namespace WebApiProdutos.Src.Repositories
 {
     public class SubcategoryRepository : BaseRepository<Subcategory>, ISubcategoryRepository
     {

@@ -1,16 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Castle.Core.Internal;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using webApi.src.controllers.parameters;
-using webApi.src.interfaces.services;
-using WebApi.src.presenters;
-using WebApi.Src.Models;
-using WebApi.Src.Presenters;
+using WebApiProdutos.Src.Controllers.Parameters;
+using WebApiProdutos.Src.Interfaces.Services;
+using WebApiProdutos.Src.Presenters;
 
-namespace webApi.src.controllers
+namespace WebApiProdutos.Src.Controllers
 {
     [Route("api/v1/[controller]")]
     [Consumes("application/json")]
@@ -24,7 +21,7 @@ namespace webApi.src.controllers
         private readonly ISubcategoryService _subcategoryService;
         private ILogger<SubcategoryController> _logger;
 
-        public SubcategoryController(ISubcategoryService subcategoryService,ILogger<SubcategoryController> logger)
+        public SubcategoryController(ISubcategoryService subcategoryService, ILogger<SubcategoryController> logger)
         {
             _logger = logger;
             _subcategoryService = subcategoryService;
@@ -41,7 +38,7 @@ namespace webApi.src.controllers
             }
             var subcategories = new PageablePresenter<SubcategoryPresenter>(page, result.TotalPages);
             result.ForEach(r => subcategories.Content.Add(new SubcategoryPresenter(r)));
-             _logger.LogInformation($"Total de registros retornados:{subcategories.Content.Count}");
+            _logger.LogInformation($"Total de registros retornados:{subcategories.Content.Count}");
             return subcategories;
         }
 
@@ -53,8 +50,8 @@ namespace webApi.src.controllers
             if (result is null)
             {
                 _logger.LogInformation($"Subcategoria não encontrada, codigo:{subcategoryCode}");
-                return NotFound();             
-            }  
+                return NotFound();
+            }
             return new SubcategoryPresenter(result);
         }
 

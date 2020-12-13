@@ -1,8 +1,8 @@
-using webApi.src.models;
 using System.Collections.Generic;
 using Castle.Core.Internal;
+using WebApiProdutos.Src.Models;
 
-namespace WebApi.src.presenters
+namespace WebApiProdutos.Src.Presenters
 {
     public class CategoryPresenter
     {
@@ -24,7 +24,7 @@ namespace WebApi.src.presenters
                 category.Subcategories.ForEach(s =>
                 {
                     s.Category = null;
-                    this.Subcategories.Add(new SubcategoryPresenter(s));
+                    Subcategories.Add(new SubcategoryPresenter(s));
                 });
             }
         }

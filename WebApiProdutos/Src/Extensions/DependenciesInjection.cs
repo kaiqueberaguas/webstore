@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using webApi.src.interfaces.repositories;
-using webApi.src.interfaces.services;
-using WebApi.Src.Repositories;
-using WebApi.Src.Services;
+using WebApiProdutos.Src.Interfaces.Repositories;
+using WebApiProdutos.Src.Interfaces.Services;
+using WebApiProdutos.Src.Repositories;
+using WebApiProdutos.Src.Services;
 
-namespace WebApi.Src.Extensions
+namespace WebApiProdutos.Src.Extensions
 {
     public static class DependenciesInjection
     {

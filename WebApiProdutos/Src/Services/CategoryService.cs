@@ -1,12 +1,10 @@
 ﻿using Microsoft.Extensions.Logging;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using webApi.src.interfaces.repositories;
-using webApi.src.interfaces.services;
-using webApi.src.models;
-using WebApi.Src.Models;
+using WebApiProdutos.Src.Interfaces.Repositories;
+using WebApiProdutos.Src.Interfaces.Services;
+using WebApiProdutos.Src.Models;
 
-namespace WebApi.Src.Services
+namespace WebApiProdutos.Src.Services
 {
     public class CategoryService : ICategoryService
     {

@@ -4,14 +4,11 @@ using Castle.Core.Internal;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using webApi.src.controllers.parameters;
-using webApi.src.interfaces.services;
-using WebApi.src.presenters;
-using WebApi.Src.Controllers.Parameters;
-using WebApi.Src.Infra.Log;
-using WebApi.Src.Presenters;
+using WebApiProdutos.Src.Controllers.Parameters;
+using WebApiProdutos.Src.Interfaces.Services;
+using WebApiProdutos.Src.Presenters;
 
-namespace webApi.src.controllers
+namespace WebApiProdutos.Src.Controllers
 {
     [Route("api/v1/[controller]")]
     [Consumes("application/json")]

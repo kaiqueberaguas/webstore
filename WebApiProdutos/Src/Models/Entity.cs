@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace webApi.src.models
+namespace WebApiProdutos.Src.Models
 {
     public abstract class Entity
     {

@@ -1,6 +1,6 @@
-﻿using webApi.src.models;
+﻿using WebApiProdutos.Src.Models;
 
-namespace webApi.src.interfaces.services
+namespace WebApiProdutos.Src.Interfaces.Services
 {
     public interface ICategoryService : IBasicCrudService<Category>
     {

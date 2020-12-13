@@ -1,12 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using webApi.src.dbcontext;
+using WebApiProdutos.Src.Dbcontext;
 
-namespace webApi.src.extensions
+namespace WebApiProdutos.Src.Extensions
 {
     public static class DatabaseConfigutationExtension
     {

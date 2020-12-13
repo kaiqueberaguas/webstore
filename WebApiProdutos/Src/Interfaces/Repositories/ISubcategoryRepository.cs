@@ -1,8 +1,7 @@
 ﻿using System.Threading.Tasks;
-using webApi.src.models;
-using WebApi.Src.Models;
+using WebApiProdutos.Src.Models;
 
-namespace webApi.src.interfaces.repositories
+namespace WebApiProdutos.Src.Interfaces.Repositories
 {
     public interface ISubcategoryRepository : IBaseRepository<Subcategory>
     {

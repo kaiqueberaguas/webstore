@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using webApi.src.models;
+using WebApiProdutos.Src.Models;
 
-namespace webApi.src.controllers.parameters
+namespace WebApiProdutos.Src.Controllers.Parameters
 {
     public class SubcategoryParameter
     {
@@ -16,7 +16,7 @@ namespace webApi.src.controllers.parameters
             Code = SubcategoryCode,
             Name = Name,
             Description = Description,
-            Category = new Category() { Code = CategoryCode},
+            Category = new Category() { Code = CategoryCode },
         };
     }
 }

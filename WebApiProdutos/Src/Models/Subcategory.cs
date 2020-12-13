@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace webApi.src.models
+namespace WebApiProdutos.Src.Models
 {
     public class Subcategory : Entity
     {
@@ -59,6 +59,6 @@ namespace webApi.src.models
             }
         }
 
-        
+
     }
 }

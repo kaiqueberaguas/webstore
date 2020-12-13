@@ -1,12 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
-using webApi.src.dbcontext;
-using webApi.src.interfaces.repositories;
-using webApi.src.models;
-using WebApi.Src.Models;
+using WebApiProdutos.Src.Dbcontext;
+using WebApiProdutos.Src.Interfaces.Repositories;
+using WebApiProdutos.Src.Models;
 
-namespace WebApi.Src.Repositories
+namespace WebApiProdutos.Src.Repositories
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : Entity
     {
@@ -36,7 +35,7 @@ namespace WebApi.Src.Repositories
             if (size <= 0) size = 1;
             var list = await _storeContext.Set<T>().Skip((page - 1) * size).Take(size).ToListAsync();
             var count = await _storeContext.Set<T>().CountAsync();
-            return new Pageable<T>(list, count, page,size);
+            return new Pageable<T>(list, count, page, size);
         }
         public virtual async Task<T> Insert(T obj)
         {

@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
-using webApi.src.models;
-using WebApi.Src.Models;
+using WebApiProdutos.Src.Models;
 
-namespace webApi.src.interfaces.repositories
+namespace WebApiProdutos.Src.Interfaces.Repositories
 {
     public interface IBaseRepository<T> : IDisposable where T : Entity
     {

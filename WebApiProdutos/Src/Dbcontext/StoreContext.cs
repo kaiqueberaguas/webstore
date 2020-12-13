@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using webApi.src.models;
+using WebApiProdutos.Src.Models;
 
-namespace webApi.src.dbcontext
+namespace WebApiProdutos.Src.Dbcontext
 {
     public class StoreContext : DbContext
     {

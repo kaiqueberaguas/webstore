@@ -1,6 +1,6 @@
-using webApi.src.models;
+using WebApiProdutos.Src.Models;
 
-namespace WebApi.src.presenters
+namespace WebApiProdutos.Src.Presenters
 {
     public class SubcategoryPresenter
     {
@@ -8,7 +8,7 @@ namespace WebApi.src.presenters
         public string Description { get; }
         public long SubcatedoryCode { get; }
         public bool IsActive { get; set; }
-        
+
         public SubcategoryPresenter(Subcategory subcategory)
         {
             Name = subcategory.Name;

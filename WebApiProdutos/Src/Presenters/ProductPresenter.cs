@@ -1,7 +1,7 @@
 ﻿using System;
-using webApi.src.models;
+using WebApiProdutos.Src.Models;
 
-namespace WebApi.src.presenters
+namespace WebApiProdutos.Src.Presenters
 {
     public class ProductPresenter
     {
