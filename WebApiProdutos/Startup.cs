@@ -3,19 +3,34 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Rewrite;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Serilog;
+using System;
 using WebApiProdutos.Src.Extensions;
 using WebApiProdutos.Src.Infra.Loggin;
 
-namespace WebApi
+namespace WebApiProdutos
 {
     public class Startup
     {
         private IConfiguration Configuration { get; }
 
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
+            Log.Logger = new LoggerConfiguration()
+                .Enrich.FromLogContext()
+                .WriteTo.RollingFile(configuration.GetSection("logger.path").Value)
+                .CreateLogger();
         }
+
+        //public Startup(IConfiguration configuration, ILogger<Startup> logger)
+        //{
+        //    Configuration = configuration;
+        //    _logger = logger;
+        //}
 
 
         public void ConfigureServices(IServiceCollection services)
@@ -25,29 +40,19 @@ namespace WebApi
 
             services.AddSwaggerConfigure();
             services.AddDependencyInjection();
-            //services.AddJwtSecurity(Configuration);
-           
-            //services.AddCors(options =>
-            //{
-            //    options.AddPolicy(name: "https://localhost*",
-            //        builder =>
-            //        {
-            //            builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();//ajustar restrição de cors e restrição de metodos
-            //        });
-            //});
+
             services.AddControllers();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
-
-            //app.UseGlobalExceptionHandler();
-            app.UseMiddleware<RequestLoggingMiddleware>();
+            loggerFactory.AddSerilog();
+            //app.UseMiddleware<RequestLoggingMiddleware>();
             app.UseHttpsRedirection();
+            app.UseGlobalExceptionHandler();
+            //app.UseSerilogRequestLogging();
 
             app.UseRouting();
-            //app.UseCors("https://localhost*");
-            //app.UseAuthorization();
             #region swagger
             app.UseSwagger();
             app.UseSwaggerUI(s =>

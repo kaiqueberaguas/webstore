@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using Serilog;
+using System;
 
-namespace WebApi
+namespace WebApiProdutos
 {
     public class Program
     {

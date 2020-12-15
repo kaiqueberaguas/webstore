@@ -33,15 +33,15 @@ namespace WebApiProdutos.Src.Controllers
         public async Task<ActionResult<PageablePresenter<CategoryPresenter>>> Get([FromQuery] int page = 1, [FromQuery] int size = 15)
         {
             throw new Exception("Erro de teste");
-            var result = await _categoryService.GetAll(page, size);
-            if (result.IsNullOrEmpty())
-            {
-                return NoContent();
-            }
-            var categories = new PageablePresenter<CategoryPresenter>(page, result.TotalPages);
-            result.ForEach(r => categories.Content.Add(new CategoryPresenter(r)));
-            _logger.LogInformation($"Total de registros retornados:{categories.Content.Count}");
-            return categories;
+            //var result = await _categoryService.GetAll(page, size);
+            //if (result.IsNullOrEmpty())
+            //{
+            //    return NoContent();
+            //}
+            //var categories = new PageablePresenter<CategoryPresenter>(page, result.TotalPages);
+            //result.ForEach(r => categories.Content.Add(new CategoryPresenter(r)));
+            //_logger.LogInformation($"Total de registros retornados:{categories.Content.Count}");
+            //return categories;
         }
 
         [AllowAnonymous]

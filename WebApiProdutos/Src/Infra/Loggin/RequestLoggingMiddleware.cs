@@ -26,6 +26,7 @@ namespace WebApiProdutos.Src.Infra.Loggin
             catch (Exception e)
             {
                 _logger.LogError(e.Message);
+                _logger.LogError(e.StackTrace);
             }
             finally
             {

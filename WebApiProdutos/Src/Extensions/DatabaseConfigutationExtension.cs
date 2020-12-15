@@ -14,7 +14,7 @@ namespace WebApiProdutos.Src.Extensions
         {
             #region database_configuration
             var builder = new SqlConnectionStringBuilder(configuration.GetConnectionString("SqlServerConnectionString"));
-            builder.Password = configuration["SECRETY_DATABASE"];
+            //builder.Password = configuration["SECRETY_DATABASE"];
             #endregion
 
             services.AddDbContext<StoreContext>(options => options
