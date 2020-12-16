@@ -35,6 +35,7 @@ namespace WebApiProdutos.Src.Services
             var result = await _categoryRepository.GetByCode(obj.Code.GetValueOrDefault());
             if (result is null)
             {
+                _logger.LogInformation($"Categoria {obj.Code} não exitente na base");
                 return null;
             }
             result.Update(obj);

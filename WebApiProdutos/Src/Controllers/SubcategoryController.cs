@@ -62,13 +62,13 @@ namespace WebApiProdutos.Src.Controllers
             return CreatedAtAction(nameof(Get), new { subcategoryId = result.Code }, new SubcategoryPresenter(result));
         }
 
-        [HttpPut]
-        public async Task<ActionResult<SubcategoryPresenter>> Put([FromBody] SubcategoryParameter subcategory)
-        {
-            var result = await _subcategoryService.Update(subcategory.ToModel());
-            if (result is null) return NoContent();
-            return new SubcategoryPresenter(result);
-        }
+        //[HttpPut]
+        //public async Task<ActionResult<SubcategoryPresenter>> Put([FromBody] SubcategoryParameter subcategory)
+        //{
+        //    var result = await _subcategoryService.Update(subcategory.ToModel());
+        //    if (result is null) return NoContent();
+        //    return new SubcategoryPresenter(result);
+        //}
 
         [HttpDelete("{subcategoryId}")]
         public async Task<ActionResult<SubcategoryPresenter>> Delete(long subcategoryId)

@@ -62,13 +62,13 @@ namespace WebApiProdutos.Src.Controllers
             return CreatedAtAction(nameof(Get), new { productCode = result.Code }, new ProductPresenter(result));
         }
 
-        [HttpPut]
-        public async Task<ActionResult<ProductPresenter>> Put([FromBody] ProductParameter product)
-        {
-            var result = await _productService.Update(product.ToModel());
-            if (result is null) return NoContent();
-            return new ProductPresenter(result);
-        }
+        //[HttpPut]
+        //public async Task<ActionResult<ProductPresenter>> Put([FromBody] ProductParameter product)
+        //{
+        //    var result = await _productService.Update(product.ToModel());
+        //    if (result is null) return NoContent();
+        //    return new ProductPresenter(result);
+        //}
 
         [HttpDelete("{productCode}")]
         public async Task<ActionResult<ProductPresenter>> Delete(long productCode)
