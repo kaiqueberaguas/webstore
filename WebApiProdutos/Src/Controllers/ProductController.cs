@@ -12,14 +12,12 @@ namespace WebApiProdutos.Src.Controllers
     [Route("api/v1/[controller]")]
     [Consumes("application/json")]
     [Produces("application/json")]
-    // [Authorize("Bearer")]
-    // [Authorize(Roles = "ADMIN")]
     [ApiController]
     public class ProductController : ControllerBase
     {
 
         private readonly IProductService _productService;
-        private ILogger<ProductController> _logger;
+        private readonly ILogger _logger;
 
         public ProductController(IProductService productService, ILogger<ProductController> logger)
         {
@@ -38,7 +36,6 @@ namespace WebApiProdutos.Src.Controllers
             }
             var products = new PageablePresenter<ProductPresenter>(result.PageIndex, result.TotalPages);
             result.ForEach(r => products.Content.Add(new ProductPresenter(r)));
-            _logger.LogInformation($"Total de registros retornados:{products.Content.Count}");
             return products;
         }
 
@@ -49,7 +46,6 @@ namespace WebApiProdutos.Src.Controllers
             var result = await _productService.Get(productCode);
             if (result is null)
             {
-                _logger.LogInformation($"Produto não encontrado, codigo:{productCode}");
                 return NotFound();
             }
             return new ProductPresenter(result);
@@ -62,13 +58,13 @@ namespace WebApiProdutos.Src.Controllers
             return CreatedAtAction(nameof(Get), new { productCode = result.Code }, new ProductPresenter(result));
         }
 
-        //[HttpPut]
-        //public async Task<ActionResult<ProductPresenter>> Put([FromBody] ProductParameter product)
-        //{
-        //    var result = await _productService.Update(product.ToModel());
-        //    if (result is null) return NoContent();
-        //    return new ProductPresenter(result);
-        //}
+        [HttpPut("{productCode}")]
+        public async Task<ActionResult<ProductPresenter>> Put([FromBody] ProductParameter product, long productCode)
+        {
+            var result = await _productService.Update(productCode, product.ToModel());
+            if (result is null) return NoContent();
+            return new ProductPresenter(result);
+        }
 
         [HttpDelete("{productCode}")]
         public async Task<ActionResult<ProductPresenter>> Delete(long productCode)

@@ -46,15 +46,20 @@ namespace WebApiProdutos.Src.Services
             return await _productRepository.Insert(obj);
         }
 
-        public async Task<Product> Update(Product obj)
+        public async Task<Product> Update(long code, Product obj)
         {
-            var result = await _productRepository.GetByCode(obj.Code.GetValueOrDefault());
+            var result = await _productRepository.GetByCode(code);
             if (result is null)
             {
                 return null;
             }
             result.Update(obj);
             return await _productRepository.Update(result);
+        }
+
+        public async Task<Product> PartialUpdate(long code, Product obj)
+        {
+            throw new System.NotImplementedException();
         }
 
         public async Task<Product> Delete(long code)

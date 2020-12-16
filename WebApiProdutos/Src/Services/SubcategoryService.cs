@@ -45,7 +45,7 @@ namespace WebApiProdutos.Src.Services
             obj.Category = category;
             return await _subcategoryRepository.Insert(obj);
         }
-        public async Task<Subcategory> Update(Subcategory obj)
+        public async Task<Subcategory> Update(long code, Subcategory obj)
         {
             var result = await _subcategoryRepository.GetByCode(obj.Code.GetValueOrDefault());
             if (result is null)
@@ -57,6 +57,12 @@ namespace WebApiProdutos.Src.Services
             result.Update(obj);
             return await _subcategoryRepository.Update(result);
         }
+
+        public Task<Subcategory> PartialUpdate(long code, Subcategory obj)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public async Task<Subcategory> Delete(long code)
         {
             var obj = await _subcategoryRepository.GetByCode(code);
@@ -64,6 +70,5 @@ namespace WebApiProdutos.Src.Services
                 return await _subcategoryRepository.Delete(obj.Id.GetValueOrDefault());
             return null;
         }
-
     }
 }

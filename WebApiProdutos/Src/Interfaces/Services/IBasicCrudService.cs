@@ -7,7 +7,8 @@ namespace WebApiProdutos.Src.Interfaces.Services
     {
         Task<Pageable<T>> GetAll(int page, int size);
         Task<T> Get(long Code);
-        Task<T> Update(T obj);
+        Task<T> Update(long code, T obj);
+        Task<T> PartialUpdate(long code, T obj);
         Task<T> Create(T obj);
         Task<T> Delete(long code);
 

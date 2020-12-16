@@ -29,10 +29,11 @@ namespace WebApiProdutos.Src.Services
         public async Task<Category> Create(Category obj)
         {
             return await _categoryRepository.Insert(obj);
-        }
-        public async Task<Category> Update(Category obj)
+        }     
+
+        public async Task<Category> Update(long code, Category obj)
         {
-            var result = await _categoryRepository.GetByCode(obj.Code.GetValueOrDefault());
+            var result = await _categoryRepository.GetByCode(code);
             if (result is null)
             {
                 _logger.LogInformation($"Categoria {obj.Code} não exitente na base");
@@ -40,7 +41,14 @@ namespace WebApiProdutos.Src.Services
             }
             result.Update(obj);
             return await _categoryRepository.Update(result);
+            
         }
+
+        public async Task<Category> PartialUpdate(long code, Category obj)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public async Task<Category> Delete(long code)
         {
             var obj = await _categoryRepository.GetByCode(code);

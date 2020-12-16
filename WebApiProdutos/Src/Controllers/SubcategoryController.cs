@@ -12,14 +12,12 @@ namespace WebApiProdutos.Src.Controllers
     [Route("api/v1/[controller]")]
     [Consumes("application/json")]
     [Produces("application/json")]
-    // [Authorize("Bearer")]
-    // [Authorize(Roles = "ADMIN")]
     [ApiController]
     public class SubcategoryController : ControllerBase
     {
 
         private readonly ISubcategoryService _subcategoryService;
-        private ILogger<SubcategoryController> _logger;
+        private ILogger _logger;
 
         public SubcategoryController(ISubcategoryService subcategoryService, ILogger<SubcategoryController> logger)
         {
@@ -38,7 +36,6 @@ namespace WebApiProdutos.Src.Controllers
             }
             var subcategories = new PageablePresenter<SubcategoryPresenter>(page, result.TotalPages);
             result.ForEach(r => subcategories.Content.Add(new SubcategoryPresenter(r)));
-            _logger.LogInformation($"Total de registros retornados:{subcategories.Content.Count}");
             return subcategories;
         }
 
@@ -49,7 +46,6 @@ namespace WebApiProdutos.Src.Controllers
             var result = await _subcategoryService.Get(subcategoryCode);
             if (result is null)
             {
-                _logger.LogInformation($"Subcategoria não encontrada, codigo:{subcategoryCode}");
                 return NotFound();
             }
             return new SubcategoryPresenter(result);
@@ -59,21 +55,21 @@ namespace WebApiProdutos.Src.Controllers
         public async Task<ActionResult<SubcategoryPresenter>> Post([FromBody] SubcategoryCreateParameter subcategory)
         {
             var result = await _subcategoryService.Create(subcategory.ToModel());
-            return CreatedAtAction(nameof(Get), new { subcategoryId = result.Code }, new SubcategoryPresenter(result));
+            return CreatedAtAction(nameof(Get), new { subcategoryCode = result.Code }, new SubcategoryPresenter(result));
         }
 
-        //[HttpPut]
-        //public async Task<ActionResult<SubcategoryPresenter>> Put([FromBody] SubcategoryParameter subcategory)
-        //{
-        //    var result = await _subcategoryService.Update(subcategory.ToModel());
-        //    if (result is null) return NoContent();
-        //    return new SubcategoryPresenter(result);
-        //}
-
-        [HttpDelete("{subcategoryId}")]
-        public async Task<ActionResult<SubcategoryPresenter>> Delete(long subcategoryId)
+        [HttpPut("{subcategoryCode}")]
+        public async Task<ActionResult<SubcategoryPresenter>> Put([FromBody] SubcategoryParameter subcategory, long subcategoryCode)
         {
-            var result = await _subcategoryService.Delete(subcategoryId);
+            var result = await _subcategoryService.Update(subcategoryCode, subcategory.ToModel());
+            if (result is null) return NoContent();
+            return new SubcategoryPresenter(result);
+        }
+
+        [HttpDelete("{subcategoryCode}")]
+        public async Task<ActionResult<SubcategoryPresenter>> Delete(long subcategoryCode)
+        {
+            var result = await _subcategoryService.Delete(subcategoryCode);
             if (result is null) return NotFound();
             return new SubcategoryPresenter(result);
         }

@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApiProdutos.Src.Dbcontext;
@@ -9,12 +11,15 @@ namespace WebApiProdutos.Src.Repositories
 {
     public class ProductRepository : BaseRepository<Product>, IProductRepository
     {
-        public ProductRepository(StoreContext storeContext) : base(storeContext)
+        public ProductRepository(StoreContext storeContext, ILogger<ProductRepository> logger) : base(storeContext, logger)
         {
         }
 
         public async Task<Pageable<Product>> GetAll(int page, int size, long subcategoryCode)
         {
+            try
+            {
+
             if (page <= 0) page = 1;
             if (size <= 0) size = 1;
             var list = await _storeContext.Products
@@ -27,6 +32,13 @@ namespace WebApiProdutos.Src.Repositories
                 .CountAsync();
 
             return new Pageable<Product>(list, count, page, size);
+            }
+            catch(Exception e)
+            {
+                _logger.LogError(e.Message);
+                _logger.LogError(e.StackTrace);
+                return null;
+            }
 
         }
     }

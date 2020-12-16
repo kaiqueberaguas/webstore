@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using WebApiProdutos.Src.Dbcontext;
 using WebApiProdutos.Src.Interfaces.Repositories;
 using WebApiProdutos.Src.Models;
@@ -9,7 +10,7 @@ namespace WebApiProdutos.Src.Repositories
 {
     public class SubcategoryRepository : BaseRepository<Subcategory>, ISubcategoryRepository
     {
-        public SubcategoryRepository(StoreContext storeContext) : base(storeContext)
+        public SubcategoryRepository(StoreContext storeContext, ILogger<SubcategoryRepository> logger) : base(storeContext, logger)
         {
         }
 
