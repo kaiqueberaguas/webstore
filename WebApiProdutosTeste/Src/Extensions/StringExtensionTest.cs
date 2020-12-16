@@ -1,26 +1,20 @@
-﻿using NUnit.Framework;
-using WebApiProdutos.Src.Extensions;
+﻿using WebApiProdutos.Src.Extensions;
+using Xunit;
 
 namespace WebApiProdutosTeste.Src.Extensions
 {
     public class StringExtensionTest
     {
-        [SetUp]
-        public void Initialize()
-        {
-        }
 
-        [Test]
-        public void TestToCaptalize()
+        [Theory]
+        [InlineData("Teste", "Teste")]
+        [InlineData("TESTE", "Teste")]
+        [InlineData("tESTE", "Teste")]
+        [InlineData("TES4te", "Tes4te")]
+        [InlineData("45Est", "45est")]
+        public void ToCaptalizeTest(string entrada, string esperado)
         {
-            string teste1 = "teste1";
-            string teste2 = "plataforma";
-            string teste3 = "Exibir";
-            string teste4 = "OPERACIONAL";
-            Assert.AreEqual(teste1.ToCaptalize(), "Teste1");
-            Assert.AreEqual(teste2.ToCaptalize(), "Plataforma");
-            Assert.AreEqual(teste3.ToCaptalize(), "Exibir");
-            Assert.AreEqual(teste4.ToCaptalize(), "Operacional");
+            Assert.Equal(esperado, entrada.ToCaptalize());
         }
     }
 }
