@@ -5,16 +5,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Serilog;
-using System;
 using WebApiProdutos.Src.Extensions;
-using WebApiProdutos.Src.Infra.Loggin;
 
 namespace WebApiProdutos
 {
     public class Startup
     {
         private IConfiguration Configuration { get; }
-
 
         public Startup(IConfiguration configuration)
         {
@@ -25,13 +22,6 @@ namespace WebApiProdutos
                 .WriteTo.RollingFile(configuration.GetSection("logger.path").Value)
                 .CreateLogger();
         }
-
-        //public Startup(IConfiguration configuration, ILogger<Startup> logger)
-        //{
-        //    Configuration = configuration;
-        //    _logger = logger;
-        //}
-
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -47,7 +37,6 @@ namespace WebApiProdutos
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddSerilog();
-            //app.UseMiddleware<RequestLoggingMiddleware>();
             app.UseHttpsRedirection();
             app.UseGlobalExceptionHandler();
             //app.UseSerilogRequestLogging();
