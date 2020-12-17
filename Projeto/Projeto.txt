@@ -1,0 +1,43 @@
+Projeto E-commerce com arquitetura distribuida(Em contrução)
+
+Componentes:
+	MS Gerenciador -> MS para start da aplicação via docker(Somente para fins de estudos)
+
+    MS Produtos -> Responsavel pelo cadastro e consulta em produtos, tambem adiciona os pedidos no Redis(cliente logado) ou nos cookies(cliente não logado)
+    
+	MS Pedidos -> Uma vez que os pedido fechado, manda mensagem para MS Produtos remover os itens da prateleira, valida o 
+	pagamento e caso recusado manda mensagem para MS Produtos re-inserir os produtos na prateleira, caso confirmado o pagamento, manda a mensagem para a fila de entregas no rabbit MQ, apos isso envia o pedido para o MongoDb para historico de pedido
+	
+	MS Cadastro -> Cadastro de cliente (Opcional)
+	
+	MS Entregas -> WorkerService, Escuta a fila no RabbitMQ, assim que ouver atualização do status do pedido manda mensagem para fila de notificações do RabbitMQ
+	
+	MS Notificacoes -> Responsavel por notificar o cliente via email ou mensagem sms sobre atualizações do pedido
+	
+	MS Autenticacao -> Responsavel pela autenticação do cliente, tanto clientes cadastrados como autenticação via facebook/gmail, usa o Redis para armazenamento dos tokens gerados
+	
+	Client(Blazor Wasm) -> Front-end em blazor webassembly(SPA)
+		Funções publicas
+			-Visualização de catalogo de produtos
+			-Carrinho
+			-Pagamentos
+			-Cadastro
+			-Login
+			-Historico de pedidos(apenas usuarios logados)
+			-Consulta do status do pedido
+			-Fale conosco
+		
+		
+		Areas Restritas:
+			Area Administrativa:
+				-Cadastro de novos funcionarios
+				-Controle de roles
+				-Cadastro de novas categorias
+				-Cadastro de novas subcategorias
+				-Cadastro de novos produtos
+		
+			Area Fiscal
+				-Acesso a historico de vendas
+				-Acesso a dados estatisticos(Ciencia de dados)
+			
+			Area Contabil
