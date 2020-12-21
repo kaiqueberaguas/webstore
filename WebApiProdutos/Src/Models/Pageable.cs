@@ -9,11 +9,11 @@ namespace WebApiProdutos.Src.Models
         public int PageIndex { get; private set; }
         public int TotalPages { get; private set; }
 
-        public Pageable(List<T> items, int totalItens, int pageIndex, int pageSize)
+        public Pageable(List<T> itens, int totalItens, int pageIndex, int pageSize)
         {
             PageIndex = pageIndex;
             TotalPages = (int)Math.Ceiling(totalItens / (double)pageSize);
-            AddRange(items);
+            AddRange(itens);
         }
     }
 }

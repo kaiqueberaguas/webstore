@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using WebApiProdutos.Src.Controllers.Parameters;
 using WebApiProdutos.Src.Interfaces.Services;
+using WebApiProdutos.Src.Models;
 using WebApiProdutos.Src.Presenters;
 
 namespace WebApiProdutos.Src.Controllers
@@ -30,10 +31,7 @@ namespace WebApiProdutos.Src.Controllers
         [HttpGet]
         public async Task<ActionResult<PageablePresenter<CategoryPresenter>>> Get([FromQuery] int page = 1, [FromQuery] int size = 15)
         {
-            try
-            {
-
-            var result = await _categoryService.GetAll(page, size);
+            Pageable<Category> result = await _categoryService.GetAll(page, size);
             if (result.IsNullOrEmpty())
             {
                 return NoContent();
@@ -41,19 +39,13 @@ namespace WebApiProdutos.Src.Controllers
             var categories = new PageablePresenter<CategoryPresenter>(page, result.TotalPages);
             result.ForEach(r => categories.Content.Add(new CategoryPresenter(r)));
             return categories;
-            }
-            catch(Exception e)
-            {
-                _logger.LogError(e.Message);
-            }
-            return null;
         }
 
         [AllowAnonymous]
         [HttpGet("{categoryCode}")]
         public async Task<ActionResult<CategoryPresenter>> Get([FromRoute] long categoryCode)
         {
-            var result = await _categoryService.Get(categoryCode);
+            Category result = await _categoryService.Get(categoryCode);
             if (result is null)
             {
                 return NotFound();
@@ -64,14 +56,14 @@ namespace WebApiProdutos.Src.Controllers
         [HttpPost]
         public async Task<ActionResult<CategoryPresenter>> Post([FromBody] CategoryCreateParameter category)
         {
-            var result = await _categoryService.Create(category.ToModel());
+            Category result = await _categoryService.Create(category.ToModel());
             return CreatedAtAction(nameof(Get), new { categoryCode = result.Code }, new CategoryPresenter(result));
         }
 
         [HttpPut("{categoryCode}")]
         public async Task<ActionResult<CategoryPresenter>> Put([FromBody] CategoryParameter category, long categoryCode)
         {
-            var result = await _categoryService.Update(categoryCode, category.ToModel());
+            Category result = await _categoryService.Update(categoryCode, category.ToModel());
             if (result is null) return NoContent();
             return new CategoryPresenter(result);
         }
@@ -79,7 +71,7 @@ namespace WebApiProdutos.Src.Controllers
         [HttpDelete("{categoryCode}")]
         public async Task<ActionResult<CategoryPresenter>> Delete(long categoryCode)
         {
-            var result = await _categoryService.Delete(categoryCode);
+            Category result = await _categoryService.Delete(categoryCode);
             if (result is null) return NotFound();
             return new CategoryPresenter(result);
         }

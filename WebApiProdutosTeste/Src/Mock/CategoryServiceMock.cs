@@ -1,7 +1,5 @@
-﻿using AutoFixture;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using WebApiProdutos.Src.Interfaces.Services;
 using WebApiProdutos.Src.Models;
@@ -10,9 +8,6 @@ namespace WebApiProdutosTeste.Src.Mock
 {
     public class CategoryServiceMock : ICategoryService, IDisposable
     {
-
-
-
         public CategoryServiceMock()
         {
         }
@@ -23,15 +18,14 @@ namespace WebApiProdutosTeste.Src.Mock
             return Task.Run(() => { return obj; });
         }
 
-        public Task<Category> Get(long Code) => (Code != 1234)? new Task<Category>(() =>
+        public Task<Category> Get(long Code) => (Code != 1234) ? new Task<Category>(() =>
         {
-            
             return new Category() { Name = $"Teste", Description = $"Descrição do Teste", Code = 1234 };
-        }):null;
+        }) : null;
 
         public Task<Pageable<Category>> GetAll(int page, int size)
         {
-            if (page == 2) return null;
+            if (page == 2) Task.Run(() => new Pageable<Category>(new List<Category>(), 0, page, size));
             var categories = new List<Category>();
             for (int i = 0; i < size; i++)
             {
@@ -43,10 +37,7 @@ namespace WebApiProdutosTeste.Src.Mock
                 };
                 categories.Add(contato);
             }
-            return new Task<Pageable<Category>>(() =>
-            {
-                return new Pageable<Category>(categories, categories.Count, page, size);
-            });
+            return Task.Run(() => new Pageable<Category>(categories, categories.Count, page, size));
         }
 
         public Task<Category> PartialUpdate(long code, Category obj)

@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Xunit;
 using WebApiProdutos.Src.Presenters;
 using System.Threading.Tasks;
+using Castle.Core.Internal;
 
 namespace WebApiProdutosTeste.Src.Controllers
 {
@@ -28,13 +29,20 @@ namespace WebApiProdutosTeste.Src.Controllers
         }
 
         [Theory]
-        [InlineData(1,15)]
-        //[InlineData(2,15)]
+        //[InlineData(1, 15)]
+        [InlineData(2, 15)]
         public async Task TestaGetPaginado(int page,int size)
         {
-            var response = await _controller.Get(page, size);
-            Assert.IsType<OkObjectResult>(response.Result);
-            Assert.IsType<ActionResult<PageablePresenter<CategoryPresenter>>>(response);
+            ActionResult<PageablePresenter<CategoryPresenter>> response = await _controller.Get(page, size);
+            if (page == 2)
+            {
+                Assert.IsType<NoContentResult>(response);
+            }
+            else 
+            {
+                Assert.IsType<OkObjectResult>(response);
+                Assert.IsType<ActionResult<PageablePresenter<CategoryPresenter>>>(response);
+            }
         }
         
         //[Theory]
