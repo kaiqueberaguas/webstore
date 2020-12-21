@@ -10,7 +10,7 @@ namespace WebApiProdutos.Src.Models
         public virtual DateTime? RegisterDate { get; set; }
         public virtual bool? IsActive { get; set; }
 
-        public virtual void PrepareCreateRecord()
+        public virtual void PrepareToCreateRegister()
         {
             Id = null;
             LastModification = DateTime.Now;

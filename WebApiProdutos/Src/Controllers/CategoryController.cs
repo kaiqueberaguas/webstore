@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Castle.Core.Internal;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -29,6 +30,8 @@ namespace WebApiProdutos.Src.Controllers
         [HttpGet]
         public async Task<ActionResult<PageablePresenter<CategoryPresenter>>> Get([FromQuery] int page = 1, [FromQuery] int size = 15)
         {
+            try
+            {
 
             var result = await _categoryService.GetAll(page, size);
             if (result.IsNullOrEmpty())
@@ -38,6 +41,12 @@ namespace WebApiProdutos.Src.Controllers
             var categories = new PageablePresenter<CategoryPresenter>(page, result.TotalPages);
             result.ForEach(r => categories.Content.Add(new CategoryPresenter(r)));
             return categories;
+            }
+            catch(Exception e)
+            {
+                _logger.LogError(e.Message);
+            }
+            return null;
         }
 
         [AllowAnonymous]

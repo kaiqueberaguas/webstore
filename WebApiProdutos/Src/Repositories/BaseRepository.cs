@@ -73,7 +73,7 @@ namespace WebApiProdutos.Src.Repositories
         {
             try
             {
-                obj.PrepareCreateRecord();
+                obj.PrepareToCreateRegister();
                 _storeContext.Set<T>().Add(obj);
                 await _storeContext.SaveChangesAsync();
                 return obj;

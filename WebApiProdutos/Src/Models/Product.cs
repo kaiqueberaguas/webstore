@@ -52,9 +52,9 @@ namespace WebApiProdutos.Src.Models
             return hash.ToHashCode();
         }
 
-        public override void PrepareCreateRecord()
+        public override void PrepareToCreateRegister()
         {
-            base.PrepareCreateRecord();
+            base.PrepareToCreateRegister();
             Code = GetHashCode();
             if (Code < 0) Code *= -1;
         }
