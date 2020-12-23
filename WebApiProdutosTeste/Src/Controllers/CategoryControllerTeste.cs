@@ -30,13 +30,13 @@ namespace WebApiProdutosTeste.Src.Controllers
 
         [Theory]
         [InlineData(1, 15)]
-        //[InlineData(2, 15)]
+        [InlineData(2, 15)]
         public async Task TestaGetPaginado(int page, int size)
         {
             ActionResult<PageablePresenter<CategoryPresenter>> response = await _controller.Get(page, size);
             if (page == 2)
             {
-                Assert.IsType<NotFoundObjectResult>(response.Result);
+                Assert.IsType<NotFoundResult>(response.Result);
             }
             else
             {
@@ -45,7 +45,7 @@ namespace WebApiProdutosTeste.Src.Controllers
         }
 
         [Theory]
-        //[InlineData(1234)]
+        [InlineData(1234)]
         [InlineData(5667)]
         public async Task TestaGet(long code)
         {
@@ -75,5 +75,48 @@ namespace WebApiProdutosTeste.Src.Controllers
             Assert.IsType<ActionResult<CategoryPresenter>>(response);
 
         }
+
+        [Theory]
+        [InlineData(1234)]
+        [InlineData(5678)]
+        public async Task TestaUpdate(long code)
+        {
+            var category = new CategoryParameter()
+            {
+                CategoryCode = code,
+                Description = "Teste atualizãção",
+                IsActive = false,
+                Name = "Atualizada"
+            };
+
+            var response = await _controller.Put(category,code);
+            if (code == 1234)
+            {
+                Assert.IsType<ActionResult<CategoryPresenter>>(response);
+            }
+            else
+            {
+                Assert.IsType<NotFoundResult>(response.Result);
+            }
+        }
+
+
+        [Theory]
+        [InlineData(1234)]
+        [InlineData(5678)]
+        public async Task TestaDelete(long code)
+        {
+            var response = await _controller.Delete(code);
+            if (code == 1234)
+            {
+                Assert.IsType<ActionResult<CategoryPresenter>>(response);
+            }
+            else
+            {
+                Assert.IsType<NotFoundResult>(response.Result);
+            }
+        }
+
+
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Castle.Core.Internal;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -61,6 +60,7 @@ namespace WebApiProdutos.Src.Controllers
             return CreatedAtAction(nameof(Get), new { categoryCode = result.Code }, new CategoryPresenter(result));
         }
 
+        //verbo correto é o patch, preciso corrigir
         [HttpPut("{categoryCode}")]
         public async Task<ActionResult<CategoryPresenter>> Put([FromBody] CategoryParameter category, long categoryCode)
         {

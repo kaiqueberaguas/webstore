@@ -18,12 +18,11 @@ namespace WebApiProdutosTeste.Src.Mock
             return Task.Run(() => { return obj; });
         }
 
-        public Task<Category> Get(long Code) => (Code == 1234) ? Task.Run(() =>
+        public Task<Category> Get(long code) => (code == 1234) ? Task.Run(() =>
         {
             return new Category() { Name = $"Teste", Description = $"Descrição do Teste", Code = 1234 };
         }) : Task.FromResult<Category>(null);
-        public Task<Category> GetSincrono(long Code) => null;
-        
+
         public Task<Pageable<Category>> GetAll(int page, int size)
         {
             if (page == 2) return Task.Run(() => new Pageable<Category>(new List<Category>(), 0, page, size));
@@ -46,14 +45,18 @@ namespace WebApiProdutosTeste.Src.Mock
             throw new NotImplementedException();
         }
 
-        public Task<Category> Update(long code, Category obj)
+        //arrumar
+        public Task<Category> Update(long code, Category obj) => (code == 1234) ? Task.Run(() =>
         {
-            throw new NotImplementedException();
-        }
-        public Task<Category> Delete(long code)
+            return new Category() { Name = $"Teste", Description = $"Descrição do Teste", Code = 1234 };
+        }) : Task.FromResult<Category>(null);
+
+        //arrumar
+        public Task<Category> Delete(long code) => (code == 1234) ? Task.Run(() =>
         {
-            throw new NotImplementedException();
-        }
+            return new Category() { Name = $"Teste", Description = $"Descrição do Teste", Code = 1234 };
+        }) : Task.FromResult<Category>(null);
+
 
         public void Dispose()
         {
