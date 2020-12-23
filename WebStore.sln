@@ -13,25 +13,29 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebPlataformBlazorTeste", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiProdutosTeste", "WebApiProdutosTeste\WebApiProdutosTeste.csproj", "{60985C99-B03D-49D7-8394-45650637284F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiPedidos", "WebApiPedidos\WebApiPedidos.csproj", "{42C62237-8EE4-42C7-B991-DFE77F92930D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiPedidos", "WebApiPedidos\WebApiPedidos.csproj", "{42C62237-8EE4-42C7-B991-DFE77F92930D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiPedidosTeste", "WebApiPedidosTeste\WebApiPedidosTeste.csproj", "{37050756-321F-45B6-BC6D-41F8CCD158AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiPedidosTeste", "WebApiPedidosTeste\WebApiPedidosTeste.csproj", "{37050756-321F-45B6-BC6D-41F8CCD158AB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiEntregas", "WebApiEntregas\WebApiEntregas.csproj", "{4198C71C-0359-41E3-B9F5-2AD280C95DC2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiEntregas", "WebApiEntregas\WebApiEntregas.csproj", "{4198C71C-0359-41E3-B9F5-2AD280C95DC2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiNotificacoes", "WebApiNotificacoes\WebApiNotificacoes.csproj", "{960D76B4-9A5A-42AE-A118-869690BC7F2E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiNotificacoes", "WebApiNotificacoes\WebApiNotificacoes.csproj", "{960D76B4-9A5A-42AE-A118-869690BC7F2E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiNotificacoesTeste", "WebApiNotificacoesTeste\WebApiNotificacoesTeste.csproj", "{722616AF-17D4-4999-ACCF-6C9CC2F68915}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiNotificacoesTeste", "WebApiNotificacoesTeste\WebApiNotificacoesTeste.csproj", "{722616AF-17D4-4999-ACCF-6C9CC2F68915}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiEntregasTeste", "WebApiEntregasTeste\WebApiEntregasTeste.csproj", "{49960D94-BB5A-4354-9645-57ADC5869948}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiEntregasTeste", "WebApiEntregasTeste\WebApiEntregasTeste.csproj", "{49960D94-BB5A-4354-9645-57ADC5869948}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiCadastroTeste", "WebApiCadastroTeste\WebApiCadastroTeste.csproj", "{58B97D29-9EF5-41E6-A089-134091B62926}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiCadastroTeste", "WebApiCadastroTeste\WebApiCadastroTeste.csproj", "{58B97D29-9EF5-41E6-A089-134091B62926}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiCadastro", "WebApiCadastro\WebApiCadastro.csproj", "{C21CEC60-1E4D-4641-A2B7-979568EA7714}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiCadastro", "WebApiCadastro\WebApiCadastro.csproj", "{C21CEC60-1E4D-4641-A2B7-979568EA7714}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BackEnd", "BackEnd", "{81FEEF78-2F8C-45A3-A603-B98E1E3BD17A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FrontEnd", "FrontEnd", "{51215DA1-7C32-4075-B42C-6B5128F559C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarterProject", "StarterProject\StarterProject.csproj", "{7251F1A1-BC1D-4C51-8583-986D6B1AF7D0}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{184744A1-7146-4E1B-AD71-047EA8143429}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,6 +91,14 @@ Global
 		{C21CEC60-1E4D-4641-A2B7-979568EA7714}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C21CEC60-1E4D-4641-A2B7-979568EA7714}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C21CEC60-1E4D-4641-A2B7-979568EA7714}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7251F1A1-BC1D-4C51-8583-986D6B1AF7D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7251F1A1-BC1D-4C51-8583-986D6B1AF7D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7251F1A1-BC1D-4C51-8583-986D6B1AF7D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7251F1A1-BC1D-4C51-8583-986D6B1AF7D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{184744A1-7146-4E1B-AD71-047EA8143429}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{184744A1-7146-4E1B-AD71-047EA8143429}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{184744A1-7146-4E1B-AD71-047EA8143429}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{184744A1-7146-4E1B-AD71-047EA8143429}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -11,9 +11,13 @@
     <OutputPath></OutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="C\**" />
     <Compile Remove="Src\configurations\**" />
+    <Content Remove="C\**" />
     <Content Remove="Src\configurations\**" />
+    <EmbeddedResource Remove="C\**" />
     <EmbeddedResource Remove="Src\configurations\**" />
+    <None Remove="C\**" />
     <None Remove="Src\configurations\**" />
   </ItemGroup>
   <ItemGroup>
