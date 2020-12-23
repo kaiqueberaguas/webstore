@@ -18,14 +18,15 @@ namespace WebApiProdutosTeste.Src.Mock
             return Task.Run(() => { return obj; });
         }
 
-        public Task<Category> Get(long Code) => (Code != 1234) ? new Task<Category>(() =>
+        public Task<Category> Get(long Code) => (Code == 1234) ? Task.Run(() =>
         {
             return new Category() { Name = $"Teste", Description = $"Descrição do Teste", Code = 1234 };
-        }) : null;
-
+        }) : Task.FromResult<Category>(null);
+        public Task<Category> GetSincrono(long Code) => null;
+        
         public Task<Pageable<Category>> GetAll(int page, int size)
         {
-            if (page == 2) Task.Run(() => new Pageable<Category>(new List<Category>(), 0, page, size));
+            if (page == 2) return Task.Run(() => new Pageable<Category>(new List<Category>(), 0, page, size));
             var categories = new List<Category>();
             for (int i = 0; i < size; i++)
             {

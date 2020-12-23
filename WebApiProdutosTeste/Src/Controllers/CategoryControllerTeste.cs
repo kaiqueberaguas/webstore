@@ -29,31 +29,36 @@ namespace WebApiProdutosTeste.Src.Controllers
         }
 
         [Theory]
-        //[InlineData(1, 15)]
-        [InlineData(2, 15)]
-        public async Task TestaGetPaginado(int page,int size)
+        [InlineData(1, 15)]
+        //[InlineData(2, 15)]
+        public async Task TestaGetPaginado(int page, int size)
         {
             ActionResult<PageablePresenter<CategoryPresenter>> response = await _controller.Get(page, size);
             if (page == 2)
             {
-                Assert.IsType<NoContentResult>(response);
+                Assert.IsType<NotFoundObjectResult>(response.Result);
             }
-            else 
+            else
             {
-                Assert.IsType<OkObjectResult>(response);
                 Assert.IsType<ActionResult<PageablePresenter<CategoryPresenter>>>(response);
             }
         }
-        
-        //[Theory]
+
+        [Theory]
         //[InlineData(1234)]
-        //[InlineData(5667)]
-        //public async Task TestaGet(long code)
-        //{
-        //    var response = await _controller.Get(code);
-        //    Assert.IsType<OkObjectResult>(response.Result);
-        //    Assert.IsType<ActionResult<CategoryPresenter>>(response);
-        //}
+        [InlineData(5667)]
+        public async Task TestaGet(long code)
+        {
+            var response = await _controller.Get(code);
+            if (code == 1234)
+            {
+                Assert.IsType<ActionResult<CategoryPresenter>>(response);
+            }
+            else
+            {
+                Assert.IsType<NotFoundResult>(response.Result);
+            }
+        }
 
         [Fact]
         public async Task TestaCreate()
@@ -63,7 +68,7 @@ namespace WebApiProdutosTeste.Src.Controllers
                 Name = "Teste",
                 Description = "descrição"
             };
-            
+
             var response = await _controller.Post(obj);
 
             Assert.IsType<CreatedAtActionResult>(response.Result);

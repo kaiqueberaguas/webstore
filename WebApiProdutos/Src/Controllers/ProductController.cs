@@ -32,7 +32,7 @@ namespace WebApiProdutos.Src.Controllers
             var result = await _productService.GetAll(page, size, subcategoryCode);
             if (result.IsNullOrEmpty())
             {
-                return NoContent();
+                return NotFound();
             }
             var products = new PageablePresenter<ProductPresenter>(result.PageIndex, result.TotalPages);
             result.ForEach(r => products.Content.Add(new ProductPresenter(r)));
@@ -62,7 +62,7 @@ namespace WebApiProdutos.Src.Controllers
         public async Task<ActionResult<ProductPresenter>> Put([FromBody] ProductParameter product, long productCode)
         {
             var result = await _productService.Update(productCode, product.ToModel());
-            if (result is null) return NoContent();
+            if (result is null) return NotFound();
             return new ProductPresenter(result);
         }
 

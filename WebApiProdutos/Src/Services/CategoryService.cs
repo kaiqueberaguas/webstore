@@ -36,15 +36,14 @@ namespace WebApiProdutos.Src.Services
             var result = await _categoryRepository.GetByCode(code);
             if (result is null)
             {
-                _logger.LogInformation($"Categoria {obj.Code} não exitente na base");
-                return null;
+                return result;
             }
             result.Update(obj);
             return await _categoryRepository.Update(result);
             
         }
 
-        public async Task<Category> PartialUpdate(long code, Category obj)
+        public Task<Category> PartialUpdate(long code, Category obj)
         {
             throw new System.NotImplementedException();
         }
@@ -54,7 +53,7 @@ namespace WebApiProdutos.Src.Services
             var obj = await _categoryRepository.GetByCode(code);
             if (obj != null)
                 return await _categoryRepository.Delete(obj.Id.GetValueOrDefault());
-            return null;
+            return obj;
         }
     }
 }

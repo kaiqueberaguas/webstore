@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using System;
 using System.Threading.Tasks;
 using WebApiProdutos.Src.Interfaces.Repositories;
 using WebApiProdutos.Src.Interfaces.Services;
@@ -38,8 +39,7 @@ namespace WebApiProdutos.Src.Services
             var subcategory = await _subcategoryrepository.GetByCode(obj.Subcategory.Code.GetValueOrDefault());
             if (subcategory is null)
             {
-                _logger.LogError($"Subcategoria codigo:{obj.Subcategory.Code.GetValueOrDefault()} não encontrada");
-                return null;
+                throw new Exception("Subcategoria não encontrada");
             }
             obj.Subcategory = null;
             obj.SubcategoryId = subcategory.Id;
@@ -51,13 +51,13 @@ namespace WebApiProdutos.Src.Services
             var result = await _productRepository.GetByCode(code);
             if (result is null)
             {
-                return null;
+                return result;
             }
             result.Update(obj);
             return await _productRepository.Update(result);
         }
 
-        public async Task<Product> PartialUpdate(long code, Product obj)
+        public Task<Product> PartialUpdate(long code, Product obj)
         {
             throw new System.NotImplementedException();
         }
@@ -67,7 +67,7 @@ namespace WebApiProdutos.Src.Services
             var obj = await _productRepository.GetByCode(code);
             if (obj != null)
                 return await _productRepository.Delete(obj.Id.GetValueOrDefault());
-            return null;
+            return obj;
         }
     }
 }

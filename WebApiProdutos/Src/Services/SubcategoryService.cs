@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using System;
 using System.Threading.Tasks;
 using WebApiProdutos.Src.Interfaces.Repositories;
 using WebApiProdutos.Src.Interfaces.Services;
@@ -39,8 +40,7 @@ namespace WebApiProdutos.Src.Services
             var category = await _categoryRepository.GetByCode(obj.Category.Code.GetValueOrDefault());
             if (category is null)
             {
-                _logger.LogError($"Categoria codigo:{obj.Category.Code.GetValueOrDefault()} não encontrada");
-                return null;
+                throw new Exception("Categoria não encontrada");
             }
             obj.Category = category;
             return await _subcategoryRepository.Insert(obj);
@@ -50,7 +50,7 @@ namespace WebApiProdutos.Src.Services
             var result = await _subcategoryRepository.GetByCode(obj.Code.GetValueOrDefault());
             if (result is null)
             {
-                return null;
+                return result;
             }
             var category = await _categoryRepository.GetByCode(obj.Category.Code.GetValueOrDefault());
             obj.Category = category;
@@ -68,7 +68,7 @@ namespace WebApiProdutos.Src.Services
             var obj = await _subcategoryRepository.GetByCode(code);
             if (obj != null)
                 return await _subcategoryRepository.Delete(obj.Id.GetValueOrDefault());
-            return null;
+            return obj;
         }
     }
 }

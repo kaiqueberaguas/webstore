@@ -31,10 +31,11 @@ namespace WebApiProdutos.Src.Controllers
         [HttpGet]
         public async Task<ActionResult<PageablePresenter<CategoryPresenter>>> Get([FromQuery] int page = 1, [FromQuery] int size = 15)
         {
+           
             Pageable<Category> result = await _categoryService.GetAll(page, size);
             if (result.IsNullOrEmpty())
             {
-                return NoContent();
+                return NotFound();
             }
             var categories = new PageablePresenter<CategoryPresenter>(page, result.TotalPages);
             result.ForEach(r => categories.Content.Add(new CategoryPresenter(r)));
@@ -64,7 +65,7 @@ namespace WebApiProdutos.Src.Controllers
         public async Task<ActionResult<CategoryPresenter>> Put([FromBody] CategoryParameter category, long categoryCode)
         {
             Category result = await _categoryService.Update(categoryCode, category.ToModel());
-            if (result is null) return NoContent();
+            if (result is null) return NotFound();
             return new CategoryPresenter(result);
         }
 

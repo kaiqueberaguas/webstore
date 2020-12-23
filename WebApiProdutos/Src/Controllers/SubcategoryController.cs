@@ -32,7 +32,7 @@ namespace WebApiProdutos.Src.Controllers
             var result = await _subcategoryService.GetAllByCategory(categoryCode, page, size);
             if (result.IsNullOrEmpty())
             {
-                return NoContent();
+                return NotFound();
             }
             var subcategories = new PageablePresenter<SubcategoryPresenter>(page, result.TotalPages);
             result.ForEach(r => subcategories.Content.Add(new SubcategoryPresenter(r)));
@@ -62,7 +62,7 @@ namespace WebApiProdutos.Src.Controllers
         public async Task<ActionResult<SubcategoryPresenter>> Put([FromBody] SubcategoryParameter subcategory, long subcategoryCode)
         {
             var result = await _subcategoryService.Update(subcategoryCode, subcategory.ToModel());
-            if (result is null) return NoContent();
+            if (result is null) return NotFound();
             return new SubcategoryPresenter(result);
         }
 
