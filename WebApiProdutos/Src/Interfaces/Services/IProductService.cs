@@ -5,6 +5,6 @@ namespace WebApiProdutos.Src.Interfaces.Services
 {
     public interface IProductService : IBasicCrudService<Product>
     {
-        Task<Pageable<Product>> GetAll(int page, int size, long subcategoryCode);
+        Task<Pageable<Product>> GetBySubcategory(long subcategoryCode, int page, int size);
     }
 }

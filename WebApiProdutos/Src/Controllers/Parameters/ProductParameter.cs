@@ -25,6 +25,7 @@ namespace WebApiProdutos.Src.Controllers.Parameters
         public DateTime PurchaseDate { get; set; }
 
         public long SubcategoryCode { get; set; }
+        public bool IsActive { get; set; }
 
         public Product ToModel() => new Product()
         {

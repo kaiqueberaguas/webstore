@@ -39,11 +39,11 @@ namespace WebApiProdutos.Src.Repositories
                 return null;
             }
         }
-        public virtual async Task<T> GetById(long Id)
+        public virtual async Task<T> GetById(long id)
         {
             try
             {
-                return await _storeContext.Set<T>().FindAsync(Id);
+                return await _storeContext.Set<T>().FindAsync(id);
             }
             catch (Exception e)
             {

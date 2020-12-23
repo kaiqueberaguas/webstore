@@ -10,6 +10,7 @@ namespace WebApiProdutos.Src.Controllers.Parameters
         public string Name { get; set; }
         public string Description { get; set; }
         public long CategoryCode { get; set; }
+        public bool IsActive { get; set; }
 
         public Subcategory ToModel() => new Subcategory()
         {

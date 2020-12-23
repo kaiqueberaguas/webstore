@@ -22,7 +22,7 @@ namespace WebApiProdutos.Src.Presenters
             Amount = Amount;
             Information = product.Information;
             IsActive = product.IsActive.GetValueOrDefault();
-            AvailableQuantity = product.AvailableQuantity.Value;
+            AvailableQuantity = product.AvailableQuantity.GetValueOrDefault();
             LimitDate = product.LimitDate;
         }
     }

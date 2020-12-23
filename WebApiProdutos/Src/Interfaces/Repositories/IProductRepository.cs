@@ -5,6 +5,6 @@ namespace WebApiProdutos.Src.Interfaces.Repositories
 {
     public interface IProductRepository : IBaseRepository<Product>
     {
-        Task<Pageable<Product>> GetAll(int page, int size, long subcategoryCode);
+        Task<Pageable<Product>> GetAll(long subcategoryCode, int page, int size);
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Castle.Core.Internal;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -29,14 +30,23 @@ namespace WebApiProdutos.Src.Controllers
         [HttpGet("subcategory/{subcategoryCode}")]
         public async Task<ActionResult<PageablePresenter<ProductPresenter>>> Get(long subcategoryCode, [FromQuery] int page = 1, [FromQuery] int size = 15)
         {
-            var result = await _productService.GetAll(page, size, subcategoryCode);
-            if (result.IsNullOrEmpty())
+            try
             {
-                return NotFound();
+                var result = await _productService.GetBySubcategory(subcategoryCode, page, size);
+                if (result.IsNullOrEmpty())
+                {
+                    return NotFound();
+                }
+                var products = new PageablePresenter<ProductPresenter>(result.PageIndex, result.TotalPages);
+                result.ForEach(r => products.Content.Add(new ProductPresenter(r)));
+                return products;
             }
-            var products = new PageablePresenter<ProductPresenter>(result.PageIndex, result.TotalPages);
-            result.ForEach(r => products.Content.Add(new ProductPresenter(r)));
-            return products;
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+                _logger.LogError(e.StackTrace);
+                return BadRequest(e.Message);
+            }
         }
 
         [AllowAnonymous]

@@ -29,13 +29,13 @@ namespace WebApiProdutosTeste.Src.Mock
             var categories = new List<Category>();
             for (int i = 0; i < size; i++)
             {
-                var contato = new Category()
+                var category = new Category()
                 {
                     Name = $"Teste {i}",
                     Description = $"Descrição do Teste {i}",
                     Code = i
                 };
-                categories.Add(contato);
+                categories.Add(category);
             }
             return Task.Run(() => new Pageable<Category>(categories, categories.Count, page, size));
         }

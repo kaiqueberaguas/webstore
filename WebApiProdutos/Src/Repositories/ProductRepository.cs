@@ -15,25 +15,24 @@ namespace WebApiProdutos.Src.Repositories
         {
         }
 
-        public async Task<Pageable<Product>> GetAll(int page, int size, long subcategoryCode)
+        public async Task<Pageable<Product>> GetAll(long subcategoryCode, int page, int size)
         {
             try
             {
+                if (page <= 0) page = 1;
+                if (size <= 0) size = 1;
+                var list = await _storeContext.Products
+                    .Where(p => p.Subcategory.Code == subcategoryCode)
+                    .Skip((page - 1) * size)
+                    .Take(size)
+                    .ToListAsync();
+                var count = await _storeContext.Products
+                    .Where(p => p.Subcategory.Code == subcategoryCode)
+                    .CountAsync();
 
-            if (page <= 0) page = 1;
-            if (size <= 0) size = 1;
-            var list = await _storeContext.Products
-                .Where(p => p.Subcategory.Code == subcategoryCode)
-                .Skip((page - 1) * size)
-                .Take(size)
-                .ToListAsync();
-            var count = await _storeContext.Products
-                .Where(p => p.Subcategory.Code == subcategoryCode)
-                .CountAsync();
-
-            return new Pageable<Product>(list, count, page, size);
+                return new Pageable<Product>(list, count, page, size);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 _logger.LogError(e.Message);
                 _logger.LogError(e.StackTrace);

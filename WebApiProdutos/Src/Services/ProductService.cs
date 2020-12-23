@@ -29,9 +29,10 @@ namespace WebApiProdutos.Src.Services
         {
             return await _productRepository.GetAll(page, size);
         }
-        public async Task<Pageable<Product>> GetAll(int page, int size, long subcategoryCode)
+
+        public async Task<Pageable<Product>> GetBySubcategory(long subcategoryCode, int page, int size)
         {
-            return await _productRepository.GetAll(page, size, subcategoryCode);
+            return await _productRepository.GetAll(subcategoryCode, page, size);
         }
 
         public async Task<Product> Create(Product obj)
