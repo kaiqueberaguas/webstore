@@ -1,4 +1,4 @@
-﻿@page "/subcategory/{subcategoryName}/{subcategoryCode}/products"
+﻿@*@page "/subcategory/{subcategoryName}/{subcategoryCode}/products"
 
 <h3>@SubcategoryName</h3>
 
@@ -47,4 +47,4 @@
 
     private string SetTextCase(Product product, string caseTrue, string caseFalse) => (product.IsActive.GetValueOrDefault()) ? caseTrue : caseFalse;
 
-}
+}*@
