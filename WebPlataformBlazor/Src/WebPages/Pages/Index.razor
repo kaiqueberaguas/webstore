@@ -1,4 +1,5 @@
 ﻿@page "/"
+<button @onclick="teste">Teste</button>
 <div class="alert alert-primary" role="alert">
     A simple primary alert—check it out!
 </div>
@@ -16,10 +17,20 @@
         </div>
     </div>*@
 
-@inject ProductsPageService _productsPageService;
+@inject ICategoryService _categoryService;
 
 @code{
 
+    public async Task teste()
+    {
+        var category = new Category()
+        {
+            Name = "Nome de teste",
+            Description = "DescricaoTeste"
+        };
+        await _categoryService.Create(category);
+        Console.WriteLine("ok");
+    }
 
     //protected override async Task OnInitializedAsync() =>
 }

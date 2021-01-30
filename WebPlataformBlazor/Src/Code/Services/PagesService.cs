@@ -41,19 +41,16 @@ namespace WebPlataformBlazor.Src.Code.Services
 
         public async Task<T> Create(T obj)
         {
-            
             try
             {
-                //_logger.LogInformation("Objeto recebido: " + JsonSerializer.Serialize(obj));
                 using var response = await _httpClient.PostAsJsonAsync(BaseUrl, obj);
-                //_logger.LogInformation($"Codigo de retorno da criação de objeto: {response.StatusCode} Mensagem: {response.Content}");
                 return response.Content as T;
             }
             catch (Exception e)
             {
                 _logger.LogError(e.Message);
+                throw new ApplicationException();
             }
-            return null;
         }
 
         public Task<T> Delete(long code)

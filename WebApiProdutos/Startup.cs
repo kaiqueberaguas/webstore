@@ -29,6 +29,15 @@ namespace WebApiProdutos
             services.AddRouting(options => options.LowercaseUrls = true);
 
             services.AddSwaggerConfigure();
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: "PoliticaCorsLocalHost",
+                                  builder =>
+                                  {
+                                      builder.AllowAnyOrigin()
+                                      .AllowAnyMethod().AllowAnyHeader();
+                                  });
+            });
             services.AddDependencyInjection();
 
             services.AddControllers();
@@ -39,8 +48,7 @@ namespace WebApiProdutos
             loggerFactory.AddSerilog();
             app.UseHttpsRedirection();
             app.UseGlobalExceptionHandler();
-            //app.UseSerilogRequestLogging();
-
+            app.UseCors("PoliticaCorsLocalHost");
             app.UseRouting();
             #region swagger
             app.UseSwagger();

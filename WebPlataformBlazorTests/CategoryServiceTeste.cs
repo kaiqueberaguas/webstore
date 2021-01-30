@@ -31,8 +31,8 @@ namespace WebPlataformBlazorTeste
                 Name = "Nome de teste",
                 Description = "DescricaoTeste"                
             };
-            var response = await _categoryService.Create(category);
-            Assert.NotNull(response);
+            var response = _categoryService.Create(category).Result.Code;
+            Assert.True(response > 0);
 
 
         }
